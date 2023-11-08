@@ -10,7 +10,7 @@ export default function Sidebar() {
 
 
   return (
-    <div className="p-10 bg-bgSecondary rounded-3xl">
+    <div className="p-10 bg-bgSecondary rounded-lg h-full">
       <div className="my-5">
         <h1>HG</h1>
       </div>
@@ -22,7 +22,9 @@ export default function Sidebar() {
             <NavLink
               key={title}
               to={url}
-              onClick={() => setIsActive(titleInLower)}
+              onClick={() => {
+                setIsActive(titleInLower)
+              }}
               className={isActive === titleInLower ? isActiveStyle : isNotActiveStyle}
             >
               <div className="flex gap-3 items-center px-4">
