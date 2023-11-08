@@ -9,8 +9,8 @@ export default {
     extend: {
       colors: {
         bgPrimary: "pink-600",
-        bgSecondary: "zinc-800",
-        bgTertiary: "slate-800",
+        bgSecondary: "#212130",
+        bgTertiary: "#282D42",
         bgQuaternary: 'fuchsia-600',
         textPrimary: 'white',
         textSecondary: 'pink-600',
