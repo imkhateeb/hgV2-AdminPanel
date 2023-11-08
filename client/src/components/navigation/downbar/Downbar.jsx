@@ -24,9 +24,8 @@ export default function Downbar() {
               }}
               className={isActive === titleInLower ? isActiveStyle : isNotActiveStyle}
             >
-              <div className="flex flex-col gap-[2px] items-center justify-center px-1">
-                <Icon className="text-xl font-bold" />
-                <p className="text-xs">{title}</p>
+              <div className="flex flex-col gap-[2px] items-center justify-center px-2">
+                <Icon className="text-2xl font-bold" />
               </div>
             </NavLink>
           )
