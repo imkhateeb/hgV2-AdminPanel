@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import {Sidebar, Navbar, Dashboard} from '../components';
-import Announcements from '../components/dashboard/Announcements';
 
 export default function Home() {
   return (
@@ -10,7 +9,6 @@ export default function Home() {
         <Navbar />
         <Routes>
           <Route path='/*' element={<Dashboard />} />
-          <Route path='/announcement' element={<Announcements />} />
         </Routes>
       </div>
     </div>
