@@ -1,82 +1,146 @@
-import { FaPlus } from 'react-icons/fa';
-
-const data = [
-  { id: '2026UG0000', name: 'Student 1', createdOn: '7-11-2023', enrolled: 'Paid', topic: 'Demo text' },
-  { id: '2026UG0000', name: 'Student 1', createdOn: '7-11-2023', enrolled: 'Unpaid', topic: 'Demo text' },
-  // ... more data
-];
-
-const Feeds = () => {
+import React, { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
+import { BsFilterRight } from "react-icons/bs";
+import { SearchOutlined } from "@ant-design/icons";
+import { Input, Select, Pagination, ConfigProvider } from "antd";
+const Announcements = () => {
   return (
-    <div className="bg-bgSecondary rounded-lg p-8 min-h-screen text-white">
-      <div className="mx-auto">
-        <div className="flex justify-between items-center my-3 md:my-5">
-          <h2 className="text-4xl max-md:text-3xl max-sm:text-2xl font-bold">Announcements</h2>
-          <button
-            type="button"
-            className="py-2 px-5 text-white bg-pink-600 flex items-center gap-2 rounded-md"
-          ><FaPlus /> Add New</button>
+      <section className="bg-bgSecondary rounded-3xl px-7 w-full">
+        <div className="w-full h-16 flex items-center">
+          <h1 className="text-white text-3xl font-semibold">Feeds</h1>
         </div>
-        <div className="flex justify-between my-3 md:my-5">
-          <div>
-            <input type='text' placeholder='Search here...' />
+        <div className="flex h-16  items-center justify-between">
+          <div className="flex bg-white rounded-md px-2">
+            <button>
+              {" "}
+              <SearchOutlined className="text-black " />
+            </button>
+            <Input placeholder="Search here" className="" bordered={false} />
           </div>
-          <div className='flex gap-2'>
-            <span>Filters</span>
-            <span>UI/UX</span>
-            <span>SD</span>
-            <span>Blockchain</span>
-            <span>AI/ML</span>
+          <div className="flex items-center gap-4 -ml-16">
+            <div className="flex items-center border-2 w-20 bg-white rounded-md h-8 gap-2 px-2">
+              <BsFilterRight className="text-black" size={20} />
+              <p className="text-[14px] text-[#718096]">Filters</p>
+            </div>
+            <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+              UI/UX
+            </span>
+            <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-green-600/20">
+              SD
+            </span>
+            <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-green-600/20">
+              Blockchain
+            </span>
+            <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-green-600/20">
+              AI/ML
+            </span>
           </div>
-          <div className='flex items-center gap-1 py-2 px-4 bg-slate-600 rounded-md'>
-            Sort by: 
-            <select className='bg-transparent outline-none'>
-              <option>Newest</option>
-              <option>Oldest</option>
-            </select>
+          <div className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
+            <AiOutlinePlus />
+            <h1>Add New</h1>
           </div>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead>
-              <tr>
-                <th className="text-left px-6 py-3">Name</th>
-                <th className="text-left px-6 py-3">Feed</th>
-                <th className="text-left px-6 py-3">Created On</th>
-                <th className="text-left px-6 py-3">Status</th>
-                <th className="text-left px-6 py-3">Upvotes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={item.id} className="border-b border-gray-800">
-                  <td className="px-6 py-4">{item.id}</td>
-                  <td className="px-6 py-4">{item.name}</td>
-                  <td className="px-6 py-4">{item.createdOn}</td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`px-4 py-1 rounded-full text-sm ${item.enrolled === 'Paid'
-                        ? 'bg-green-500'
-                        : 'bg-red-500'
-                        }`}
-                    >
-                      {item.enrolled}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">{item.topic}</td>
-                  <td className="px-6 py-4">...</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <table className="w-full mt-4 overflow-x-scroll">
+          <tr className=" border-t-2 h-14">
+            <th className="text-left w-[20%] text-[15px]">USER</th>
+            <th className="text-left w-[40%] text-[15px]">DESCRIPTION</th>
+            <th className="text-left w-[20%] ">
+              <div className="flex items-center gap-2 text-[15px]">
+                <h1>CREATED ON</h1>
+                <BiSort />
+              </div>
+            </th>
+            <th className="text-left w-[10%] text-[15px]">STATUS</th>
+            <th className="text-left w-[10%] text-[15px]">ACTION</th>
+          </tr>
+          <tr className="border-t-2 h-14">
+            <td>Siva</td>
+            <td>There is an event on sunday</td>
+            <td>10-20-3003</td>
+            <td>True</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+          <tr className="border-y-2 h-14">
+            <td>Dora</td>
+            <td>What the fuck are you doing</td>
+            <td>22-12-2003</td>
+            <td>False</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+          <tr className="border-y-2 h-14">
+            <td>Khateeb</td>
+            <td>What the fuck are you doing</td>
+            <td>22-12-2003</td>
+            <td>False</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+          <tr className="border-y-2 h-14">
+            <td>Alok</td>
+            <td>What the fuck are you doing</td>
+            <td>22-12-2003</td>
+            <td>False</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+          <tr className="border-y-2 h-14">
+            <td>Aditya</td>
+            <td>What the fuck are you doing</td>
+            <td>22-12-2003</td>
+            <td>False</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+          <tr className="border-y-2 h-14">
+            <td>Varad</td>
+            <td>What the fuck are you doing</td>
+            <td>22-12-2003</td>
+            <td>False</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+          <tr className="border-y-2 h-14">
+            <td>Shubh</td>
+            <td>What the fuck are you doing</td>
+            <td>22-12-2003</td>
+            <td>False</td>
+            <td>
+              <BiDotsHorizontalRounded size={26} />
+            </td>
+          </tr>
+        </table>
+
+        <div className="flex  h-16 my-6 justify-between items-center">
+          <div className="flex items-center gap-3 ">
+            <h1>Show result : </h1>
+            <Select
+              defaultValue="1"
+              options={[
+                { value: "1", label: "1" },
+                { value: "2", label: "2" },
+                { value: "3", label: "3" },
+              ]}
+            />
+          </div>
+          <div className="">
+            {/* <Pagination defaultCurrent={1} total={50} itemRender={()=>{
+              [1,2,3].map((e)=>{
+                   return <p>{e}</p>
+              })
+            }} /> */}
+          </div>
         </div>
-        <div className="flex justify-between items-center mt-6">
-          <span>Show result:</span>
-          {/* Pagination component would go here */}
-        </div>
-      </div>
-    </div>
+      </section>
   );
 };
 
-export default Feeds;
+export default Announcements;
