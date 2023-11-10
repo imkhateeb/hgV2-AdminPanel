@@ -3,5 +3,4 @@ import Sidebar from "./navigation/sidebar/Sidebar";
 import Dashboard from "./dashboard/Dashboard";
 import Downbar from "./navigation/downbar/Downbar";
 import Feeds from "./feeds/Feeds";
-
 export { Navbar, Sidebar, Dashboard, Downbar, Feeds};
