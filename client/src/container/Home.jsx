@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
 
-      <div className="flex gap-3 w-full min-h-screen bg-bgTertiary text-white p-5 max-md:p-2">
+      <div className="flex gap-3 w-full min-h-screen bg-bgTertiary text-white p-3 max-md:p-2">
         <div className='max-md:hidden'>
           <Sidebar />
         </div>
