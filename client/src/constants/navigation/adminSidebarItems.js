@@ -7,8 +7,8 @@ export const adminSidebarItems = [
       icon: LuLayoutDashboard,
    },
    {
-      title: 'Announcement',
-      url: '/announcement',
+      title: 'Announcements',
+      url: '/announcements',
       icon: AiFillSound,
    },
    {
