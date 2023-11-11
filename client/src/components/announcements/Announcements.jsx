@@ -46,10 +46,10 @@ const Announcements = () => {
               AI/ML
             </span>
           </div>
-          <div className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
+          <Link to="/add-announcement" className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
             <AiOutlinePlus />
             <h1>Add New</h1>
-          </div>
+          </Link>
         </div>
         <table className="w-full mt-4 overflow-x-scroll">
           <tr className=" border-t-2 h-14">
