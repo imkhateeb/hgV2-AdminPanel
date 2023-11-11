@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
 import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Select, Pagination, ConfigProvider } from "antd";
 const Announcements = () => {
+  useEffect(()=>{
+    const check = async()=>{
+      const response = await axios.get('http://localhost:8000/api/announcements/all')
+      console.log(response)
+    }
+    check()
+  },[])
   return (
       <section className="bg-bgSecondary rounded-3xl px-7 w-full">
         <div className="w-full h-16 flex items-center">
