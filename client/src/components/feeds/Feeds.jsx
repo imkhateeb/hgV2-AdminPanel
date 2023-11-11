@@ -56,6 +56,7 @@ const Feeds = () => {
           </th>
           <th className="text-left w-[10%] text-[15px]">STATUS</th>
           <th className="text-left w-[10%] text-[15px]">ACTION</th>
+          <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
         </tr>
         <tr className="border-t-2 h-14">
           <td>Siva</td>
@@ -65,6 +66,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
         <tr className="border-y-2 h-14">
           <td>Dora</td>
@@ -74,6 +76,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
         <tr className="border-y-2 h-14">
           <td>Khateeb</td>
@@ -83,6 +86,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
         <tr className="border-y-2 h-14">
           <td>Alok</td>
@@ -92,6 +96,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
         <tr className="border-y-2 h-14">
           <td>Aditya</td>
@@ -101,6 +106,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
         <tr className="border-y-2 h-14">
           <td>Varad</td>
@@ -110,6 +116,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
         <tr className="border-y-2 h-14">
           <td>Shubh</td>
@@ -119,6 +126,7 @@ const Feeds = () => {
           <td>
             <BiDotsHorizontalRounded size={26} />
           </td>
+          <td>12</td>
         </tr>
       </table>
 

@@ -7,6 +7,7 @@ import Announcements from './announcements/Announcements';
 import Wings from "./wings/Wings";
 import Assignments from "./assignments/Assignments";
 import AddNewFeed from "./feeds/AddNewFeed";
+import AddNewAnnouncement from "./announcements/AddNewAnnouncement";
 
 
-export { Navbar, Sidebar, Dashboard, Downbar, Feeds, Announcements, Wings, Assignments, AddNewFeed};
+export { Navbar, Sidebar, Dashboard, Downbar, Feeds, Announcements, Wings, Assignments, AddNewFeed, AddNewAnnouncement};

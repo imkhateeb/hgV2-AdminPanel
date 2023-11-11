@@ -1,12 +1,12 @@
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { CgFeed } from 'react-icons/cg';
+import { GrAnnounce } from 'react-icons/gr';
 import feedsStyle from '../../constants/styles/feedsStyle';
 
-export default function AddNewFeed() {
+export default function AddNewAnnouncement() {
   return (
     <section className={feedsStyle.sectionStyle}>
       <div className='py-10 px-16 bg-pink-600 rounded-3xl'>
-        <h1 className='text-5xl font-bold'>Feeds</h1>
+        <h1 className='text-5xl font-bold'>Announcement</h1>
       </div>
       <p className='my-5'>DETAILS</p>
       <div className='flex w-full justify-between'>
@@ -36,7 +36,7 @@ export default function AddNewFeed() {
         <button
         type='button'
         className={feedsStyle.btn3}
-        >Create Feed <CgFeed /></button>
+        >Create Announcement <GrAnnounce /></button>
       </div>
     </section>
   )

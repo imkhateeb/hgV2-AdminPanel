@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Sidebar, Navbar, Dashboard, Downbar, Feeds, Announcements, Wings, Assignments, AddNewFeed } from '../components';
+import { Sidebar, Navbar, Dashboard, Downbar, Feeds, Announcements, Wings, Assignments, AddNewFeed, AddNewAnnouncement } from '../components';
 
 export default function Home() {
   return (
@@ -18,6 +18,7 @@ export default function Home() {
             <Route path='/wings' element={<Wings />} />
             <Route path='/assignments' element={<Assignments />} />
             <Route path='/add-feeds' element={<AddNewFeed />} />
+            <Route path='/add-announcement' element={<AddNewAnnouncement />} />
           </Routes>
         </div>
       </div>

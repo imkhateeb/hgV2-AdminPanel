@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
+
+
 import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
 import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Select, Pagination, ConfigProvider } from "antd";
+
+
 const Announcements = () => {
   useEffect(()=>{
     const check = async()=>{
@@ -12,7 +17,10 @@ const Announcements = () => {
       console.log(response)
     }
     check()
-  },[])
+  },[]);
+
+
+
   return (
       <section className="bg-bgSecondary rounded-3xl px-7 w-full">
         <div className="w-full h-16 flex items-center">
@@ -44,10 +52,10 @@ const Announcements = () => {
               AI/ML
             </span>
           </div>
-          <div className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
+          <Link to="/add-announcement" className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
             <AiOutlinePlus />
             <h1>Add New</h1>
-          </div>
+          </Link>
         </div>
         <table className="w-full mt-4 overflow-x-scroll">
           <tr className=" border-t-2 h-14">
