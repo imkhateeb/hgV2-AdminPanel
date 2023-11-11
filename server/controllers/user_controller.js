@@ -20,7 +20,6 @@ const createUser = asyncHandler(async (req, res) => {
     codeforces_username,
     image,
   } = req.body;
-  console.log(image);
 
   if (!name || !email || !password ) {
     res.status(400).json({ message: "Please fill all the fields" });
@@ -31,9 +30,12 @@ const createUser = asyncHandler(async (req, res) => {
   }
   var salt = await bcrypt.genSalt(10);
 
+<<<<<<< HEAD
   // const uploadedFile = await cloudinary.uploader.upload(image, {
   //   folder: "hgv2",
   // });
+=======
+>>>>>>> 0e9335b16f2572f0e521a0ac47c0c1bf5f3b70c5
   const newUser = new User({
     name: name,
     email: email,
@@ -49,7 +51,10 @@ const createUser = asyncHandler(async (req, res) => {
       leetcode_username !== undefined ? leetcode_username : null,
     codeforces_username:
       codeforces_username !== undefined ? codeforces_username : null,
+<<<<<<< HEAD
     // image: uploadedFile.secure_url,
+=======
+>>>>>>> 0e9335b16f2572f0e521a0ac47c0c1bf5f3b70c5
     isAdmin: isAdmin !== undefined ? isAdmin : false,
   });
   const result = await newUser.save();
