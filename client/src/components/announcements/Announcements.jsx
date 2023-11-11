@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
-
-
 import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
 import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Select, Pagination, ConfigProvider } from "antd";
-
-
+import {useSelector,useDispatch} from 'react-redux'
+import { fetchAnnouncements } from "../../redux/slices/announcementSlice";
 const Announcements = () => {
-  useEffect(()=>{
-    const check = async()=>{
-      const response = await axios.get('http://localhost:8000/api/announcements/all')
-      console.log(response)
-    }
-    check()
-  },[]);
-
-
-
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.announcements);
+  useEffect(() => {
+    dispatch(fetchAnnouncements());
+  }, []);
+  console.log(data);
   return (
       <section className="bg-bgSecondary rounded-3xl px-7 w-full">
         <div className="w-full h-16 flex items-center">
@@ -52,10 +46,10 @@ const Announcements = () => {
               AI/ML
             </span>
           </div>
-          <Link to="/add-announcement" className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
+          <div className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
             <AiOutlinePlus />
             <h1>Add New</h1>
-          </Link>
+          </div>
         </div>
         <table className="w-full mt-4 overflow-x-scroll">
           <tr className=" border-t-2 h-14">
@@ -135,27 +129,27 @@ const Announcements = () => {
           </tr>
         </table>
 
-        <div className="flex  h-16 my-6 justify-between items-center">
-          <div className="flex items-center gap-3 ">
-            <h1>Show result : </h1>
-            <Select
-              defaultValue="1"
-              options={[
-                { value: "1", label: "1" },
-                { value: "2", label: "2" },
-                { value: "3", label: "3" },
-              ]}
-            />
-          </div>
-          <div className="">
-            {/* <Pagination defaultCurrent={1} total={50} itemRender={()=>{
+      <div className="flex  h-16 my-6 justify-between items-center">
+        <div className="flex items-center gap-3 ">
+          <h1>Show result : </h1>
+          <Select
+            defaultValue="1"
+            options={[
+              { value: "1", label: "1" },
+              { value: "2", label: "2" },
+              { value: "3", label: "3" },
+            ]}
+          />
+        </div>
+        <div className="">
+          {/* <Pagination defaultCurrent={1} total={50} itemRender={()=>{
               [1,2,3].map((e)=>{
                    return <p>{e}</p>
               })
             }} /> */}
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 };
 
