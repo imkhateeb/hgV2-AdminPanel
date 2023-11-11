@@ -1,6 +1,6 @@
 import React from "react";
 import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
-const AnnouncementRow = ({ data, handleDelete }) => {
+const AnnouncementRow = ({ data, handleDelete, showModal, update }) => {
   return (
     <table className="w-full mt-4 overflow-x-scroll">
       <thead className=" border-t-2 h-14">
@@ -30,7 +30,10 @@ const AnnouncementRow = ({ data, handleDelete }) => {
                   <td>{e.status ? "true" : "false"}</td>
                   <td className="flex items-center gap-3 ">
                     {/* <BiDotsHorizontalRounded size={26} /> */}
-                    <button className="h-8 w-8 rounded-full  bg-green-500">
+                    <button
+                      onClick={() => showModal(e._id, e.announcementDetails)}
+                      className="h-8 w-8 rounded-full  bg-green-500"
+                    >
                       E
                     </button>
                     <button

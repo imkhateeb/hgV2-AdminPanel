@@ -27,10 +27,17 @@ export const createAnnouncement = createAsyncThunk(
   }
 );
 
-// export const updateWing = createAsyncThunk("about/updateWing", async ({ id, updatedData }) => {
-//   const response = await axios.put(`${process.env.REACT_APP_BACKEND_URI}/api/wings/${id}`, updatedData);
-//   return response.data;
-// });
+export const updateAnnouncement = createAsyncThunk(
+  "about/updateAnnouncement",
+  async ({ id, updatedData }) => {
+    const response = await axios.patch(
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/${id}`,
+      updatedData,
+      { headers }
+    );
+    return response.data;
+  }
+);
 
 export const deleteAnnouncement = createAsyncThunk(
   "about/deleteAnnouncement",
@@ -57,6 +64,8 @@ const announcementSlice = createSlice({
       .addCase(
         createAnnouncement.pending,
         fetchAnnouncements.pending,
+        deleteAnnouncement.pending,
+        updateAnnouncement.pending,
         (state) => {
           state.loading = true;
           state.error = null;
@@ -69,6 +78,8 @@ const announcementSlice = createSlice({
       .addCase(
         createAnnouncement.rejected,
         fetchAnnouncements.rejected,
+        deleteAnnouncement.rejected,
+        updateAnnouncement.rejected,
         (state, action) => {
           state.loading = false;
           state.error = action.error.message;
@@ -77,13 +88,16 @@ const announcementSlice = createSlice({
       .addCase(createAnnouncement.fulfilled, (state, action) => {
         state.announcementData.push(action.payload);
       })
-      //   .addCase(updateWing.fulfilled, (state, action) => {
-      //     const updatedWing = action.payload;
-      //     const index = state.wingsData.findIndex((wing) => wing.id === updatedWing.id);
-      //     if (index !== -1) {
-      //       state.wingsData[index] = updatedWing;
-      //     }
-      //   })
+      .addCase(updateAnnouncement.fulfilled, (state, action) => {
+        const updateAnnouncement = action.payload;
+        const index = state.announcementData.findIndex(
+          (e) => e._id === updateAnnouncement.updatedAnnouncement._id
+        );
+        if (index !== -1) {
+          state.announcementData[index] =
+            updateAnnouncement.updatedAnnouncement;
+        }
+      })
       .addCase(deleteAnnouncement.fulfilled, (state, action) => {
         const id = action.payload;
         state.announcementData = state.announcementData.filter(
