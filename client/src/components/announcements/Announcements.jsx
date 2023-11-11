@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
 import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Select, Pagination, ConfigProvider } from "antd";
 import {useSelector,useDispatch} from 'react-redux'
-import { fetchAnnouncements } from "../../redux/slices/announcementSlice";
+import { fetchAnnouncements,deleteAnnouncement } from "../../redux/slices/announcementSlice";
+import AnnouncementRow from "./AnnouncementRow";
 const Announcements = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.announcements);
+  console.log(data)
   useEffect(() => {
-    dispatch(fetchAnnouncements());
+    dispatch(fetchAnnouncements());  
   }, []);
-  console.log(data);
+  const handleDelete = (id)=>{
+    dispatch(deleteAnnouncement(id))
+  }
   return (
       <section className="bg-bgSecondary rounded-3xl px-7 w-full">
         <div className="w-full h-16 flex items-center">
@@ -51,83 +54,8 @@ const Announcements = () => {
             <h1>Add New</h1>
           </Link>
         </div>
-        <table className="w-full mt-4 overflow-x-scroll">
-          <tr className=" border-t-2 h-14">
-            <th className="text-left w-[20%] text-[15px]">USER</th>
-            <th className="text-left w-[40%] text-[15px]">DESCRIPTION</th>
-            <th className="text-left w-[20%] ">
-              <div className="flex items-center gap-2 text-[15px]">
-                <h1>CREATED ON</h1>
-                <BiSort />
-              </div>
-            </th>
-            <th className="text-left w-[10%] text-[15px]">STATUS</th>
-            <th className="text-left w-[10%] text-[15px]">ACTION</th>
-          </tr>
-          <tr className="border-t-2 h-14">
-            <td>Siva</td>
-            <td>There is an event on sunday</td>
-            <td>10-20-3003</td>
-            <td>True</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-          <tr className="border-y-2 h-14">
-            <td>Dora</td>
-            <td>What the fuck are you doing</td>
-            <td>22-12-2003</td>
-            <td>False</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-          <tr className="border-y-2 h-14">
-            <td>Khateeb</td>
-            <td>What the fuck are you doing</td>
-            <td>22-12-2003</td>
-            <td>False</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-          <tr className="border-y-2 h-14">
-            <td>Alok</td>
-            <td>What the fuck are you doing</td>
-            <td>22-12-2003</td>
-            <td>False</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-          <tr className="border-y-2 h-14">
-            <td>Aditya</td>
-            <td>What the fuck are you doing</td>
-            <td>22-12-2003</td>
-            <td>False</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-          <tr className="border-y-2 h-14">
-            <td>Varad</td>
-            <td>What the fuck are you doing</td>
-            <td>22-12-2003</td>
-            <td>False</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-          <tr className="border-y-2 h-14">
-            <td>Shubh</td>
-            <td>What the fuck are you doing</td>
-            <td>22-12-2003</td>
-            <td>False</td>
-            <td>
-              <BiDotsHorizontalRounded size={26} />
-            </td>
-          </tr>
-        </table>
+
+        <AnnouncementRow data={data} handleDelete={handleDelete}/>
 
       <div className="flex  h-16 my-6 justify-between items-center">
         <div className="flex items-center gap-3 ">
