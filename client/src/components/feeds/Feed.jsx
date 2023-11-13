@@ -1,5 +1,5 @@
 import { Switch } from "antd";
-import { deleteFeed } from '../../redux/slices/feedSlice';
+import { deleteFeed, updateFeed } from '../../redux/slices/feedSlice';
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ export default function Feed({ feed }) {
                <td>{feed.user.name}</td>
                <td>{feed.feedDetails}</td>
                <td>{feed.createdAt.split("T")[0]}</td>
-               <td><Switch checked={feed.staus} onClick={() => { !feed.staus }} /></td>
+               <td><Switch checked={feed.staus} onClick={() => { dispatch(updateFeed({id: feed?._id, data : {staus: false}}))}} /></td>
                <td className="flex gap-3 items-center">
                   <button
                      type="button"

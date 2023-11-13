@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { editFeed } from "../../redux/slices/feedSlice";
+import { updateFeed } from "../../redux/slices/feedSlice";
 
 export default function EditFeed({ setEditFeed, feed }) {
   const dispatch = useDispatch();
@@ -9,10 +9,8 @@ export default function EditFeed({ setEditFeed, feed }) {
   const [newFeedDetail, setNewFeedDetail] = useState(feed?.feedDetails);
 
   const handleClick = () => {
-    const newFeedObj = {
-      feedDetails: newFeedDetail,
-    }
-    dispatch(editFeed(feed?._id, newFeedObj))
+    const newFeedObj = {feedDetails: newFeedDetail}
+    dispatch(updateFeed({id: feed?._id, data: newFeedObj}))
     setEditFeed(false)
   }
 

@@ -24,7 +24,7 @@ export const deleteFeed = createAsyncThunk("feeds/deleteFeed", async (id) => {
   return id;
 });
 
-export const editFeed = createAsyncThunk("feeds/editFeed", async (id, data) => {
+export const updateFeed = createAsyncThunk("feeds/editFeed", async ({id, data}) => {
   const response = await axios.patch(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, data, { headers });
 
   return response.data;
@@ -45,7 +45,7 @@ const feedSlice = createSlice({
         fetchFeeds.pending,
         createFeed.pending,
         deleteFeed.pending,
-        editFeed.pending,
+        updateFeed.pending,
         (state) => {
           state.loading = true;
           state.error = null;
@@ -68,19 +68,19 @@ const feedSlice = createSlice({
             (e) => e._id !== id
           );
         })
-      .addCase(editFeed.fulfilled,
-        (state, action) => {
-          state.loading = false;
-          const updatedFeed = action.payload.updatedFeed;
-          // console.log(updatedFeed);
-          state.feedData.feeds = state.feedData.feeds.map(feed => feed._id == updatedFeed._id ? { ...feed, ...updatedFeed} : feed);
-        }
-      )
+      .addCase(updateFeed.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedFeed = action.payload.updatedFeed;
+        const details = updatedFeed.feedDetails;
+        state.feedData.feeds = state.feedData.feeds.map(feed =>
+          feed._id === updatedFeed._id ? {...feed, feedDetails: details} : feed
+        );
+      })
       .addCase(
         fetchFeeds.rejected,
         createFeed.rejected,
         deleteFeed.rejected,
-        editFeed.rejected,
+        updateFeed.rejected,
         (state, action) => {
           state.loading = false;
           state.error = action.error.message;
