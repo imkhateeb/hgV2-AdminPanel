@@ -1,24 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
-import { Input, Select, Pagination, ConfigProvider } from "antd";
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchAnnouncements, deleteAnnouncement } from "../../redux/slices/announcementSlice";
-import AnnouncementRow from "./AnnouncementRow";
+import { Input, Select, Pagination, Button, Modal } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import feedsStyle from "../../constants/styles/feedsStyle";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import {
+  fetchAnnouncements,
+  deleteAnnouncement,
+  updateAnnouncement
+} from "../../redux/slices/announcementSlice";
+import AnnouncementRow from "./AnnouncementRow";
 const Announcements = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.announcements);
-  console.log(data)
   useEffect(() => {
     dispatch(fetchAnnouncements());
   }, []);
   const handleDelete = (id) => {
-    dispatch(deleteAnnouncement(id))
+    dispatch(deleteAnnouncement(id));
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editDesc,setEditDesc] = useState({id : '',value : ''})
+  const handleChange = (e) =>{
+    setEditDesc({...editDesc,value : e.target.value})
   }
+
+  const showModal = (id,value) => {
+    setIsModalOpen(true);
+    setEditDesc({id : id,value : value})
+  };
+  const handleOk = () => {
+    const updatedData = {announcementDetails : editDesc.value}
+    dispatch(updateAnnouncement({id : editDesc.id,updatedData}))
+    setIsModalOpen(false);
+    setEditDesc({id : '',value : ''})
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setEditDesc({id : '',value : ''})
+  };
+
   return (
     <section className="bg-bgSecondary rounded-3xl px-7 w-full">
       <div className="w-full h-16 flex items-center">
@@ -37,26 +63,33 @@ const Announcements = () => {
             <BsFilterRight className="text-black" size={20} />
             <p className="text-[14px] text-[#718096]">Filters</p>
           </div>
-          <span className={`${feedsStyle.badgestag} text-green-700`}>
+          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
             UI/UX
           </span>
-          <span className={`${feedsStyle.badgestag} text-purple-700`}>
+          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-green-600/20">
             SD
           </span>
-          <span className={`${feedsStyle.badgestag} text-red-700`}>
+          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-green-600/20">
             Blockchain
           </span>
-          <span className={`${feedsStyle.badgestag} text-yellow-700`}>
+          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-green-600/20">
             AI/ML
           </span>
         </div>
-        <Link to="/add-announcement" className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer">
+        <Link
+          to="/add-announcement"
+          className="bg-pink-600 flex px-4 items-center h-[2.1rem] gap-3 rounded-lg cursor-pointer"
+        >
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>
       </div>
 
-      <AnnouncementRow data={data} handleDelete={handleDelete} />
+      <AnnouncementRow
+        data={data}
+        handleDelete={handleDelete}
+        showModal={showModal}
+      />
 
       <div className="flex  h-16 my-6 justify-between items-center">
         <div className="flex items-center gap-3 ">
@@ -77,6 +110,41 @@ const Announcements = () => {
               })
             }} /> */}
         </div>
+      </div>
+
+      <div>
+        <Modal
+          title="Basic Modal"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <section className={`${feedsStyle.sectionStyle} text-white`}>
+            <div className="py-10 px-16 bg-pink-600 rounded-3xl ">
+              <h1 className="text-5xl font-bold">Announcement</h1>
+            </div>
+            <p className="my-5">DETAILS</p>
+            <div className="flex w-full justify-between">
+              <input
+                placeholder="Event type..."
+                className={feedsStyle.eventTypeInputStyle}
+              />
+              <button type="button" className={feedsStyle.btn1}>
+                Set Activities <AiOutlineArrowRight />
+              </button>
+            </div>
+            <p className="my-5">DESCRIPTION</p>
+            <div>
+              <textarea
+                rows={4}
+                value={editDesc.value}
+                onChange={handleChange}
+                className={feedsStyle.textareaStyle}
+                placeholder="Enter details"
+              />
+            </div>
+          </section>
+        </Modal>
       </div>
     </section>
   );
