@@ -11,7 +11,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import {
   fetchAnnouncements,
   deleteAnnouncement,
-  updateAnnouncement
+  updateAnnouncement,
 } from "../../redux/slices/announcementSlice";
 import AnnouncementRow from "./AnnouncementRow";
 const Announcements = () => {
@@ -25,24 +25,24 @@ const Announcements = () => {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editDesc,setEditDesc] = useState({id : '',value : ''})
-  const handleChange = (e) =>{
-    setEditDesc({...editDesc,value : e.target.value})
-  }
+  const [editDesc, setEditDesc] = useState({ id: "", value: "" });
+  const handleChange = (e) => {
+    setEditDesc({ ...editDesc, value: e.target.value });
+  };
 
-  const showModal = (id,value) => {
+  const showModal = (id, value) => {
     setIsModalOpen(true);
-    setEditDesc({id : id,value : value})
+    setEditDesc({ id: id, value: value });
   };
   const handleOk = () => {
-    const updatedData = {announcementDetails : editDesc.value}
-    dispatch(updateAnnouncement({id : editDesc.id,updatedData}))
+    const updatedData = { announcementDetails: editDesc.value };
+    dispatch(updateAnnouncement({ id: editDesc.id, updatedData }));
     setIsModalOpen(false);
-    setEditDesc({id : '',value : ''})
+    setEditDesc({ id: "", value: "" });
   };
   const handleCancel = () => {
     setIsModalOpen(false);
-    setEditDesc({id : '',value : ''})
+    setEditDesc({ id: "", value: "" });
   };
 
   return (
@@ -118,32 +118,24 @@ const Announcements = () => {
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
+          className="text-white"
+          centered
         >
-          <section className={`${feedsStyle.sectionStyle} text-white`}>
-            <div className="py-10 px-16 bg-pink-600 rounded-3xl ">
-              <h1 className="text-5xl font-bold">Announcement</h1>
+          <div className="w-full bg-[#212130] rounded-3xl">
+            <div className="flex flex-col">
+              <h1 className="text-3xl font-bold">Update Feed</h1>
+              <div className="my-5 flex flex-col gap-2">
+                <p>DESCRIPTION</p>
+                <textarea
+                  rows={4}
+                  className="py-2 px-3 bg-transparent rounded-md border-2 outline-none"
+                  value={editDesc.value}
+                  placeholder="Input new feed..."
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-            <p className="my-5">DETAILS</p>
-            <div className="flex w-full justify-between">
-              <input
-                placeholder="Event type..."
-                className={feedsStyle.eventTypeInputStyle}
-              />
-              <button type="button" className={feedsStyle.btn1}>
-                Set Activities <AiOutlineArrowRight />
-              </button>
-            </div>
-            <p className="my-5">DESCRIPTION</p>
-            <div>
-              <textarea
-                rows={4}
-                value={editDesc.value}
-                onChange={handleChange}
-                className={feedsStyle.textareaStyle}
-                placeholder="Enter details"
-              />
-            </div>
-          </section>
+          </div>
         </Modal>
       </div>
     </section>
