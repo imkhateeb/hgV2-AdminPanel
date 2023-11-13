@@ -3,6 +3,8 @@ import { BiSort } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFeeds } from "../../redux/slices/feedSlice";
 
+import Feed from "./Feed";
+
 export default function FeedContent() {
   const dispatch = useDispatch();
   const { feedData, loading, error } = useSelector((state) => state.feeds);
@@ -14,21 +16,6 @@ export default function FeedContent() {
   if (loading) return <p>Loading feeds...</p>;
   if (error) return <p>Error loading feeds: {error}</p>;
 
-
-  const RenderTableRows = () => {
-    return feedData.map((feed, index) => {
-      console.log(feed);
-      (
-        <tr key={index}>
-          <td>Md Khateebur Rab</td>
-          <td>{feed.feedDetails}</td>
-          <td>{feed.timestamps}</td>
-          <td>{feed.staus}</td>
-          <td>{feed.upVotes}</td>
-        </tr>
-      )
-    });
-  };
 
   return (
     <table className="w-full mt-4 overflow-x-scroll">
@@ -44,11 +31,18 @@ export default function FeedContent() {
           </th>
           <th className="text-left w-[10%] text-[15px]">STATUS</th>
           <th className="text-left w-[10%] text-[15px]">ACTION</th>
+          <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
         </tr>
       </thead>
-      <tbody>
-        <RenderTableRows />
-      </tbody>
+        {feedData && feedData.feeds?.map((feed, index) => {
+          return (
+            <Feed 
+              key={feed?.feedDetails + index}
+              feed={feed}
+            />
+          )
+        })}
+
     </table>
   );
 }

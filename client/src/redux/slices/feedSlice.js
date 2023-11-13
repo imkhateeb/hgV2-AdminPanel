@@ -7,7 +7,7 @@ const headers = {
 
 
 export const fetchFeeds = createAsyncThunk("feeds/fetchFeeds", async () => {
-  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/feeds/all`);
+  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/all`);
 
   return response.data;
 });
@@ -19,13 +19,13 @@ export const createFeed = createAsyncThunk("feeds/createFeed", async (data) => {
 });
 
 export const deleteFeed = createAsyncThunk("feeds/deleteFeed", async (id) => {
-  await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, { headers });
+  await axios.delete(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, { headers });
 
   return id;
 });
 
 export const editFeed = createAsyncThunk("feeds/editFeed", async (id, data) => {
-  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, data, { headers });
+  const response = await axios.patch(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, data, { headers });
 
   return response.data;
 });
@@ -64,15 +64,18 @@ const feedSlice = createSlice({
         (state, action) => {
           state.loading = false;
           const id = action.payload;
-          state.feedData = state.feedData.filter(
+          state.feedData.feeds = state.feedData.feeds.filter(
             (e) => e._id !== id
           );
         })
       .addCase(editFeed.fulfilled,
         (state, action) => {
           state.loading = false;
-          state.feedData = action.payload;
-        })
+          const updatedFeed = action.payload.updatedFeed;
+          // console.log(updatedFeed);
+          state.feedData.feeds = state.feedData.feeds.map(feed => feed._id == updatedFeed._id ? { ...feed, ...updatedFeed} : feed);
+        }
+      )
       .addCase(
         fetchFeeds.rejected,
         createFeed.rejected,
