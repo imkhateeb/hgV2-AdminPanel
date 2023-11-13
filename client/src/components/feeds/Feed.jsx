@@ -17,7 +17,7 @@ export default function Feed({ feed }) {
                <td>{feed.user.name}</td>
                <td>{feed.feedDetails}</td>
                <td>{feed.createdAt.split("T")[0]}</td>
-               <td><Switch checked={feed.staus} onClick={() => { dispatch(updateFeed({id: feed?._id, data : {staus: false}}))}} /></td>
+               <td><Switch checked={feed.staus} onClick={() => { dispatch(updateFeed({id: feed?._id, data : {staus: feed.staus == true ? false : true}}))}} /></td>
                <td className="flex gap-3 items-center">
                   <button
                      type="button"
