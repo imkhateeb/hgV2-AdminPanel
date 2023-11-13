@@ -1,3 +1,39 @@
-.ant-select-selector{
+/* .ant-select-selector{
     background-color: transparent;
+} */
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-modal .ant-modal-content {
+  background-color: black;
+  background-color: #212130;
+  /* padding: 1; */
+}
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-modal .ant-modal-header {
+  background-color: #212130;
+}
+:where(.css-dev-only-do-not-override-1adbn6x).ant-modal .ant-modal-title {
+  color: white;
+  display: none;
+}
+button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-default {
+  background-color: white;
+  color: black;
+  background-image: none;
+  border: none;
+}
+button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-default:hover {
+    background-color: white;
+    color: black;
+    background-image: none;
+    border: none;
+  }
+button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary {
+  background-color: rgb(219 39 119);
+  background-image: none;
+  border: none;
+}
+button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary:hover{
+    background-color: rgb(219 39 119);
+    background-image: none;
+    border: none;
 }

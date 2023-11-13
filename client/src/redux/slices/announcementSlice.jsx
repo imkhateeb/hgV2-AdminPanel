@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 const headers = {
   authorization:
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGY0ZTQwYTEyYjk3MDFiM2ZjZTQxNyIsImlhdCI6MTY5OTY5NjE5MiwiZXhwIjoxNzAyMjg4MTkyfQ.YqaXN6VkMxkrnj8KZmU2A8PkeOlJ5yAcEaNbzJXaaqQ",
 };
+
 // Async Thunks
 export const fetchAnnouncements = createAsyncThunk(
   "about/fetchAnnouncements",
