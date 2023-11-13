@@ -1,8 +1,28 @@
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { CgFeed } from 'react-icons/cg';
 import feedsStyle from '../../constants/styles/feedsStyle';
+import { useRef } from 'react';
+
+import { createFeed } from '../../redux/slices/feedSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export default function AddNewFeed() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const feedDesc = useRef(null);
+
+  const handleClick = () => {
+    dispatch(
+      createFeed({
+        feedDetails: feedDesc.current.value
+      })
+    );
+    navigate("/feeds")
+  }
+
   return (
     <section className={feedsStyle.sectionStyle}>
       <div className='py-10 px-16 bg-pink-600 rounded-3xl'>
@@ -25,6 +45,7 @@ export default function AddNewFeed() {
           rows={4}
           className={feedsStyle.textareaStyle}
           placeholder='Enter details'
+          ref={feedDesc}
         />
       </div>
       <div className='flex gap-3 justify-center mt-5'>
@@ -36,6 +57,7 @@ export default function AddNewFeed() {
         <button
         type='button'
         className={feedsStyle.btn3}
+        onClick={handleClick}
         >Create Feed <CgFeed /></button>
       </div>
     </section>

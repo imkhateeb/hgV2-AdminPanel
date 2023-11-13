@@ -14,7 +14,6 @@ export default function AddNewAnnouncement() {
       createAnnouncement({ announcementDetails: inputRef.current.value })
     );
     navigate("/announcements");
-    console.log("hello");
   };
   return (
     <section className={feedsStyle.sectionStyle}>

@@ -5,7 +5,10 @@ import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Select, Pagination, ConfigProvider } from "antd";
 
+import feedsStyle from "../../constants/styles/feedsStyle";
+
 import { Link } from "react-router-dom";
+import FeedContent from "./FeedContent";
 
 const Feeds = () => {
   return (
@@ -26,16 +29,16 @@ const Feeds = () => {
             <BsFilterRight className="text-black" size={20} />
             <p className="text-[14px] text-[#718096]">Filters</p>
           </div>
-          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+          <span className={`${feedsStyle.badgestag} text-green-700`}>
             UI/UX
           </span>
-          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-green-600/20">
+          <span className={`${feedsStyle.badgestag} text-purple-700`}>
             SD
           </span>
-          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-green-600/20">
+          <span className={`${feedsStyle.badgestag} text-red-700`}>
             Blockchain
           </span>
-          <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-green-600/20">
+          <span className={`${feedsStyle.badgestag} text-yellow-700`}>
             AI/ML
           </span>
         </div>
@@ -129,6 +132,8 @@ const Feeds = () => {
           <td>12</td>
         </tr>
       </table>
+
+      <FeedContent />
 
       <div className="flex  h-16 my-6 justify-between items-center">
         <div className="flex items-center gap-3 ">

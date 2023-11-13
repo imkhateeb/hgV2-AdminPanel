@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import announcementSlice from './slices/announcementSlice'
+import { configureStore } from '@reduxjs/toolkit';
+import announcementSlice from './slices/announcementSlice';
+import feedSlice from './slices/feedSlice';
 
 const store = configureStore({
   reducer: {
-    announcements : announcementSlice
+    announcements : announcementSlice,
+    feeds : feedSlice,
   }
 })
 
-export default store
+export default store;

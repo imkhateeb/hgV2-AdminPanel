@@ -9,7 +9,9 @@ const feedsStyle = {
 
   btn2: 'flex justify-center gap-2 items-center py-2 px-4 bg-pink-600 rounded-md',
 
-  btn3: 'flex justify-center gap-2 items-center py-2 px-3 bg-pink-100 text-black rounded-md'
+  btn3: 'flex justify-center gap-2 items-center py-2 px-3 bg-pink-100 text-black rounded-md',
+
+  badgestag: 'inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium ring-1 ring-inset ring-green-600/20'
 
 };
 
