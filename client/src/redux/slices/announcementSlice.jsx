@@ -88,9 +88,11 @@ const announcementSlice = createSlice({
         }
       )
       .addCase(createAnnouncement.fulfilled, (state, action) => {
-        state.announcementData.push(action.payload);
+        state.loading = false;
+        state.announcementData?.push(action.payload);
       })
       .addCase(updateAnnouncement.fulfilled, (state, action) => {
+        state.loading = false;
         const updateAnnouncement = action.payload;
         const index = state.announcementData.findIndex(
           (e) => e._id === updateAnnouncement.updatedAnnouncement._id
@@ -101,6 +103,7 @@ const announcementSlice = createSlice({
         }
       })
       .addCase(deleteAnnouncement.fulfilled, (state, action) => {
+        state.loading = false;
         const id = action.payload;
         state.announcementData = state.announcementData.filter(
           (e) => e._id !== id

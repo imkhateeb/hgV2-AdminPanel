@@ -10,7 +10,7 @@ export default function EditFeed({ setEditFeed, feed }) {
 
   const handleClick = () => {
     const newFeedObj = {feedDetails: newFeedDetail}
-    dispatch(updateFeed({id: feed?._id, updatedData: newFeedObj}))
+    dispatch(updateFeed({id: feed?._id, data: newFeedObj}))
     setEditFeed(false)
   }
 
