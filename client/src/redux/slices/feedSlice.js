@@ -6,25 +6,25 @@ const headers = {
 };
 
 
-export const fetchFeeds = createAsyncThunk("feeds/fetchFeeds", async () => {
+export const fetchFeeds = createAsyncThunk("about/fetchFeeds", async () => {
   const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/all`);
 
   return response.data;
 });
 
-export const createFeed = createAsyncThunk("feeds/createFeed", async (data) => {
+export const createFeed = createAsyncThunk("about/createFeed", async (data) => {
   const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds`, data, { headers });
 
   return response.data;
 });
 
-export const deleteFeed = createAsyncThunk("feeds/deleteFeed", async (id) => {
+export const deleteFeed = createAsyncThunk("about/deleteFeed", async (id) => {
   await axios.delete(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, { headers });
 
   return id;
 });
 
-export const updateFeed = createAsyncThunk("feeds/editFeed", async ({id, data}) => {
+export const updateFeed = createAsyncThunk("about/updateFeed", async ({ id, data }) => {
   const response = await axios.patch(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, data, { headers });
 
   return response.data;
@@ -50,6 +50,15 @@ const feedSlice = createSlice({
           state.loading = true;
           state.error = null;
         })
+      .addCase(
+        fetchFeeds.rejected,
+        createFeed.rejected,
+        deleteFeed.rejected,
+        updateFeed.rejected,
+        (state, action) => {
+          state.loading = false;
+          state.error = action.error.message;
+        })
       .addCase(fetchFeeds.fulfilled,
         (state, action) => {
           state.loading = false;
@@ -69,22 +78,15 @@ const feedSlice = createSlice({
           );
         })
       .addCase(updateFeed.fulfilled, (state, action) => {
-        state.loading = false;
-        const updatedFeed = action.payload.updatedFeed;
-        const details = updatedFeed.feedDetails;
-        state.feedData.feeds = state.feedData.feeds.map(feed =>
-          feed._id === updatedFeed._id ? {...feed, feedDetails: details} : feed
+        const updateFeed = action.payload;
+        const index = state.announcementData.findIndex(
+          (e) => e._id === updateFeed.updatedFeed._id
         );
+        if (index !== -1) {
+          state.updatedFeed[index] =
+          updateFeed.updatedFeed;
+        }
       })
-      .addCase(
-        fetchFeeds.rejected,
-        createFeed.rejected,
-        deleteFeed.rejected,
-        updateFeed.rejected,
-        (state, action) => {
-          state.loading = false;
-          state.error = action.error.message;
-        })
   },
 });
 
