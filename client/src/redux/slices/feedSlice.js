@@ -14,7 +14,6 @@ export const fetchFeeds = createAsyncThunk("about/fetchFeeds", async () => {
 
 export const createFeed = createAsyncThunk("about/createFeed", async (data) => {
   const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds`, data, { headers });
-
   return response.data;
 });
 
@@ -25,6 +24,7 @@ export const deleteFeed = createAsyncThunk("about/deleteFeed", async (id) => {
 });
 
 export const updateFeed = createAsyncThunk("about/updateFeed", async ({ id, data }) => {
+  console.log(data)
   const response = await axios.patch(`${import.meta.env.VITE_APP_BACKEND_URI}/api/feeds/${id}`, data, { headers });
 
   return response.data;
@@ -67,6 +67,7 @@ const feedSlice = createSlice({
       .addCase(createFeed.fulfilled,
         (state, action) => {
           state.loading = false;
+          console.log(action.payload)
           state.feedData = action.payload;
         })
       .addCase(deleteFeed.fulfilled,
@@ -79,11 +80,13 @@ const feedSlice = createSlice({
         })
       .addCase(updateFeed.fulfilled, (state, action) => {
         const updateFeed = action.payload;
-        const index = state.announcementData.findIndex(
+        console.log(action.payload)
+        const index = state.feedData.feeds.findIndex(
           (e) => e._id === updateFeed.updatedFeed._id
         );
+        console.log(index)
         if (index !== -1) {
-          state.updatedFeed[index] =
+          state.feedData.feeds[index] =
           updateFeed.updatedFeed;
         }
       })

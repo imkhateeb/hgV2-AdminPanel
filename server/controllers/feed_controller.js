@@ -4,17 +4,17 @@ const User = require("../models/user_model");
 
 // create feed
 const createFeed = asyncHandler(async (req, res) => {
-  const { feedDetails, tags } = req.body;
+  const { feedDetails } = req.body;
   const user = req.user._id;
 
-  if (!feedDetails || !tags) {
+  if (!feedDetails) {
     res.status(400).json({ message: "Please fill all the fields" });
   }
 
   const newFeed = new Feed({
     feedDetails: feedDetails,
     user,
-    tags: tags
+    // tags: tags
   });
 
   const result = await newFeed.save();

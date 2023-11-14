@@ -7,9 +7,8 @@ const User = require("../models/user_model");
 const createAnnouncement = asyncHandler(async (req, res) => {
   const { announcementDetails, tags } = req.body;
   const user = req.user._id;
-  console.log(user);
-  if (!announcementDetails || !tags) {
-    res.status(400).json({ message: "Please fill all the fields" });
+  if (!announcementDetails) {
+    return res.status(400).json({ message: "Please fill all the fields" });
   }
   const newAnnouncement = new Announcement({
     announcementDetails: announcementDetails,
@@ -17,14 +16,13 @@ const createAnnouncement = asyncHandler(async (req, res) => {
   });
   const result = await newAnnouncement.save();
   if (result) {
-    res.status(201).json({
+     res.status(201).json({
       _id: newAnnouncement._id,
       announcementDetails: newAnnouncement.announcementDetails,
       userId: newAnnouncement.user,
       createdAt: newAnnouncement.createdAt,
       userName: user.name,
       userImage: user.image,
-      tags: tags
     });
   } else {
     res.status(400).json({ message: "Invalid Announcement data" });
