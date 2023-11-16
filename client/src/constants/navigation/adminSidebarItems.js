@@ -3,7 +3,7 @@ import { LuLayoutDashboard, LuUsers, AiFillSound, CgFeed, HiOutlineDocumentText 
 export const adminSidebarItems = [
    {
       title: 'Dashboard',
-      url: '/dashboard',
+      url: '/',
       icon: LuLayoutDashboard,
    },
    {
