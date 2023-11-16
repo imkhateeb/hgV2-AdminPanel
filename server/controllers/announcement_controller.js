@@ -7,12 +7,13 @@ const User = require("../models/user_model");
 const createAnnouncement = asyncHandler(async (req, res) => {
   const { announcementDetails, tags } = req.body;
   const user = req.user._id;
-  if (!announcementDetails) {
+  if (!announcementDetails || !tags) {
     return res.status(400).json({ message: "Please fill all the fields" });
   }
   const newAnnouncement = new Announcement({
     announcementDetails: announcementDetails,
     user,
+    tags : tags
   });
   const result = await newAnnouncement.save();
   if (result) {
@@ -23,6 +24,7 @@ const createAnnouncement = asyncHandler(async (req, res) => {
       createdAt: newAnnouncement.createdAt,
       userName: user.name,
       userImage: user.image,
+      tags : newAnnouncement.tags
     });
   } else {
     res.status(400).json({ message: "Invalid Announcement data" });
@@ -50,7 +52,8 @@ const getAllAnnouncements = asyncHandler(async (req, res) => {
   const { tag } = req.query;
   const queryObj = {query:{}};
   if (tag) {
-    queryObj.query = { $in: { tags: tag } }
+    // queryObj.query = { $in: { tags: tag } }
+    queryObj.query = { tags: { $in: tag } }
   }
   try {
     const announcements = await Announcement.find(queryObj.query).populate("user");

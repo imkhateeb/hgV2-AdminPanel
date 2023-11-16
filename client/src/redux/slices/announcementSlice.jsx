@@ -9,9 +9,13 @@ const headers = {
 // Async Thunks
 export const fetchAnnouncements = createAsyncThunk(
   "about/fetchAnnouncements",
-  async () => {
+  async (query) => {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/all`
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/all`,{
+        params : {
+          tag : query 
+        }
+      }
     );
     return response.data;
   }

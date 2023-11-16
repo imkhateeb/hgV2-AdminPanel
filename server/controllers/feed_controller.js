@@ -16,9 +16,8 @@ const createFeed = asyncHandler(async (req, res) => {
     user,
     // tags: tags
   });
-
   const result = await newFeed.save();
-
+  result.user = req.user
   if (result) {
     res.status(201).json({ message: "Feed created successfully", result });
   } else {
@@ -33,7 +32,8 @@ const updateFeed = asyncHandler(async (req, res) => {
       req.params.id,
       { $set: req.body },
       { new: true }
-    );
+    ).populate("user");
+    
     res.status(200).json({ msg: "updated feed is", updatedFeed });
   } catch (err) {
     res.status(500).json(err);

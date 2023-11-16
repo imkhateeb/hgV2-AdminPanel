@@ -1,7 +1,7 @@
 import { Switch } from "antd";
 import { deleteFeed, updateFeed } from '../../redux/slices/feedSlice';
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import EditFeed from "./EditFeed";
 
@@ -9,12 +9,11 @@ export default function Feed({ feed }) {
    const dispatch = useDispatch();
 
    const [editFeed, setEditFeed] = useState(false);
-
    return (
       <>
          <tbody>
             <tr className="border-t-2 h-14">
-               <td>{feed.user.name}</td>
+               <td>{feed.name}</td>
                <td>{feed.feedDetails}</td>
                <td>{feed.createdAt.split("T")[0]}</td>
                <td><Switch checked={feed.staus} onClick={() => { dispatch(updateFeed({id: feed?._id, updatedData : {staus: !feed.staus}}))}} /></td>

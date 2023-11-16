@@ -34,7 +34,7 @@ export default function FeedContent() {
           <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
         </tr>
       </thead>
-        {feedData && feedData.feeds?.map((feed, index) => {
+        {feedData && feedData.map((feed, index) => {
           return (
             <Feed 
               key={feed?.feedDetails + index}

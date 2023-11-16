@@ -1,9 +1,27 @@
 import { Switch } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { updateAnnouncement } from "../../redux/slices/announcementSlice";
-const AnnouncementRow = ({ data, handleDelete, showModal }) => {
+const AnnouncementRow = ({ data, handleDelete, showModal, search }) => {
+  const [array, setArray] = useState([]);
+  useEffect(() => {
+    setArray(data?.announcementData);
+  }, [data?.announcementData]);
+  useEffect(() => {
+    console.log(search);
+    setArray(
+      data?.announcementData?.filter((e) => {
+        if (
+          e.announcementDetails.includes(search) ||
+          e.createdAt.slice(0, 10).includes(search)
+        ) {
+          return e;
+        }
+      })
+    );
+  }, [search]);
+
   const dispatch = useDispatch();
   return (
     <table className="w-full mt-4 overflow-x-scroll">
@@ -22,7 +40,7 @@ const AnnouncementRow = ({ data, handleDelete, showModal }) => {
       </thead>
       {data.loading
         ? "loading..."
-        : data?.announcementData?.map((e) => {
+        : array?.map((e) => {
             return (
               <tbody className="border-t-2 h-14" key={e._id}>
                 <tr>

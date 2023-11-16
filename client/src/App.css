@@ -37,3 +37,7 @@ button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary:hover{
     background-image: none;
     border: none;
 }
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-select:not(.ant-select-customize-input) .ant-select-selector{
+  border: none;
+}

@@ -6,12 +6,16 @@ import { createAnnouncement } from "../../redux/slices/announcementSlice";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 export default function AddNewAnnouncement() {
-  const inputRef = useRef(null);
+  const descRef = useRef(null);
+  const tagRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(
-      createAnnouncement({ announcementDetails: inputRef.current.value })
+      createAnnouncement({
+        announcementDetails: descRef.current.value,
+        tags: tagRef.current.value.split(','),
+      })
     );
     navigate("/announcements");
   };
@@ -25,6 +29,7 @@ export default function AddNewAnnouncement() {
         <input
           placeholder="Event type..."
           className={feedsStyle.eventTypeInputStyle}
+          ref={tagRef}
         />
         <button type="button" className={feedsStyle.btn1}>
           Set Activities <AiOutlineArrowRight />
@@ -34,7 +39,7 @@ export default function AddNewAnnouncement() {
       <div>
         <textarea
           rows={4}
-          ref={inputRef}
+          ref={descRef}
           className={feedsStyle.textareaStyle}
           placeholder="Enter details"
         />
