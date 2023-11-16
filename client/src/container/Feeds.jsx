@@ -5,10 +5,10 @@ import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Select, Pagination, ConfigProvider } from "antd";
 
-import feedsStyle from "../../constants/styles/feedsStyle";
+import feedsStyle from "../constants/styles/feedsStyle";
 
 import { Link } from "react-router-dom";
-import FeedContent from "./FeedContent";
+import FeedContent from "../components/feeds/FeedContent";
 
 const Feeds = () => {
   return (

@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import { Sidebar, Navbar, Dashboard, Downbar, Feeds, Announcements, Wings, Assignments, AddNewFeed, AddNewAnnouncement } from '../components';
+import { Sidebar, Navbar, Dashboard, Downbar, Wings, Assignments, AddNewFeed, AddNewAnnouncement } from '../components';
+import Announcements from './Announcements';
+import Feeds from './Feeds';
 
 export default function Home() {
   return (
