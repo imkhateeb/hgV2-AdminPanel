@@ -22,7 +22,7 @@ export default function EditFeed({ setEditFeed, feed }) {
           <p>DESCRIPTION</p>
           <textarea
             rows={4}
-            className="py-2 px-3 bg-transparent rounded-md border-2 outline-none"
+            className="py-2 px-3 bg-transparent rounded-md border-[1px] border-gray-400 outline-none"
             value={newFeedDetail}
             placeholder="Input new feed..."
             onChange={(e)=>setNewFeedDetail(e.target.value)}

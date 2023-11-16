@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { adminSidebarItems } from "../../../constants/navigation/adminSidebarItems";
 import { NavLink } from "react-router-dom";
 
@@ -8,7 +7,6 @@ const isActiveStyle = 'pr-8 py-2 text-base font-semibold bg-pink-600 rounded-lg 
 const isNotActiveStyle = 'pr-8 py-2 text-base text-slate-400 font-semibold hover:bg-pink-600 hover:text-white rounded-lg animate-fade-in transition-all duration-100 ease-linear';
 
 export default function Sidebar() {
-  const [isActive, setIsActive] = useState("");
 
 
   return (
@@ -23,15 +21,11 @@ export default function Sidebar() {
 
       <div className="flex flex-col gap-2">
         {adminSidebarItems?.map(({ title, url, icon: Icon }) => {
-          const titleInLower = title.toLowerCase();
           return (
             <NavLink
               key={title}
               to={url}
-              onClick={() => {
-                setIsActive(titleInLower)
-              }}
-              className={isActive === titleInLower ? isActiveStyle : isNotActiveStyle}
+              className={({ isActive }) => isActive ? isActiveStyle : isNotActiveStyle}
             >
               <div className="flex gap-3 items-center px-4">
                 <Icon />
