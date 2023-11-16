@@ -1,7 +1,24 @@
+import { useEffect, useState } from "react";
 import Announcement from "./Announcement";
 
-const AnnouncementRow = ({ data, handleDelete, showModal }) => {
-
+const AnnouncementRow = ({ data, handleDelete, showModal, search }) => {
+  const [array, setArray] = useState([]);
+  useEffect(() => {
+    setArray(data?.announcementData);
+  }, [data?.announcementData]);
+  useEffect(() => {
+    console.log(search);
+    setArray(
+      data?.announcementData?.filter((e) => {
+        if (
+          e.announcementDetails.includes(search) ||
+          e.createdAt.slice(0, 10).includes(search)
+        ) {
+          return e;
+        }
+      })
+    );
+  }, [search]);
 
   return (
     <table className="w-full mt-4 overflow-x-scroll">
@@ -20,7 +37,7 @@ const AnnouncementRow = ({ data, handleDelete, showModal }) => {
       </thead>
       {data.loading
         ? "loading..."
-        : data?.announcementData?.map((e) => {
+        : array?.map((e) => {
           return (
             <Announcement key={e._id} e={e} handleDelete={handleDelete} showModal={showModal} />
           );
