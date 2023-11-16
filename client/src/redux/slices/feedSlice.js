@@ -2,12 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const struct = (arr) => {
-  const data = arr.map(({_id, feedDetails, createdAt, staus, user,upVotes
+  const data = arr.map(({_id, feedDetails, tags, createdAt, staus, user,upVotes
   }) => {
     const obj = {
       _id, 
       name: user.name,
       feedDetails,
+      tags,
       createdAt,
       staus,
       upVotes

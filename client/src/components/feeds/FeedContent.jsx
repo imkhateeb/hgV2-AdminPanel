@@ -1,17 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFeeds } from "../../redux/slices/feedSlice";
 
 import Feed from "./Feed";
+import { filterFeeds } from "../../utils/filterFeeds";
+filterFeeds
 
-export default function FeedContent() {
+export default function FeedContent({ searchTerm, queries }) {
+  const [feeds, setFeeds] = useState([]);
+
   const dispatch = useDispatch();
   const { feedData, loading, error } = useSelector((state) => state.feeds);
 
   useEffect(() => {
     dispatch(fetchFeeds());
   }, [dispatch]);
+
+  useEffect(() => {
+    if ( !searchTerm?.trim() && !queries?.length ) {
+      setFeeds(feedData);
+    } else {
+      setFeeds(filterFeeds(feedData, searchTerm, queries));
+    }
+  }, [feedData, searchTerm, queries]);
 
   if (loading) return <p>Loading feeds...</p>;
   if (error) return <p>Error loading feeds: {error}</p>;
@@ -34,14 +46,14 @@ export default function FeedContent() {
           <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
         </tr>
       </thead>
-        {feedData && feedData.map((feed, index) => {
-          return (
-            <Feed 
-              key={feed?.feedDetails + index}
-              feed={feed}
-            />
-          )
-        })}
+      {feeds && feeds.map((feed, index) => {
+        return (
+          <Feed
+            key={feed?.feedDetails + index}
+            feed={feed}
+          />
+        )
+      })}
 
     </table>
   );
