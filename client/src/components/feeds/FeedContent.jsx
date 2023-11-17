@@ -7,7 +7,7 @@ import Feed from "./Feed";
 import { filterFeeds } from "../../utils/filterFeeds";
 filterFeeds
 
-export default function FeedContent({ searchTerm, queries }) {
+export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFeeds, pageNumber }) {
   const [feeds, setFeeds] = useState([]);
   const [showSortingDiv, setShowSortingDiv] = useState(false);
   const dispatch = useDispatch();
@@ -19,9 +19,12 @@ export default function FeedContent({ searchTerm, queries }) {
 
   useEffect(() => {
     if (!searchTerm?.trim() && !queries?.length) {
+      setTotalFeeds(feedData?.length);
       setFeeds(feedData);
     } else {
-      setFeeds(filterFeeds(feedData, searchTerm, queries));
+      const filteredFeeds = filterFeeds(feedData, searchTerm, queries);
+      setTotalFeeds(filteredFeeds?.length);
+      setFeeds(filteredFeeds);
     }
   }, [feedData, searchTerm, queries]);
 
@@ -79,7 +82,7 @@ export default function FeedContent({ searchTerm, queries }) {
           <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
         </tr>
       </thead>
-      {feeds && feeds.map((feed, index) => {
+      {feeds && feeds.slice(feedLimit*(pageNumber-1), feedLimit*pageNumber > feeds.length ? feeds.length : feedLimit*pageNumber).map((feed, index) => {
         return (
           <Feed
             key={feed?.feedDetails + index}

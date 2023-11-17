@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BiDotsHorizontalRounded, BiSort } from "react-icons/bi";
 import { BsFilterRight } from "react-icons/bs";
 import { SearchOutlined } from "@ant-design/icons";
-import { Input, Select, Tag, Pagination, ConfigProvider } from "antd";
+import { Input, Select, Tag } from "antd";
 
 import { Link } from "react-router-dom";
 import FeedContent from "../components/feeds/FeedContent";
+import Pagination from "../components/utility/Pagination";
 
 
 const tagRender = (props) => {
-  const { label, value, closable, onClose } = props;
+  const { label, closable, onClose } = props;
   const onPreventMouseDown = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -33,8 +33,11 @@ const tagRender = (props) => {
 const Feeds = () => {
   const [queries, setQueries] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
+  const [feedLimit, setFeedLimit] = useState(8);
+  const [totalFeeds, setTotalFeeds] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
 
-  const options = [{ value: "ui", }, { value: "ml",}, { value: "sd", }, { value: "cp", }, { value: "iot", }, { value: "cyb", },];
+  const options = [{ value: "ui", }, { value: "ml", }, { value: "sd", }, { value: "cp", }, { value: "iot", }, { value: "cyb", },];
 
   return (
     <section className="bg-bgSecondary rounded-3xl px-7 w-full">
@@ -45,9 +48,9 @@ const Feeds = () => {
         <div className="flex bg-white rounded-md px-2">
           <button>
             {" "}
-            <SearchOutlined className="text-black " />
+            <SearchOutlined className="text-black" />
           </button>
-          <Input placeholder="Search here..." onChange={(e)=>setSearchTerm(e.target.value)} bordered={false} />
+          <Input placeholder="Search here..." onChange={(e) => setSearchTerm(e.target.value)} bordered={false} />
         </div>
         <div className="flex bg-white rounded-md">
           <div className="flex items-center w-20 gap-2 px-2">
@@ -69,29 +72,38 @@ const Feeds = () => {
         </Link>
       </div>
 
-      <FeedContent 
+      <FeedContent
         searchTerm={searchTerm}
         queries={queries}
+        feedLimit={feedLimit}
+        setTotalFeeds={setTotalFeeds}
+        pageNumber={pageNumber}
       />
 
-      <div className="flex  h-16 my-6 justify-between items-center">
+      <div className="flex mb-4 mt-5 justify-between items-center">
         <div className="flex items-center gap-3 ">
           <h1>Show result : </h1>
-          <Select
-            defaultValue="1"
-            options={[
-              { value: "1", label: "1" },
-              { value: "2", label: "2" },
-              { value: "3", label: "3" },
-            ]}
-          />
+          <select 
+          onChange={(e)=>setFeedLimit(parseInt(e.target.value))}
+          className="cursor-pointer py-[2px] px-[5px] outline-none rounded-md bg-transparent border-[1px] border-gray-400"
+          >
+            <option className="text-black">8</option>
+            <option className="text-black">1</option>
+            <option className="text-black">2</option>
+            <option className="text-black">3</option>
+            <option className="text-black">4</option>
+            <option className="text-black">5</option>
+            <option className="text-black">6</option>
+            <option className="text-black">7</option>
+          </select>
         </div>
-        <div className="">
-          {/* <Pagination defaultCurrent={1} total={50} itemRender={()=>{
-              [1,2,3].map((e)=>{
-                   return <p>{e}</p>
-              })
-            }} /> */}
+
+        <div className="text-pink-600 py-1 pr-2 rounded-md">
+            <Pagination 
+              totalItems={totalFeeds}
+              itemsPerPage={feedLimit}
+              onPageChange={setPageNumber}
+            />
         </div>
       </div>
     </section>
