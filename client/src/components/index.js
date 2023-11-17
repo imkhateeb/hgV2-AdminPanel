@@ -10,8 +10,7 @@ import Login from "./authentication/Login";
 import Signup from "./authentication/Signup";
 
 
-<<<<<<< HEAD
-export { Navbar, Sidebar, Dashboard, Downbar, Feeds, Announcements, Wings, Assignments, AddNewFeed, AddNewAnnouncement, Login, Signup};
-=======
-export { Navbar, Sidebar, Dashboard, Downbar, Wings, Assignments, AddNewFeed, AddNewAnnouncement};
->>>>>>> 5257ee0b515ebf1a9f509505a00b4e7647042ba3
+
+export { Navbar, Sidebar, Dashboard, Downbar, Wings, Assignments, AddNewFeed, AddNewAnnouncement, Login, Signup};
+
+

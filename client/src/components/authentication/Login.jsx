@@ -2,9 +2,12 @@ import React, { useEffect, useState, useId } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { loginSuccess, loginFailed } from "../../redux/slices/authSlice";
 import axios from "axios";
+
+const VITE_APP_BACKEND_URI = import.meta.env.VITE_APP_BACKEND_URI;
+
 
 function Signup() {
   const id = useId();
@@ -25,7 +28,7 @@ function Signup() {
         password: password,
       };
 
-      fetch("http://localhost:8000/api/users/login", {
+      fetch(`${VITE_APP_BACKEND_URI}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

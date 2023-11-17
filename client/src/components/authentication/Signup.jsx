@@ -1,7 +1,7 @@
 import React, { useEffect, useId, useState } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,6 +10,8 @@ import {
   logout,
 } from "../../redux/slices/authSlice";
 
+const VITE_APP_BACKEND_URI = import.meta.env.VITE_APP_BACKEND_URI;
+
 function Signup() {
   const id = useId();
   const [name, setName] = useState("");
@@ -17,9 +19,11 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       setError("");
 
@@ -29,35 +33,26 @@ function Signup() {
         password: password,
       };
 
-      fetch("http://localhost:8000/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          if (res.status === 201) {
-            res.json().then((res) => {
-              const user = res.newUser;
-              dispatch(loginSuccess(user));
-              localStorage.setItem("user", JSON.stringify(res.token));
-            });
-          } else {
-            res.json().then((user) => {
-              console.log("this is error", user);
-              setError(user.message);
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setError(error.message);
-        });
+      const response = await axios.post(
+        `${VITE_APP_BACKEND_URI}/api/users/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
+
+      if (response.status === 201) {
+        const user = response.data.newUser;
+        dispatch(loginSuccess(user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        navigate("/");
+      } else {
+        setError(response.data.message || "Error during registration");
+      }
     } catch (error) {
-      console.log("Error message", error);
-      setError(error.message);
-      dispatch(loginFailed(error.message));
+      setError(error.message || "Error during registration");
+      dispatch(loginFailed(error.message || "Error during registration"));
     } finally {
       setName("");
       setEmail("");
@@ -138,7 +133,10 @@ function Signup() {
             <div className="footer mt-2">
               <p className="text-white text-center">
                 Already have an account?{" "}
-                <Link to="/" className="text-blue-600 font-semibold">
+                <Link
+                  to="/account/login"
+                  className="text-blue-600 font-semibold"
+                >
                   Login
                 </Link>
               </p>
