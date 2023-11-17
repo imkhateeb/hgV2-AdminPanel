@@ -8,7 +8,7 @@ const createFeed = asyncHandler(async (req, res) => {
   const user = req.user._id;
 
   if (!feedDetails || !tags) {
-    res.status(400).json({ message: "Please fill all the fields" });
+    return  res.status(400).json({ message: "Please fill all the fields" });
   }
 
   const newFeed = new Feed({
