@@ -55,6 +55,7 @@ export default function AddNewFeed() {
         <button
         type='button'
         className={feedsStyle.btn2}
+        onClick={()=>navigate("/feeds")}
         ><AiOutlineArrowLeft /> Go Back</button>
 
         <button
