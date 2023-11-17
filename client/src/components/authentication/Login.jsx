@@ -1,10 +1,58 @@
-import React, { useId } from "react";
+import React, { useEffect, useId } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Signup() {
   const id = useId();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
+
+  const handleSubmit = () => {
+    try {
+      setError("");
+
+      const data = {
+        name: name,
+        email: email,
+        password: password,
+      };
+
+      fetch("http://localhost:8000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => {
+        if (res.status === 201) {
+          res.json().then((res) => {
+            const user = res.newUser;
+
+            dispatch(loginSuccess(user));
+            localStorage.setItem("token", JSON.stringify(res.token));
+          });
+        } else {
+          res.json().then((user) => {
+            console.log(user);
+            setError(user.message);
+          });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+      dispatch(loginFailed(error.message));
+    } finally {
+      setName("");
+      setEmail("");
+      setPassword("");
+    }
+  };
 
   return (
     <div className="flex w-full min-h-screen bg-black max-sm:flex-col max-sm:items-center ">
@@ -22,13 +70,14 @@ function Signup() {
             style={{ backdropFilter: "blur(6px)" }}
           >
             <h1 className="text-3xl font-bold ml-6 my-8">Login</h1>
-            
+
             <div className="flex justify-center mt-4 ">
               <input
                 id={id + 1}
                 className="w-4/5 h-10 rounded-lg border-2 border-white mt-1 bg-transparent  pl-2 "
                 type="email"
                 placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex justify-center mt-4 ">
@@ -37,6 +86,7 @@ function Signup() {
                 className="w-4/5 h-10 rounded-lg border-2 border-white mt-1 bg-transparent  pl-2 "
                 type="password"
                 placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="flex justify-center mt-4 ">
@@ -46,6 +96,7 @@ function Signup() {
                   background:
                     "linear-gradient(90.57deg, #D4428D 9.91%, #E26AA7 53.29%, #040F75 91.56%",
                 }}
+                onClick={handleSubmit}
               >
                 Login
               </button>
@@ -57,6 +108,9 @@ function Signup() {
                   Sign Up
                 </Link>
               </p>
+            </div>
+            <div className="error-message">
+              <p className="text-red-600 text-center text-sm">{error}</p>
             </div>
           </div>
         </div>

@@ -2,25 +2,64 @@ import React, { useEffect, useId, useState } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loginSuccess,
+  loginFailed,
+  logout,
+} from "../../redux/slices/authSlice";
 
 function Signup() {
   const id = useId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-
-//   useEffect(() => {
-//     console.log(name, email, password)
-//   }, [name, email, password]);
-
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    console.log("clicked")
-  }
+    try {
+      setError("");
 
+      const data = {
+        name: name,
+        email: email,
+        password: password,
+      };
 
-
+      fetch("http://localhost:8000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => {
+        if (res.status === 201) {
+          res.json().then((res) => {
+            const user = res.newUser;
+            dispatch(loginSuccess(user));
+            localStorage.setItem("user", JSON.stringify(res.token));
+          });
+        } else {
+          res.json().then((user) => {
+            console.log(user);
+            setError(user.message);
+          });
+        }
+      });
+    } catch (error) {
+      console.log("Error message", error);
+      setError(error.message);
+      dispatch(loginFailed(error.message));
+     
+    } finally {
+      setName("");
+      setEmail("");
+      setPassword("");
+    }
+  };
 
   return (
     <div className="flex w-full min-h-screen bg-black max-sm:flex-col max-sm:items-center ">
@@ -37,7 +76,18 @@ function Signup() {
             className=" h-[28rem] max-sm:h-[24rem] w-1/2 max-sm:w-full text-white   border-white border-2 rounded-xl mb-24"
             style={{ backdropFilter: "blur(6px)" }}
           >
-            <h1 className="text-3xl font-bold ml-6 my-8">Sign Up</h1>
+            <h1 className="text-3xl font-bold ml-6 my-6">Sign Up</h1>
+
+            <div className="flex justify-center  ">
+              <img
+                src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+                alt=""
+                srcSet=""
+                width={"50px"}
+                className="rounded-full"
+              />
+            </div>
+
             <div className="flex justify-center mt-4 ">
               <input
                 id={id}
@@ -75,9 +125,7 @@ function Signup() {
                   background:
                     "linear-gradient(90.57deg, #D4428D 9.91%, #E26AA7 53.29%, #040F75 91.56%",
                 }}
-
                 onClick={handleSubmit}
-
               >
                 Sign Up
               </button>
@@ -85,14 +133,14 @@ function Signup() {
             <div className="footer mt-2">
               <p className="text-white text-center">
                 Already have an account?{" "}
-                <Link
-                  to="/account/login"
-                  className="text-blue-600 font-semibold"
-                >
+                <Link to="/" className="text-blue-600 font-semibold">
                   Login
                 </Link>
               </p>
             </div>
+           <div className="error-message">
+              <p className="text-red-600 text-center text-sm">{error}</p>
+           </div>
           </div>
         </div>
 
