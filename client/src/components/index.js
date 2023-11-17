@@ -6,6 +6,11 @@ import Wings from "./wings/Wings";
 import Assignments from "./assignments/Assignments";
 import AddNewFeed from "./feeds/AddNewFeed";
 import AddNewAnnouncement from "./announcements/AddNewAnnouncement";
+import Login from "./authentication/Login";
+import Signup from "./authentication/Signup";
 
 
-export { Navbar, Sidebar, Dashboard, Downbar, Wings, Assignments, AddNewFeed, AddNewAnnouncement};
+
+export { Navbar, Sidebar, Dashboard, Downbar, Wings, Assignments, AddNewFeed, AddNewAnnouncement, Login, Signup};
+
+

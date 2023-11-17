@@ -1,27 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const storedToken = JSON.parse(localStorage.getItem("token"));
 
 const struct = (arr) => {
-  const data = arr.map(({_id, feedDetails, tags, createdAt, staus, user,upVotes
-  }) => {
-    const obj = {
-      _id, 
-      name: user.name,
-      feedDetails,
-      tags,
-      createdAt,
-      staus,
-      upVotes
-    };
-    return obj;
-  });
+  const data = arr.map(
+    ({ _id, feedDetails, tags, createdAt, staus, user, upVotes }) => {
+      const obj = {
+        _id,
+        name: user.name,
+        feedDetails,
+        tags,
+        createdAt,
+        staus,
+        upVotes,
+      };
+      return obj;
+    }
+  );
 
   return data;
 };
 
 const headers = {
-  authorization:
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGY1MTMyNzkwNDgwZmY2YWJlMTA0NCIsImlhdCI6MTY5OTY5Njk0NiwiZXhwIjoxNzAyMjg4OTQ2fQ.R4_15tNOSekWN9Jc3K860urWro0o_MRl765zuUIfQN8",
+  authorization: `Bearer ${storedToken}`,
 };
 
 export const fetchFeeds = createAsyncThunk("about/fetchFeeds", async () => {
