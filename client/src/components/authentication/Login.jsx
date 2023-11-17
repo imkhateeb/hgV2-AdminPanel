@@ -1,7 +1,9 @@
-import React, { useEffect, useId } from "react";
+import React, { useEffect, useState, useId } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginSuccess, loginFailed } from "../../redux/slices/authSlice";
 import axios from "axios";
 
 function Signup() {
@@ -9,15 +11,16 @@ function Signup() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     try {
       setError("");
 
       const data = {
-        name: name,
         email: email,
         password: password,
       };
@@ -29,26 +32,26 @@ function Signup() {
         },
         body: JSON.stringify(data),
       }).then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           res.json().then((res) => {
-            const user = res.newUser;
+            const user = res.user;
+
+            console.log(user);
 
             dispatch(loginSuccess(user));
             localStorage.setItem("token", JSON.stringify(res.token));
+            navigate("/");
           });
         } else {
-          res.json().then((user) => {
-            console.log(user);
-            setError(user.message);
+          res.json().then((res) => {
+            setError(res.message);
           });
         }
       });
     } catch (error) {
-      console.log(error);
       setError(error.message);
       dispatch(loginFailed(error.message));
     } finally {
-      setName("");
       setEmail("");
       setPassword("");
     }

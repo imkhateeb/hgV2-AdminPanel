@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const storedToken = JSON.parse(localStorage.getItem("token"));
+
 const headers = {
-  authorization:
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGY0ZTQwYTEyYjk3MDFiM2ZjZTQxNyIsImlhdCI6MTY5OTY5NjE5MiwiZXhwIjoxNzAyMjg4MTkyfQ.YqaXN6VkMxkrnj8KZmU2A8PkeOlJ5yAcEaNbzJXaaqQ",
+  authorization: `Bearer ${storedToken}`,
 };
 
 // Async Thunks
@@ -11,10 +12,11 @@ export const fetchAnnouncements = createAsyncThunk(
   "about/fetchAnnouncements",
   async (query) => {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/all`,{
-        params : {
-          tag : query 
-        }
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/all`,
+      {
+        params: {
+          tag: query,
+        },
       }
     );
     return response.data;

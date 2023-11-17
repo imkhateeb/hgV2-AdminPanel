@@ -4,14 +4,15 @@ import {
   Navbar,
   Dashboard,
   Downbar,
-  Feeds,
-  Announcements,
   Wings,
   Assignments,
   AddNewFeed,
   AddNewAnnouncement,
 } from "../components";
 import ProtectedRoute from "../components/authentication/ProtectedRoutes";
+
+import Announcements from "./Announcements";
+import Feeds from "./Feeds";
 
 export default function Home() {
   return (

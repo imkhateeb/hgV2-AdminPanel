@@ -35,25 +35,29 @@ function Signup() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }).then((res) => {
-        if (res.status === 201) {
-          res.json().then((res) => {
-            const user = res.newUser;
-            dispatch(loginSuccess(user));
-            localStorage.setItem("user", JSON.stringify(res.token));
-          });
-        } else {
-          res.json().then((user) => {
-            console.log(user);
-            setError(user.message);
-          });
-        }
-      });
+      })
+        .then((res) => {
+          if (res.status === 201) {
+            res.json().then((res) => {
+              const user = res.newUser;
+              dispatch(loginSuccess(user));
+              localStorage.setItem("user", JSON.stringify(res.token));
+            });
+          } else {
+            res.json().then((user) => {
+              console.log("this is error", user);
+              setError(user.message);
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setError(error.message);
+        });
     } catch (error) {
       console.log("Error message", error);
       setError(error.message);
       dispatch(loginFailed(error.message));
-     
     } finally {
       setName("");
       setEmail("");
@@ -106,6 +110,7 @@ function Signup() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="flex justify-center mt-4 ">
@@ -138,9 +143,9 @@ function Signup() {
                 </Link>
               </p>
             </div>
-           <div className="error-message">
+            <div className="error-message">
               <p className="text-red-600 text-center text-sm">{error}</p>
-           </div>
+            </div>
           </div>
         </div>
 

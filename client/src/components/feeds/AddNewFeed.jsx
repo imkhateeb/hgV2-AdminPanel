@@ -13,11 +13,13 @@ export default function AddNewFeed() {
   const dispatch = useDispatch();
 
   const feedDesc = useRef(null);
+  const tagRef = useRef(null);
 
   const handleClick = () => {
     dispatch(
       createFeed({
-        feedDetails: feedDesc.current.value
+        feedDetails: feedDesc.current.value,
+        tags: tagRef.current.value,
       })
     );
     navigate("/feeds")
@@ -33,6 +35,7 @@ export default function AddNewFeed() {
         <input
           placeholder='Event type...'
           className={feedsStyle.eventTypeInputStyle}
+          ref={tagRef}
         />
         <button
           type='button'
