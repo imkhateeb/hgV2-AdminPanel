@@ -78,8 +78,8 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
             </div>
           </th>
           <th className="text-left w-[10%] text-[15px]">STATUS</th>
-          <th className="text-left w-[10%] text-[15px]">ACTION</th>
           <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
+          <th className="text-left w-[10%] text-[15px]">ACTION</th>
         </tr>
       </thead>
       {feeds && feeds.slice(feedLimit*(pageNumber-1), feedLimit*pageNumber > feeds.length ? feeds.length : feedLimit*pageNumber).map((feed, index) => {
