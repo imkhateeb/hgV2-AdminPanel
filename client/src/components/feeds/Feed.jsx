@@ -1,7 +1,10 @@
 import { Switch } from "antd";
 import { deleteFeed, updateFeed } from '../../redux/slices/feedSlice';
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import { MdDelete } from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
 
 import EditFeed from "./EditFeed";
 import FeedDetails from "./FeedDetails";
@@ -31,15 +34,14 @@ export default function Feed({ feed }) {
                <td className="flex gap-3 items-center">
                   <button
                      type="button"
-                     className="button hover:underline"
+                     className="button hover:underline flex justify-center items-center"
                      onClick={() => setEditFeed(true)}
-
-                  >E</button>
+                  ><AiFillEdit fontSize={24}/></button>
                   <button
                      type="button"
-                     className="button hover:underline"
+                     className="button hover:underline flex justify-center items-center"
                      onClick={() => { dispatch(deleteFeed(feed?._id)) }}
-                  >D</button>
+                  ><MdDelete fontSize={24}/></button>
                </td>
                <td>{feed.upVotes.length}</td>
             </tr>
