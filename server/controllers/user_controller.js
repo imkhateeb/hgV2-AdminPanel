@@ -23,11 +23,11 @@ const createUser = asyncHandler(async (req, res) => {
   // console.log(image);
 
   if (!name || !email || !password ) {
-    res.status(400).json({ message: "Please fill all the fields" });
+   return res.status(400).json({ message: "Please fill all the fields" });
   }
   const checkUser = await User.findOne({ email });
   if (checkUser) {
-    res.status(400).json({ message: "User with this email already exists" });
+   return res.status(400).json({ message: "User with this email already exists" });
   }
   var salt = await bcrypt.genSalt(10);
 
@@ -56,7 +56,7 @@ const createUser = asyncHandler(async (req, res) => {
     codeforces_username:
       codeforces_username !== undefined ? codeforces_username : null,
     image: uploadedFile.secure_url, 
-    isAdmin: isAdmin !== undefined ? isAdmin : false,
+    isAdmin: isAdmin !== undefined ? isAdmin : true,
   });
   const result = await newUser.save();
   if (result) {

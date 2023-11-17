@@ -2,6 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const storedToken = JSON.parse(localStorage.getItem("token"));
 
+console.log("feeds",storedToken);
+const headers = {
+  authorization: `Bearer ${storedToken}`,
+};
+
+
 const struct = (arr) => {
   const data = arr.map(
     ({ _id, feedDetails, tags, createdAt, staus, user, upVotes }) => {
@@ -21,9 +27,7 @@ const struct = (arr) => {
   return data;
 };
 
-const headers = {
-  authorization: `Bearer ${storedToken}`,
-};
+
 
 export const fetchFeeds = createAsyncThunk("about/fetchFeeds", async () => {
   const response = await axios.get(

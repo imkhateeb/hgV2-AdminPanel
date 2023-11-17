@@ -7,6 +7,8 @@ const headers = {
   authorization: `Bearer ${storedToken}`,
 };
 
+console.log(storedToken)
+
 // Async Thunks
 export const fetchAnnouncements = createAsyncThunk(
   "about/fetchAnnouncements",
@@ -43,6 +45,7 @@ export const updateAnnouncement = createAsyncThunk(
       updatedData,
       { headers }
     );
+    console.log(response);
     return response.data;
   }
 );
@@ -100,13 +103,19 @@ const announcementSlice = createSlice({
       .addCase(updateAnnouncement.fulfilled, (state, action) => {
         state.loading = false;
         const updateAnnouncement = action.payload;
-        const index = state.announcementData.findIndex(
-          (e) => e._id === updateAnnouncement.updatedAnnouncement._id
+        console.log("This is updated announcmenr", updateAnnouncement);
+        state.announcementData = state.announcementData.map((e) =>
+          e._id === updateAnnouncement.updatedAnnouncement._id
+            ? updateAnnouncement.updatedAnnouncement
+            : e
         );
-        if (index !== -1) {
-          state.announcementData[index] =
-            updateAnnouncement.updatedAnnouncement;
-        }
+        // const index = state.announcementData.findIndex(
+        //   (e) => e._id === updateAnnouncement.updatedAnnouncement._id
+        // );
+        // if (index !== -1) {
+        //   state.announcementData[index] =
+        //     updateAnnouncement.updatedAnnouncement;
+        // }
       })
       .addCase(deleteAnnouncement.fulfilled, (state, action) => {
         state.loading = false;

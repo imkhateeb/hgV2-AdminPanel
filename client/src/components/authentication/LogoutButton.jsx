@@ -11,7 +11,10 @@ function LogoutButton() {
 
   return (
     <div className="logout-button">
-      <button className="btn btn-primary" onClick={handleLogout}>
+      <button
+        onClick={handleLogout}
+        className="bg-white text-black rounded-md px-4 py-2"
+      >
         Logout
       </button>
     </div>
