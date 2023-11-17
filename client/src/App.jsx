@@ -3,10 +3,6 @@ import "./App.css";
 import Home from "./container/Home";
 import Auth from "./container/Auth";
 
-
-
-
-
 export default function App() {
   return (
     <BrowserRouter>

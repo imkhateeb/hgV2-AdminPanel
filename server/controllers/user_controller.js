@@ -56,7 +56,7 @@ const createUser = asyncHandler(async (req, res) => {
     codeforces_username:
       codeforces_username !== undefined ? codeforces_username : null,
     image: uploadedFile.secure_url, 
-    isAdmin: isAdmin !== undefined ? isAdmin : false,
+    isAdmin: isAdmin !== undefined ? isAdmin : true,
   });
   const result = await newUser.save();
   if (result) {

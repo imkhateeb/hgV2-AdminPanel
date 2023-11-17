@@ -13,18 +13,18 @@ const createAnnouncement = asyncHandler(async (req, res) => {
   const newAnnouncement = new Announcement({
     announcementDetails: announcementDetails,
     user,
-    tags : tags
+    tags: tags,
   });
   const result = await newAnnouncement.save();
   if (result) {
-     res.status(201).json({
+    res.status(201).json({
       _id: newAnnouncement._id,
       announcementDetails: newAnnouncement.announcementDetails,
       userId: newAnnouncement.user,
       createdAt: newAnnouncement.createdAt,
       userName: user.name,
       userImage: user.image,
-      tags : newAnnouncement.tags
+      tags: newAnnouncement.tags,
     });
   } else {
     res.status(400).json({ message: "Invalid Announcement data" });
@@ -38,7 +38,10 @@ const updateAnnouncement = asyncHandler(async (req, res) => {
       req.params.id,
       { $set: req.body },
       { new: true }
-    );
+    ).populate({ path: "user", select: "name" });
+
+    console.log(updatedAnnouncement);
+
     res
       .status(200)
       .json({ msg: "updated announcement is", updatedAnnouncement });
@@ -50,13 +53,15 @@ const updateAnnouncement = asyncHandler(async (req, res) => {
 // get all announcements
 const getAllAnnouncements = asyncHandler(async (req, res) => {
   const { tag } = req.query;
-  const queryObj = {query:{}};
+  const queryObj = { query: {} };
   if (tag) {
     // queryObj.query = { $in: { tags: tag } }
-    queryObj.query = { tags: { $in: tag } }
+    queryObj.query = { tags: { $in: tag } };
   }
   try {
-    const announcements = await Announcement.find(queryObj.query).populate("user");
+    const announcements = await Announcement.find(queryObj.query).populate(
+      "user"
+    );
     res.status(200).json(announcements);
   } catch (err) {
     res.status(400).json({ message: "Error in getting announcement" + err });
@@ -81,5 +86,5 @@ module.exports = {
   createAnnouncement,
   getAllAnnouncements,
   updateAnnouncement,
-  deleteAnnouncement
+  deleteAnnouncement,
 };

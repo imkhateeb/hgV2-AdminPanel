@@ -18,7 +18,9 @@ function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       setError("");
 
@@ -35,8 +37,8 @@ function Signup() {
       if (response.status === 200) {
         const user = response.data.user;
 
-        dispatch(loginSuccess(user));
         localStorage.setItem("token", JSON.stringify(response.data.token));
+        dispatch(loginSuccess(user));
         navigate("/");
       } else {
         setError(response.data.message || "Error during registration");
@@ -49,6 +51,8 @@ function Signup() {
     }
   };
 
+ 
+
   return (
     <div className="flex w-full min-h-screen bg-black max-sm:flex-col max-sm:items-center ">
       <div className="left-container w-1/2 flex items-center justify-center">
@@ -60,12 +64,13 @@ function Signup() {
         </div>
 
         <div className="input-form w-full flex justify-center items-center absolute  ">
+        
           <div
             className="h-[28rem] max-sm:h-[28rem] w-1/2 max-lg:w-[70%] max-md:w-[80%]  max-sm:w-[75%] max-xs:w-full text-white border-white border-2 rounded-xl mb-24"
             style={{ backdropFilter: "blur(6px)" }}
           >
-            <h1 className="text-3xl font-bold ml-6 my-6">Login</h1>
-
+            <h1 className="text-3xl text-center font-bold  my-6">Welcome Back!</h1>
+           
             <div className="flex justify-center  ">
               <img
                 src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
@@ -75,7 +80,7 @@ function Signup() {
                 className="rounded-full"
               />
             </div>
-
+            <form className="w-full" onSubmit={handleSubmit}>
             <div className="flex justify-center mt-4 ">
               <input
                 id={id + 1}
@@ -84,6 +89,7 @@ function Signup() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="flex justify-center mt-4  ">
@@ -94,6 +100,7 @@ function Signup() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className="flex justify-center mt-4 ">
@@ -103,11 +110,12 @@ function Signup() {
                   background:
                     "linear-gradient(90.57deg, #D4428D 9.91%, #E26AA7 53.29%, #040F75 91.56%",
                 }}
-                onClick={handleSubmit}
+          
               >
                 Login
               </button>
             </div>
+            </form>
             <div className="footer mt-2">
               <p className="text-white text-center">
                 Don't have an account?{" "}
@@ -117,9 +125,10 @@ function Signup() {
               </p>
             </div>
             <div className="error-message">
-              <p className="text-red-600 text-center text-sm">{error}</p>
+              <p className="text-pink-600 text-center text-sm font-medium">{error}</p>
             </div>
           </div>
+      
         </div>
 
         <div className="lower-image  flex justify-end mr-10">
