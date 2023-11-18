@@ -1,29 +1,27 @@
-import { LuLayoutDashboard, LuUsers, AiFillSound, CgFeed, HiOutlineDocumentText } from '../icons/icons';
-
 export const adminSidebarItems = [
    {
       title: 'Dashboard',
       url: '/',
-      icon: LuLayoutDashboard,
+      icon: 'dashboard',
    },
    {
       title: 'Announcements',
       url: '/announcements',
-      icon: AiFillSound,
+      icon: 'announcements',
    },
    {
       title: 'Feeds',
       url: '/feeds',
-      icon: CgFeed,
+      icon: 'feeds',
    },
    {
       title: 'Wings',
       url: '/wings',
-      icon: LuUsers,
+      icon: 'wings',
    },
    {
       title: 'Assignment',
       url: '/assignment',
-      icon: HiOutlineDocumentText,
+      icon: 'assignment',
    },
 ]

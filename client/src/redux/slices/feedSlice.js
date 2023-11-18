@@ -74,8 +74,12 @@ const feedSlice = createSlice({
     builder
       .addCase(
         fetchFeeds.pending,
-        createFeed.pending,
-        deleteFeed.pending,
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addCase(
         updateFeed.pending,
         (state) => {
           state.loading = true;
@@ -83,13 +87,44 @@ const feedSlice = createSlice({
         }
       )
       .addCase(
+        deleteFeed.pending,
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addCase(
+        createFeed.pending,
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addCase(
         fetchFeeds.rejected,
-        createFeed.rejected,
-        deleteFeed.rejected,
-        updateFeed.rejected,
         (state, action) => {
           state.loading = false;
           state.error = action.error.message;
+        }
+      )
+      .addCase(
+        updateFeed.rejected,
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      ).addCase(
+        deleteFeed.rejected,
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addCase(
+        createFeed.rejected,
+        (state) => {
+          state.loading = true;
+          state.error = null;
         }
       )
       .addCase(fetchFeeds.fulfilled, (state, action) => {
@@ -106,6 +141,7 @@ const feedSlice = createSlice({
         state.feedData = state.feedData.filter((e) => e._id !== id);
       })
       .addCase(updateFeed.fulfilled, (state, action) => {
+        state.loading = false;
         const updateFeed = struct([action.payload.updatedFeed]);
         const index = state.feedData.findIndex(
           (e) => e._id === updateFeed[0]._id

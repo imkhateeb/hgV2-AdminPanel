@@ -81,6 +81,14 @@ export default {
             transform: 'translateY(-20px)',
           },
         },
+        'shimmer': {
+          '0%, 100%': {
+            opacity: '1',
+          },
+          '50%': {
+            opacity: '0.5',
+          },
+        },
       },
       animation: {
         'slide-in': 'slide-in 0.5s ease-out',
@@ -89,6 +97,7 @@ export default {
         'fade-in-up': 'fade-in-up 0.5s ease-out',
         'fade-out': 'fade-out 0.5s ease-out',
         'fade-out-up': 'fade-out-up 0.5s ease-out',
+        'shimmer': 'shimmer 1.5s ease-in-out infinite',
       },
     },
   },

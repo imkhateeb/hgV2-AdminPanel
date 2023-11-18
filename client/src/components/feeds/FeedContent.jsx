@@ -2,29 +2,39 @@ import { useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFeeds } from "../../redux/slices/feedSlice";
+import SkeletonAnimation from "../utility/SkeletonAnimation";
 
 import Feed from "./Feed";
 import { filterFeeds } from "../../utils/filterFeeds";
 filterFeeds
 
-export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFeeds, pageNumber }) {
+export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFeeds, pageNumber, totalFeeds }) {
   const [feeds, setFeeds] = useState([]);
   const [showSortingDiv, setShowSortingDiv] = useState(false);
   const dispatch = useDispatch();
   const { feedData, loading, error } = useSelector((state) => state.feeds);
 
+  const fetchAllFeeds = () => {
+    try {
+      dispatch(fetchFeeds());
+    } catch (error) {
+      console.log("Error while gettting all feeds", error);
+    }
+  }
   useEffect(() => {
-    dispatch(fetchFeeds());
+    fetchAllFeeds();
   }, [dispatch]);
 
   useEffect(() => {
-    if (!searchTerm?.trim() && !queries?.length) {
-      setTotalFeeds(feedData?.length);
-      setFeeds(feedData);
-    } else {
-      const filteredFeeds = filterFeeds(feedData, searchTerm, queries);
-      setTotalFeeds(filteredFeeds?.length);
-      setFeeds(filteredFeeds);
+    if (feedData?.length) {
+      if (!searchTerm?.trim() && !queries?.length) {
+        setTotalFeeds(feedData?.length);
+        setFeeds(feedData);
+      } else {
+        const filteredFeeds = filterFeeds(feedData, searchTerm, queries);
+        setTotalFeeds(filteredFeeds?.length);
+        setFeeds(filteredFeeds);
+      }
     }
   }, [feedData, searchTerm, queries]);
 
@@ -40,57 +50,54 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
     }))
   }
 
-  if (loading) return <p>Loading feeds...</p>;
-  if (error) return <p>Error loading feeds: {error}</p>;
+  if (error) return <p>Error loading feeds: {error.message || 'Unknown error'}</p>;
 
 
   return (
-    <table className="w-full mt-4 overflow-x-scroll">
-      <thead className="border-t-2 h-14">
-        <tr>
-          <th className="text-left w-[20%] text-[15px]">USER</th>
-          <th className="text-left w-[40%] text-[15px]">DESCRIPTION</th>
-          <th className="text-left w-[20%]">
-            <div className="flex relative items-center gap-2 text-[15px]">
-              <h1>CREATED ON</h1>
-              <BiSort className="cursor-pointer" onClick={() => { setShowSortingDiv(true) }} />
-              {showSortingDiv &&
-                (
-                  <div className="absolute flex flex-col bg-bgTertiary ml-24 mt-12 rounded-lg">
-                    <button
-                      type="button"
-                      className="py-1 px-3 cursor-pointer hover:bg-bgSecondary transition-all duration-200 ease-in"
-                      onClick={() => {
-                        setShowSortingDiv(false);
-                        handleNewest();
-                      }}
-                    >Latest</button>
-                    <button
-                      type="button"
-                      className="py-2 px-5 cursor-pointer hover:bg-bgSecondary transition-all duration-200 ease-in"
-                      onClick={() => {
-                        setShowSortingDiv(false);
-                        handleOldest();
-                      }}
-                    >Oldest</button>
-                  </div>
-                )}
-            </div>
-          </th>
-          <th className="text-left w-[10%] text-[15px]">STATUS</th>
-          <th className="text-left w-[10%] text-[15px]">UPVOTES</th>
-          <th className="text-left w-[10%] text-[15px]">ACTION</th>
-        </tr>
-      </thead>
-      {feeds && feeds.slice(feedLimit*(pageNumber-1), feedLimit*pageNumber > feeds.length ? feeds.length : feedLimit*pageNumber).map((feed, index) => {
-        return (
-          <Feed
-            key={feed?.feedDetails + index}
-            feed={feed}
-          />
-        )
-      })}
-
-    </table>
+    <div className="flex flex-col w-full mt-4">
+      <div className="flex border-t-2 py-4 w-full">
+        <div className="w-[15%] text-[16px] font-semibold">USER</div>
+        <div className="w-[45%] text-[16px] font-semibold">DESCRIPTION</div>
+        <div className="w-[10%] flex relative gap-1 items-center text-[16px] font-semibold">
+          <h1>CREATED ON</h1>
+          <BiSort className="cursor-pointer" onClick={() => { setShowSortingDiv(true) }} />
+          {showSortingDiv &&
+            (
+              <div className="absolute flex flex-col bg-bgTertiary ml-[95px] mt-12 rounded-lg">
+                <button
+                  type="button"
+                  className="py-1 px-3 cursor-pointer hover:bg-bgSecondary transition-all duration-200 ease-in"
+                  onClick={() => {
+                    setShowSortingDiv(false);
+                    handleNewest();
+                  }}
+                >Latest</button>
+                <button
+                  type="button"
+                  className="py-2 px-5 cursor-pointer hover:bg-bgSecondary transition-all duration-200 ease-in"
+                  onClick={() => {
+                    setShowSortingDiv(false);
+                    handleOldest();
+                  }}
+                >Oldest</button>
+              </div>
+            )}
+        </div>
+        <div className="w-[10%] text-center text-[16px] font-semibold">STATUS</div>
+        <div className="w-[10%] text-center text-[16px] font-semibold">UPVOTES</div>
+        <div className="w-[10%] text-center text-[16px] font-semibold">ACTION</div>
+      </div>
+      {
+        loading ? <SkeletonAnimation totalFeeds={totalFeeds} /> :
+          (feeds && feeds.slice(feedLimit * (pageNumber - 1), feedLimit * pageNumber > feeds.length ? feeds.length : feedLimit * pageNumber).map((feed, index) => {
+            return (
+              <Feed
+                key={feed?.feedDetails + index}
+                feed={feed}
+              />
+            )
+          }))
+      }
+    </div >
   );
 }

@@ -57,7 +57,7 @@ button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary:hover{
 }
 
 .ant-switch {
-  background-color: rgb(226, 38, 116) !important;
+  background-color: red !important;
   min-width: 40px;
   border-radius: 20px; 
 }

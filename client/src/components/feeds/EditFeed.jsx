@@ -37,7 +37,7 @@ export default function EditFeed({ setEditFeed, feed }) {
         >Save</button>
         <button
           type="button"
-          className="py-1 px-3 rounded-md cursor-pointer bg-bgSecondary hover:bg-bgTertiary text-white transition-all duration-200 ease-linear"
+          className="py-1 px-3 rounded-md cursor-pointer bg-slate-800 hover:bg-bgTertiary text-white transition-all duration-200 ease-linear"
           onClick={() => setEditFeed(false)}
         >Cancel</button>
       </div>
