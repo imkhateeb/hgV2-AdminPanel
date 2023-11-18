@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Signup, Login } from "../components";
+import FigmaLoginComponent from "../components/authentication/FigmaLoginComponent";
 
 
 export default function Auth() {
@@ -10,6 +11,7 @@ export default function Auth() {
             <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/figma" element={<FigmaLoginComponent />} />
             </Routes>
         </div>
       
