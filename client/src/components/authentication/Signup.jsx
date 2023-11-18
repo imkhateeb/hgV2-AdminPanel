@@ -19,7 +19,8 @@ function Signup() {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+      e.preventDefault();
     try {
       setError("");
 
@@ -34,8 +35,8 @@ function Signup() {
 
       if (response.status === 201) {
         const user = response.data.newUser;
-        dispatch(loginSuccess(user));
         localStorage.setItem("token", JSON.stringify(response.data.token));
+        dispatch(loginSuccess(user));
         navigate("/");
       } else {
         setError(response.data.message || "Error during registration");
