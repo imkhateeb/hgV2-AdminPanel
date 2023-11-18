@@ -16,7 +16,7 @@ export default function Announcement({e, handleDelete, showModal}) {
         <tbody className="border-t-2 h-14" >
         <tr>
           {/* <td>{e.user.name.toUpperCase()}</td> */}
-          <td>Siva Sai</td>
+          <td>{e.user.name}</td>
           <td>
             {e.announcementDetails.slice(0, 50)}... {" "}
             <button

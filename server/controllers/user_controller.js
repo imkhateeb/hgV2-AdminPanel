@@ -18,22 +18,28 @@ const createUser = asyncHandler(async (req, res) => {
     instagram_url,
     leetcode_username,
     codeforces_username,
-    image,
+    // image,
   } = req.body;
-  console.log(image);
+  // console.log(image);
 
-  if (!name || !email || !password || !image) {
-    res.status(400).json({ message: "Please fill all the fields" });
+  if (!name || !email || !password ) {
+   return res.status(400).json({ message: "Please fill all the fields" });
   }
   const checkUser = await User.findOne({ email });
   if (checkUser) {
-    res.status(400).json({ message: "User with this email already exists" });
+   return res.status(400).json({ message: "User with this email already exists" });
   }
   var salt = await bcrypt.genSalt(10);
 
-  const uploadedFile = await cloudinary.uploader.upload(image, {
-    folder: "hgv2",
-  });
+  // const uploadedFile = await cloudinary.uploader.upload(image, {
+  //   folder: "hgv2",
+  // });
+
+  const uploadedFile = {
+    secure_url : "#"
+  }
+
+
   const newUser = new User({
     name: name,
     email: email,
@@ -49,8 +55,8 @@ const createUser = asyncHandler(async (req, res) => {
       leetcode_username !== undefined ? leetcode_username : null,
     codeforces_username:
       codeforces_username !== undefined ? codeforces_username : null,
-    image: uploadedFile.secure_url,
-    isAdmin: isAdmin !== undefined ? isAdmin : false,
+    image: uploadedFile.secure_url, 
+    isAdmin: isAdmin !== undefined ? isAdmin : true,
   });
   const result = await newUser.save();
   if (result) {

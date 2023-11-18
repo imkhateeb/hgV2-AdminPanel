@@ -8,7 +8,7 @@ const createFeed = asyncHandler(async (req, res) => {
   const user = req.user._id;
 
   if (!feedDetails || !tags) {
-    res.status(400).json({ message: "Please fill all the fields" });
+    return  res.status(400).json({ message: "Please fill all the fields" });
   }
 
   const newFeed = new Feed({
@@ -32,7 +32,7 @@ const updateFeed = asyncHandler(async (req, res) => {
       req.params.id,
       { $set: req.body },
       { new: true }
-    ).populate("user");
+    ).populate({ path: "user", select: "name" });
     
     res.status(200).json({ msg: "updated feed is", updatedFeed });
   } catch (err) {
