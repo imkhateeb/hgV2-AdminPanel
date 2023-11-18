@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 
 import { Input, Select, Pagination, Button, Modal } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import feedsStyle from "../../constants/styles/feedsStyle";
+import feedsStyle from "../constants/styles/feedsStyle";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import {
   fetchAnnouncements,
   deleteAnnouncement,
   updateAnnouncement,
-} from "../../redux/slices/announcementSlice";
-import AnnouncementRow from "./AnnouncementRow";
-import AnnouncementHeader from "./AnnouncementHeader";
+} from "../redux/slices/announcementSlice";
+import AnnouncementRow from "../components/announcements/AnnouncementRow";
+import AnnouncementHeader from "../components/announcements/AnnouncementHeader";
+
 const Announcements = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.announcements);

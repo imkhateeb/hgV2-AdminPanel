@@ -38,6 +38,44 @@ button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary:hover{
     border: none;
 }
 
+/* Customizing the scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Roundness of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the thumb on hover */
+}
+
+.ant-switch {
+  background-color: rgb(226, 38, 116) !important;
+  min-width: 40px;
+  border-radius: 20px; 
+}
+
+.ant-switch-checked {
+  background-color: rgb(53, 53, 240) !important;
+}
+
 :where(.css-dev-only-do-not-override-1adbn6x).ant-select:not(.ant-select-customize-input) .ant-select-selector{
   border: none;
+}
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-item a{
+  color: white;
+}
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-disabled .ant-pagination-item-link, :where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-disabled:hover .ant-pagination-item-link{
+color: white;  
+}
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-prev button, :where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-next button{
+  color: white;
 }

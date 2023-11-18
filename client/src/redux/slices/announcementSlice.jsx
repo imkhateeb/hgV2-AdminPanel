@@ -1,20 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const storedToken = JSON.parse(localStorage.getItem("token"));
+
 const headers = {
-  authorization:
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGY0ZTQwYTEyYjk3MDFiM2ZjZTQxNyIsImlhdCI6MTY5OTY5NjE5MiwiZXhwIjoxNzAyMjg4MTkyfQ.YqaXN6VkMxkrnj8KZmU2A8PkeOlJ5yAcEaNbzJXaaqQ",
+  authorization: `Bearer ${storedToken}`,
 };
+
+console.log(storedToken)
 
 // Async Thunks
 export const fetchAnnouncements = createAsyncThunk(
   "about/fetchAnnouncements",
   async (query) => {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/all`,{
-        params : {
-          tag : query 
-        }
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/announcements/all`,
+      {
+        params: {
+          tag: query,
+        },
       }
     );
     return response.data;
@@ -41,6 +45,7 @@ export const updateAnnouncement = createAsyncThunk(
       updatedData,
       { headers }
     );
+    console.log(response);
     return response.data;
   }
 );
@@ -98,13 +103,19 @@ const announcementSlice = createSlice({
       .addCase(updateAnnouncement.fulfilled, (state, action) => {
         state.loading = false;
         const updateAnnouncement = action.payload;
-        const index = state.announcementData.findIndex(
-          (e) => e._id === updateAnnouncement.updatedAnnouncement._id
+        console.log("This is updated announcmenr", updateAnnouncement);
+        state.announcementData = state.announcementData.map((e) =>
+          e._id === updateAnnouncement.updatedAnnouncement._id
+            ? updateAnnouncement.updatedAnnouncement
+            : e
         );
-        if (index !== -1) {
-          state.announcementData[index] =
-            updateAnnouncement.updatedAnnouncement;
-        }
+        // const index = state.announcementData.findIndex(
+        //   (e) => e._id === updateAnnouncement.updatedAnnouncement._id
+        // );
+        // if (index !== -1) {
+        //   state.announcementData[index] =
+        //     updateAnnouncement.updatedAnnouncement;
+        // }
       })
       .addCase(deleteAnnouncement.fulfilled, (state, action) => {
         state.loading = false;
