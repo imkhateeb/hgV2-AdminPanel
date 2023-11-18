@@ -32,7 +32,7 @@ const updateFeed = asyncHandler(async (req, res) => {
       req.params.id,
       { $set: req.body },
       { new: true }
-    ).populate("user");
+    ).populate({ path: "user", select: "name" });
     
     res.status(200).json({ msg: "updated feed is", updatedFeed });
   } catch (err) {
