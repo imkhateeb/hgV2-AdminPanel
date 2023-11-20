@@ -86,8 +86,8 @@ function FigmaLoginComponent() {
               />
             </div>
             <form className="w-full" onSubmit={handleSubmit}>
-              <div className="flex justify-center mt-4 ">
-                <label htmlFor={id + 1} className="sr-only">
+              <div className="flex flex-col  justify-center mt-4 items-center ">
+                <label htmlFor={id + 1} className="w-4/5   text-sm">
                   Email
                 </label>
                 <input
@@ -100,7 +100,10 @@ function FigmaLoginComponent() {
                   required
                 />
               </div>
-              <div className="flex justify-center mt-4  ">
+              <div className="flex flex-col  justify-center mt-2 items-center  ">
+              <label htmlFor={id + 1} className="w-4/5   text-sm">
+                  Password
+                </label>
                 <input
                   id={id + 2}
                   className="w-4/5 h-10 rounded-lg border-2 border-white mt-1 bg-transparent  pl-2 "
