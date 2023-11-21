@@ -1,35 +1,68 @@
 import React, { useState, useId } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../redux/slices/authSlice";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const VITE_APP_BACKEND_URI = import.meta.env.VITE_APP_BACKEND_URI;
 
 function ForgetPassword() {
   const id = useId();
-  
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
- 
   const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  }
+    try {
+      setError("");
+      const data = {
+        email: email,
+      };
 
+      const response = axios.post(
+        `${VITE_APP_BACKEND_URI}/api/users/forget-password`,
+        data
+      );
 
-  
+      toast.promise(response, {
+        loading: "Saving...",
+        success: <b>Email Sent Successfully</b>,
+        error: <b>{error}</b>,
+      });
+
+      response
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            setEmail("");
+          } else {
+            setError(res.data.message || "Error During password reset");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setError(
+            error.response.data.message || "Error During password reset"
+          );
+        });
+    } catch (error) {
+      console.log(error);
+      setError("Error During password reset");
+    }
+  };
 
   return (
     <div className="flex w-full min-h-screen bg-black max-sm:flex-col max-sm:items-center ">
+      <Toaster />
       <div className="left-container w-1/2 flex items-center justify-center">
         <img
           src={hgLogoSvg}
           alt="hglogo"
           width="375px"
-          className="w-[375px] max-md:w-[225px]"
+          className="w-[300px] max-md:w-[225px]"
         />
       </div>
       <div className="right-container w-1/2 max-sm:w-[80%] flex  flex-col relative justify-center space-y-32  mx-20">
@@ -39,7 +72,7 @@ function ForgetPassword() {
 
         <div className="input-form w-full flex justify-center items-center absolute  ">
           <div
-            className="h-[22rem] max-sm:h-[28rem] w-1/2 max-lg:w-[70%] max-md:w-[80%]  max-sm:w-[75%] max-xs:w-full text-white border-white border-2 rounded-xl mb-24"
+            className="h-[22rem] max-sm:h-[20rem] w-1/2 max-lg:w-[70%] max-md:w-[80%]  max-sm:w-[75%] max-xs:w-full text-white border-white border-2 rounded-xl mb-24"
             style={{ backdropFilter: "blur(6px)" }}
           >
             <h1 className="text-3xl text-center font-bold  mt-6 mb-3">

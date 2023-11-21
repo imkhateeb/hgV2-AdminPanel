@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("../config/cloudinary");
 const sendMail = require("../utils/reset-password-nodemailer");
+const e = require("express");
 const createUser = asyncHandler(async (req, res) => {
   const {
     name,
@@ -233,29 +234,50 @@ const forgetPassword = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "User with this email does not exist" });
   }
 
-  const token = generateToken(user._id);
-  const message = `Click the following link to reset your password: http://localhost:8000/reset-password/${token}`;
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: Math.floor(Date.now() / 1000) + 300,
+  });
 
-  sendMail("alokgupta1560@gmail.com", "alokgupta1560@gmail.com", message);
 
-  return res.json({ message });
+  const message = `Click the following link to reset your password: ${process.env.FRONTEND_URL}/account/reset-password?token=${token}`;
+
+  sendMail(
+    "alokgupta1560@gmail.com",
+    "motivationwallah1560@gmail.com",
+    message
+  );
+
+  return res.status(200).json({
+    message: "Email sent successfully",
+    success: true,
+    err: {},
+  });
 });
 
 const resetPassword = asyncHandler(async (req, res) => {
   const token = req.params.token;
 
-  const password = req.body.password;
+  let password = req.body.password;
 
   const isValidToken = jwt.verify(token, process.env.JWT_SECRET);
 
   if (!isValidToken) {
-    return res.status(400).json({ message: "Invalid Token" });
+    return res.status(400).json({ message: "Token Expired" });
   }
   var salt = await bcrypt.genSalt(10);
-  const user = await User.findById(isValidToken.id);
-  (user.password = await bcrypt.hash(password, salt)), await user.save();
-  
-  return res.json({ message: "Password Reset Successfully", data: user });
+  password = await bcrypt.hash(password, salt);
+  const user = await User.findByIdAndUpdate(
+    isValidToken.id,
+    { password },
+    { new: true }
+  )
+    .select("-password")
+    .exec();
+  return res.status(200).json({
+    message: "Password Reset Successfully",
+    data: user,
+    success: true,
+  });
 });
 
 module.exports = {

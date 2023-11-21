@@ -10,7 +10,7 @@ router.route("/login").post(loginUser);
 router.get("/getuser/:id",getUser)
 router.put("/updateuser/:id",checkLogin,updateUser)
 router.put("/updatepassword/:id",checkLogin,updatePassword)
-router.post("/forgetpassword",forgetPassword)
+router.post("/forget-password",forgetPassword)
 router.put("/reset-password/:token",resetPassword)
 
 

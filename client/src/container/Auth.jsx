@@ -11,7 +11,7 @@ export default function Auth() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/figma" element={<FigmaLoginComponent />} />
-        <Route path="/reset-password" element={<ResetPassword/>} />
+        <Route path="/reset-password/*" element={<ResetPassword />} />
         <Route path="/forget-password" element={<ForgetPassword/>} />
       </Routes>
     </div>
