@@ -1,7 +1,7 @@
 import React, { useId, useState } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
 import ellipseSvg from "../../assets/images/ellipsesvg.svg";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
