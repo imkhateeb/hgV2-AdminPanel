@@ -1,4 +1,4 @@
-import { loginSuccess, logout } from "../../redux/slices/authSlice";
+import { loginSuccess } from "../../redux/slices/authSlice";
 
 export const validateTokenMiddleware = (store) => (next) => (action) => {
   if (action.type === "VALIDATE_TOKEN") {

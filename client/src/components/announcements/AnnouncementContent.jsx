@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {fetchAnnouncements} from '../../redux/slices/announcementSlice';
 import SkeletonAnimation from "../utility/SkeletonAnimation";
 
-import filterAnnouncements from "../../utils/filterAnnouncements";
+import {filterAnnouncements} from "../../utils/filterAnnouncements";
 
 const AnnouncementContent = ({
   searchTerm,

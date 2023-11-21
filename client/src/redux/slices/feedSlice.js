@@ -86,14 +86,14 @@ const feedSlice = createSlice({
       .addCase(
         updateFeed.pending,
         (state) => {
-          state.loading = true;
+          // state.loading = true;
           state.error = null;
         }
       )
       .addCase(
         deleteFeed.pending,
         (state) => {
-          state.loading = true;
+          // state.loading = true;
           state.error = null;
         }
       )

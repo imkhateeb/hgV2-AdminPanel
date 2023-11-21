@@ -1,11 +1,18 @@
-import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import LogoutButton from "../../authentication/LogoutButton";
+import { useNavigate } from "react-router-dom";
+import searchLogo from '../../../assets/pngimages/search.png';
+import { useState } from "react";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const [showUser, setShowUser] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/account/login");
+  };
 
   return (
     <>
@@ -14,23 +21,41 @@ export default function Navbar() {
           <h1 className="text-lg font-semibold">Hello, Admin</h1>
         </div>
         <div />
-        <div className="flex gap-3 items-center">
-          <div className="flex bg-white rounded-md px-2">
-            <button>
-              {" "}
-              <SearchOutlined className="text-black " />
-            </button>
+        <div className="flex gap-2 items-center relative">
+          <div className="flex bg-white rounded-md px-2 items-center">
+            <img
+              src={searchLogo}
+              alt="search-logo"
+              className="h-[18px] w-[18px]"
+            />
             <Input placeholder="Search here" className="" bordered={false} />
           </div>
-          {isAuthenticated? <LogoutButton/> :<div className="w-[40px] h-[40px] rounded-full bg-black" />}
+
+          {isAuthenticated ? (
+            <>
+              <div
+                className="h-8 w-8 rounded-full bg-black cursor-pointer"
+                onClick={() => setShowUser(!showUser)}
+              >
+                {/* Set the profile picture */}
+              </div>
+
+              {showUser && (
+                <div className="absolute bg-bgTertiary rounded-md right-0 top-8">
+                  <button
+                    type="button"
+                    className="py-1 px-3 text-gray-400 font-bold"
+                    onClick={handleLogout}
+                  >Logout</button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="h-8 w-8 rounded-full bg-black cursor-pointer">
+              {/* Set the hg picture */}
+            </div>
+          )}
         </div>
-      </div>
-      <div className="sm:hidden w-full">
-        <input
-          type="text"
-          className="w-full py-2 px-3 rounded-md outline-none bg-slate-600"
-          placeholder="Search..."
-        />
       </div>
     </>
   );

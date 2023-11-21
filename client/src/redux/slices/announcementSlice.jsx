@@ -72,9 +72,12 @@ const announcementSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(fetchAnnouncements.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
       .addCase(
         createAnnouncement.pending,
-        fetchAnnouncements.pending,
         deleteAnnouncement.pending,
         updateAnnouncement.pending,
         (state) => {
