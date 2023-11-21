@@ -10,30 +10,11 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Pagination from "../components/utility/Pagination";
 
 const Announcements = () => {
-<<<<<<< HEAD
   const [queries, setQueries] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
   const [announcementLimit, setAnnouncementLimit] = useState(8);
   const [totalAnnouncements, setTotalAnnouncements] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
-=======
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.announcements);
-  const [query,setQuery] = useState([])
-  const [search,setSearch] = useState('')
-  const handleQuery = (value) => {
-    setQuery(value) 
-  };
-  const handleSearch = (value) => {
-    setSearch(value)
-  };
-  useEffect(() => {
-    dispatch(fetchAnnouncements(query));
-  }, [query]);
-  const handleDelete = (id) => {
-    dispatch(deleteAnnouncement(id));
-  };
->>>>>>> b83b18647cb187cfdb6ea385e2b5bd2c796ad406
 
 
   return (
