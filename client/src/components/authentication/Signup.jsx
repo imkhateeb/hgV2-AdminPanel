@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const VITE_APP_BACKEND_URI = import.meta.env.VITE_APP_BACKEND_URI;
 
@@ -24,7 +25,7 @@ function Signup() {
     try {
       setError("");
 
-      const response = await axios.post(
+      const res =  axios.post(
         `${VITE_APP_BACKEND_URI}/api/users/register`,
         {
           name,
@@ -33,20 +34,27 @@ function Signup() {
         }
       );
 
+      toast.promise(res, {
+        loading: "Signing Up...",
+        success: <b>Registered Successfully</b>,
+        error: <b>{error}</b>,
+      })
+
+      const response = await res;
+
       if (response.status === 201) {
         const user = response.data.newUser;
         localStorage.setItem("token", JSON.stringify(response.data.token));
         dispatch(loginSuccess(user));
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+       
       } else {
         setError(response.data.message || "Error during registration");
       }
     } catch (error) {
       setError(error.response.data.message || "Error during registration");
-    } finally {
-      setName("");
-      setEmail("");
-      setPassword("");
     }
   };
 
@@ -54,8 +62,9 @@ function Signup() {
 
   return (
     <div className="flex w-full min-h-screen bg-black max-sm:flex-col max-sm:items-center ">
+      <Toaster/>
       <div className="left-container w-1/2  flex items-center justify-center ">
-        <img src={hgLogoSvg} alt="hglogo" width="375px" />
+        <img src={hgLogoSvg} alt="hglogo" width="300px" />
       </div>
       <div className="right-container w-1/2 max-sm:w-[80%] flex  flex-col relative justify-center space-y-32  mx-20">
         <div className="upper-image  justify-start  ml-10">
@@ -117,8 +126,7 @@ function Signup() {
                 <button
                   className="w-4/5 h-10 rounded-lg border-2 border-white mt-1   pl-2 "
                   style={{
-                    background:
-                      "linear-gradient(90.57deg, #D4428D 9.91%, #E26AA7 53.29%, #040F75 91.56%",
+                    background: 'linear-gradient(91.94deg, #EE2B7A 3.09%, #FF014E 139.14%'
                   }}
               
                 >
@@ -131,7 +139,7 @@ function Signup() {
                 Already have an account?{" "}
                 <Link
                   to="/account/login"
-                  className="text-blue-600 font-semibold"
+                  className="text-pink-600 font-semibold"
                 >
                   Login
                 </Link>

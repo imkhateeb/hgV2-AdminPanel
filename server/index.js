@@ -1,4 +1,5 @@
 const express = require("express");
+// const sendMail = require("./utils/reset-password-nodemailer");
 const app = express();
 module.exports = app;
 // const app = express(); 
@@ -29,6 +30,7 @@ app.use(
 );
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server listening on port ${PORT}`);
+    // sendMail('alokgupta1560@gmail.com', '1234')
 });
 app.use(bodyParser.json({limit:"50mb"}));
 

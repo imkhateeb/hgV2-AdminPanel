@@ -18,7 +18,7 @@ const Announcements = () => {
   const [query,setQuery] = useState([])
   const [search,setSearch] = useState('')
   const handleQuery = (value) => {
-    setQuery(value)
+    setQuery(value) 
   };
   const handleSearch = (value) => {
     setSearch(value)
