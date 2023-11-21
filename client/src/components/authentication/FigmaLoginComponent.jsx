@@ -1,6 +1,5 @@
 import React, { useState, useId } from "react";
 import hgLogoSvg from "../../assets/images/hgofficallogo.svg";
-import ellipseSvg from "../../assets/images/ellipsesvg.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/authSlice";
