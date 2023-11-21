@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RxCross2 } from "react-icons/rx";
 
 const FilterDropdown = ({ setQueries }) => {
    const options = [
@@ -31,14 +32,14 @@ const FilterDropdown = ({ setQueries }) => {
    };
 
    return (
-      <div className="relative inline-block text-black flex gap-1">
-         <button onClick={toggleDropdown} className="px-3 py-[4px] bg-gray-200 hover:bg-gray-300 rounded cursor-pointer w-24">
+      <div className="relative inline-block flex gap-1">
+         <button onClick={toggleDropdown} className="px-3 py-[4px] bg-gray-200 hover:bg-gray-300 rounded cursor-pointer w-24 text-black">
             Filter
          </button>
          {showDropdown && (
-            <div className="absolute left-0 mt-8 bg-white border rounded shadow w-24">
+            <div className="absolute left-0 mt-8 bg-white border rounded shadow w-24 text-black">
                {options.map(option => (
-                  <div key={option} onClick={() => handleSelect(option)} className={`px-3 py-[4px] my-[2px] hover:bg-pink-500 transition-all duration-200 cursor-pointer ${selectedOptions.toString().includes(option) && 'bg-pink-500'}`}>
+                  <div key={option} onClick={() => handleSelect(option)} className={`px-3 py-[4px] my-[2px] hover:bg-pink-600 transition-all duration-200 cursor-pointer ${selectedOptions.toString().includes(option) && 'bg-pink-500'}`}>
                      {option}
                   </div>
                ))}
@@ -46,13 +47,23 @@ const FilterDropdown = ({ setQueries }) => {
          )}
 
          <div className="flex flex-wrap gap-1">
-            {selectedOptions.map((option, index) => (
+            {selectedOptions.map((option) => {
+               return (
                <span
                   key={option}
-                  onClick={() => removeFilter(option)}
-                  className={`inline-flex items-center rounded-md bg-${colors[index]}-50 px-2 py-[4px] text-sm font-medium text-${colors[index]}-600 ring-1 ring-inset ring-${colors[index]}-500/10 cursor-pointer w-16 justify-center`}
-               >{option}</span>
-            ))}
+                  className='py-1 pl-3 pr-2 bg-slate-600 rounded-full text-black flex items-center gap-1 text-white'
+               >
+               {option.toUpperCase()}
+                  <div className='p-[2px] bg-gray-400 rounded-full'>
+
+                  <RxCross2 
+                     onClick={()=>removeFilter(option)}
+                     className='cursor-pointer text-black text-sm font-bold'
+                  />
+                  </div>
+               </span>
+            )})
+            }
          </div>
       </div>
    );

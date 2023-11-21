@@ -1,19 +1,31 @@
-let objects = [
-   { name: "Charlie", age: 25 },
-   { name: "Alice", age: 30 },
-   { name: "Bob", age: 22 }
-];
+const sortByNameUtilityFunction = (feeds, sortByName) => {
+   if ( sortByName ){
+      feeds.sort((a, b) => {
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      })
+    } else {
+      feeds.sort((a, b) => {
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    return feeds;
+}
 
-objects.sort((a, b) => {
-   let nameA = a.name.toUpperCase(); // ignore upper and lowercase
-   let nameB = b.name.toUpperCase(); // ignore upper and lowercase
-   if (nameA < nameB) {
-       return -1;
-   }
-   if (nameA > nameB) {
-       return 1;
-   }
-   return 0; // names must be equal
-});
 
-console.log(objects);
+export default sortByNameUtilityFunction;

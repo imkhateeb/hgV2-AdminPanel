@@ -31,10 +31,10 @@ export default function Feed({ feed }) {
                more
             </button>
          </div>
-         <div className="w-[10%]">{feed.createdAt.split("T")[0]}</div>
-         <div className="w-[10%] text-center"><Switch checked={feed.staus} onClick={() => { dispatch(updateFeed({ id: feed?._id, updatedData: { staus: !feed.staus } })) }} /></div>
-         <div className="w-[10%] text-center">{feed.upVotes.length}</div>
-         <div className="flex w-[10%] gap-2 flex justify-center">
+         <div className="w-[15%]">{feed.createdAt.split("T")[0]}</div>
+         <div className="w-[8%] pl-3"><Switch checked={feed.staus} onClick={() => { dispatch(updateFeed({ id: feed?._id, updatedData: { staus: !feed.staus } })) }} /></div>
+         <div className="w-[8%] pl-8">{feed.upVotes.length}</div>
+         <div className="flex w-[9%] gap-2 flex justify-center">
             <button
                type="button"
                className="button hover:underline flex justify-center items-center text-yellow-300"
