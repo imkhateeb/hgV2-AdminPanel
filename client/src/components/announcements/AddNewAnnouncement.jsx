@@ -3,7 +3,7 @@ import { GrAnnounce } from "react-icons/gr";
 import feedsStyle from "../../constants/styles/feedsStyle";
 import { useNavigate } from "react-router-dom";
 import { createAnnouncement } from "../../redux/slices/announcementSlice";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 export default function AddNewAnnouncement() {
   const descRef = useRef(null);

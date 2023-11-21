@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { Switch } from "antd";
 import { deleteFeed, updateFeed } from '../../redux/slices/feedSlice';
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 
 import { MdDelete } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
@@ -15,7 +15,7 @@ export default function Feed({ feed }) {
    const [editFeed, setEditFeed] = useState(false);
 
    const handleDeleteFeed = (id) => {
-      dispatch(deleteFeed(id))
+      dispatch(deleteFeed(id));
    }
 
    return (

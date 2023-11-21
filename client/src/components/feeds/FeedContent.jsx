@@ -9,6 +9,7 @@ import { filterFeeds } from "../../utils/filterFeeds";
 filterFeeds
 
 export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFeeds, pageNumber, totalFeeds }) {
+
   const [feeds, setFeeds] = useState([]);
   const [showOldest, setShowOldest] = useState(false);
   const [sortByName, setSortByName] = useState(false);
@@ -206,6 +207,6 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
             )
           }))
       }
-    </div >
+    </div>
   );
 }

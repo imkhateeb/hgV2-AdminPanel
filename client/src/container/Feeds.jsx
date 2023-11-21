@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
 import { Link } from "react-router-dom";
@@ -22,7 +21,7 @@ const Feeds = () => {
 
   return (
     <section className="bg-bgSecondary rounded-3xl p-5 w-full">
-      <div className="w-full flex items-center">
+      <div className="w-full flex items-center my-2">
         <h1 className="text-white text-3xl font-bold">Feeds</h1>
       </div>
       <div className="flex py-2 items-center justify-between">

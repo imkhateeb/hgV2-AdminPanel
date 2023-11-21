@@ -1,115 +1,84 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { Input, Select, Pagination, Button, Modal } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import feedsStyle from "../constants/styles/feedsStyle";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import {
-  fetchAnnouncements,
-  deleteAnnouncement,
-  updateAnnouncement,
-} from "../redux/slices/announcementSlice";
-import AnnouncementRow from "../components/announcements/AnnouncementRow";
-import AnnouncementHeader from "../components/announcements/AnnouncementHeader";
+import { Input } from "antd";
+import AnnouncementContent from "../components/announcements/AnnouncementContent";
+
+import searchLogo from '../assets/pngimages/search.png';
+import FilterDropdown from "../components/utility/Filter";
+import { Link } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
+import Pagination from "../components/utility/Pagination";
 
 const Announcements = () => {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.announcements);
-  const [query,setQuery] = useState([])
-  const [search,setSearch] = useState('')
-  const handleQuery = (value) => {
-    setQuery(value)
-  };
-  const handleSearch = (value) => {
-    setSearch(value)
-  };
-  useEffect(() => {
-    dispatch(fetchAnnouncements(query));
-  }, [query]);
-  const handleDelete = (id) => {
-    dispatch(deleteAnnouncement(id));
-  };
+  const [queries, setQueries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(null);
+  const [announcementLimit, setAnnouncementLimit] = useState(8);
+  const [totalAnnouncements, setTotalAnnouncements] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editDesc, setEditDesc] = useState({ id: "", value: "" });
-  const handleChange = (e) => {
-    setEditDesc({ ...editDesc, value: e.target.value });
-  };
-
-  const showModal = (id, value) => {
-    setIsModalOpen(true);
-    setEditDesc({ id: id, value: value });
-  };
-  const handleOk = () => {
-    const updatedData = { announcementDetails: editDesc.value };
-    dispatch(updateAnnouncement({ id: editDesc.id, updatedData }));
-    setIsModalOpen(false);
-    setEditDesc({ id: "", value: "" });
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setEditDesc({ id: "", value: "" });
-  };
 
   return (
-    <section className="bg-bgSecondary rounded-3xl px-7 w-full">
+    <section className="bg-bgSecondary rounded-3xl p-5 w-full">
 
-      <AnnouncementHeader handleQuery={handleQuery} handleSearch={handleSearch}/>
+      <div className="w-full flex items-center my-2">
+        <h1 className="text-white text-3xl font-bold">Announcements</h1>
+      </div>
+      <div className="flex py-2 items-center justify-between">
+        <div className="flex gap-1">
+          <div className="flex bg-white rounded-md px-2">
+            <button>
+              <img
+                src={searchLogo}
+                alt="search-logo"
+                className="h-[18px] w-[20px]"
+              />
+            </button>
+            <Input placeholder="Search here..." onChange={(e) => setSearchTerm(e.target.value)} bordered={false} />
+          </div>
+          <FilterDropdown setQueries={setQueries} />
+        </div>
+        <Link to="/add-announcement" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+          <AiOutlinePlus />
+          <h1>Add New</h1>
+        </Link>
+      </div>
 
-      <AnnouncementRow
-        data={data}
-        handleDelete={handleDelete}
-        showModal={showModal}
-        search={search}
+      <AnnouncementContent
+        searchTerm={searchTerm}
+        queries={queries}
+        announcementLimit={announcementLimit}
+        setTotalAnnouncements={setTotalAnnouncements}
+        pageNumber={pageNumber}
+        totalAnnouncements={totalAnnouncements}
       />
 
-      <div className="flex  h-16 my-6 justify-between items-center">
+      {totalAnnouncements !== 0 && <div className="flex mt-4 justify-between items-center">
         <div className="flex items-center gap-3 ">
           <h1>Show result : </h1>
-          <Select
-            defaultValue="1"
-            options={[
-              { value: "1", label: "1" },
-              { value: "2", label: "2" },
-              { value: "3", label: "3" },
-            ]}
+          <select
+            onChange={(e) => setAnnouncementLimit(parseInt(e.target.value))}
+            defaultValue={8}
+            className="cursor-pointer py-[2px] px-[5px] outline-none rounded-md bg-transparent border-[1px] border-gray-400"
+          >
+            <option className="text-black">1</option>
+            <option className="text-black">2</option>
+            <option className="text-black">3</option>
+            <option className="text-black">4</option>
+            <option className="text-black">5</option>
+            <option className="text-black">6</option>
+            <option className="text-black">7</option>
+            <option className="text-black">8</option>
+          </select>
+        </div>
+
+        <div className="text-pink-600 py-1 pr-2 rounded-md">
+          <Pagination
+            totalItems={totalAnnouncements}
+            itemsPerPage={announcementLimit}
+            onPageChange={setPageNumber}
           />
         </div>
-        <div className="">
-          {/* <Pagination defaultCurrent={1} total={50} itemRender={()=>{
-              [1,2,3].map((e)=>{
-                   return <p>{e}</p>
-              })
-            }} /> */}
-        </div>
-      </div>
-
-      <div>
-        <Modal
-          title="Basic Modal"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          className="text-white"
-          centered
-        >
-          <div className="w-full bg-[#212130] rounded-3xl">
-            <div className="flex flex-col">
-              <h1 className="text-3xl font-bold">Update Feed</h1>
-              <div className="my-5 flex flex-col gap-2">
-                <p>DESCRIPTION</p>
-                <textarea
-                  rows={4}
-                  className="py-2 px-3 bg-transparent rounded-md border-2 outline-none"
-                  value={editDesc.value}
-                  placeholder="Input new feed..."
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-          </div>
-        </Modal>
-      </div>
+      </div>}
     </section>
   );
 };
