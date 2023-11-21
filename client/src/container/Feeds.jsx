@@ -8,7 +8,7 @@ import FeedContent from "../components/feeds/FeedContent";
 import Pagination from "../components/utility/Pagination";
 import FilterDropdown from "../components/utility/Filter";
 
-
+import searchLogo from '../assets/pngimages/search.png';
 
 
 const Feeds = () => {
@@ -29,8 +29,11 @@ const Feeds = () => {
         <div className="flex gap-1">
           <div className="flex bg-white rounded-md px-2">
             <button>
-              {" "}
-              <SearchOutlined className="text-black" />
+              <img 
+                src={searchLogo}
+                alt="search-logo"
+                className="h-[18px] w-[20px]"
+              />
             </button>
             <Input placeholder="Search here..." onChange={(e) => setSearchTerm(e.target.value)} bordered={false} />
           </div>

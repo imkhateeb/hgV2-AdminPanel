@@ -3,7 +3,6 @@ import {
   Sidebar,
   Navbar,
   Dashboard,
-  Downbar,
   Wings,
   Assignments,
   AddNewFeed,
@@ -37,9 +36,6 @@ export default function Home() {
             </Routes>
           </ProtectedRoute>
         </div>
-      </div>
-      <div className="flex fixed bottom-2 px-2 w-full md:hidden">
-        <Downbar />
       </div>
     </>
   );
