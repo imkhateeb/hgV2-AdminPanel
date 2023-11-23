@@ -6,9 +6,10 @@ import { useState } from "react";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [showUser, setShowUser] = useState(false);
 
+  console.log(user);
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/account/login");

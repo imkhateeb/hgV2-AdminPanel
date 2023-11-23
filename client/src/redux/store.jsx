@@ -2,7 +2,7 @@ import { configureStore} from '@reduxjs/toolkit';
 import announcementSlice from './slices/announcementSlice';
 import feedSlice from './slices/feedSlice';
 import authSlice from './slices/authSlice';
-import { validateTokenMiddleware } from '../components/authentication/validateTokemMiddleware';
+import { validateTokenMiddleware } from '../components/authentication/validateTokenMiddleware';
 
 const store = configureStore({
   reducer: {

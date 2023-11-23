@@ -12,7 +12,6 @@ router.put("/updateuser/:id",checkLogin,updateUser)
 router.put("/updatepassword/:id",checkLogin,updatePassword)
 router.post("/forget-password",forgetPassword)
 router.put("/reset-password/:token",resetPassword)
-
-
+router.get("/isauthenticated", checkLogin);
 
 module.exports = router;
