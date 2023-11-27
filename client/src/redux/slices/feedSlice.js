@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const storedToken = JSON.parse(localStorage.getItem("token"));
 
-console.log("feeds",storedToken);
+// console.log("feeds",storedToken);
 const headers = {
   authorization: `Bearer ${storedToken}`,
 };

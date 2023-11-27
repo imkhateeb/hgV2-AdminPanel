@@ -57,7 +57,7 @@ function Login() {
   return (
     <div className="flex w-full min-h-screen bg-black max-sm:flex-col max-sm:items-center ">
       <Toaster 
-         position="top-right"
+         
       />
       <div className="left-container w-1/2 flex items-center justify-center">
         <img
