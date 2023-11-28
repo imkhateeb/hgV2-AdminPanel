@@ -2,14 +2,15 @@ import { Route, Routes } from "react-router-dom";
 import {
   Sidebar,
   Navbar,
-  Dashboard,
-  Wings,
   Assignments,
   AddNewFeed,
   AddNewAnnouncement,
+  AddNewWing,
 } from "../components";
+
 import ProtectedRoute from "../components/authentication/ProtectedRoutes";
 
+import Wings from "./Wings";
 import Announcements from "./Announcements";
 import Feeds from "./Feeds";
 
@@ -28,7 +29,8 @@ export default function Home() {
               <Route path="/feeds" element={<Feeds />} />
               <Route path="/wings" element={<Wings />} />
               <Route path="/assignments" element={<Assignments />} />
-              <Route path="/add-feeds" element={<AddNewFeed />} />
+              <Route path="/add-feed" element={<AddNewFeed />} />
+              <Route path="/add-wing" element={<AddNewWing />} />
               <Route
                 path="/add-announcement"
                 element={<AddNewAnnouncement />}

@@ -38,7 +38,7 @@ const Feeds = () => {
           </div>
           <FilterDropdown setQueries={setQueries} />
         </div>
-        <Link to="/add-feeds" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+        <Link to="/add-feed" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>

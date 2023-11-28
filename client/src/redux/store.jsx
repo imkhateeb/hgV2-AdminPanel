@@ -2,16 +2,14 @@ import { configureStore} from '@reduxjs/toolkit';
 import announcementSlice from './slices/announcementSlice';
 import feedSlice from './slices/feedSlice';
 import authSlice from './slices/authSlice';
-// import { validateTokenMiddleware } from '../components/authentication/validateTokenMiddleware';
-
+import wingSlice from './slices/wingSlice';
 const store = configureStore({
   reducer: {
     announcements : announcementSlice,
     feeds : feedSlice,
-    auth : authSlice
+    auth : authSlice,
+    wings: wingSlice,
   },
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(validateTokenMiddleware)
 })
 
 export default store;
