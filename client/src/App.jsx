@@ -11,8 +11,7 @@ export default function App() {
       
         <Route path="/*" element={<Home />} />
         <Route path="/account/*" element={<Auth />} />
-        <Route path="/notfound" element={<NotFound/>} /> // This is temporary route for testing
-   
+        <Route path="/notfound" element={<NotFound/>} /> 
       </Routes>
     </BrowserRouter>
   );
