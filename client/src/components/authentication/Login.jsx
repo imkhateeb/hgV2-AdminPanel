@@ -147,8 +147,8 @@ function Login() {
         <div className="lower-image  flex justify-end mr-10">
           <img src={ellipseSvg} width={"225px"} />
         </div>
+      <p className="border-[0.5px] border-gray-200">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</p>
       </div>
-      <p className="text-gray-300">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</p>
     </div>
   );
 }
