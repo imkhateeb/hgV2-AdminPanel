@@ -38,20 +38,18 @@ export default function WingContent({ queries }) {
     }
   }, [wingData, queries]);
 
+  console.log(wings);
 
   const sortByTimeDate = () => {
 
   }
 
   const sortByLexicalUser = () => {
-    
+
   }
 
   const sortByLexicalDesc = () => {
 
-  }
-
-  const handleSortByStatus = () => {
   }
 
 
@@ -74,7 +72,7 @@ export default function WingContent({ queries }) {
           }} />
         </div>
         <div className="w-[15%] flex relative gap-1 items-center text-[16px] font-semibold">
-          <h1>CREATED ON</h1>
+          <h1>LEVELS</h1>
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setShowOldest(!showOldest)
             sortByTimeDate()
@@ -87,7 +85,13 @@ export default function WingContent({ queries }) {
             sortByTimeDate()
           }} />
         </div>
-        <div className="w-[10%] text-center text-[16px] font-semibold">ACTION</div>
+        <div className="w-[10%] flex relative gap-1 items-center text-[16px] font-semibold">
+          <h1>ACTIONS</h1>
+          <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
+            setShowOldest(!showOldest)
+            sortByTimeDate()
+          }} />
+        </div>
       </div>
       {
         loading ? <SkeletonAnimation /> :
@@ -95,7 +99,7 @@ export default function WingContent({ queries }) {
             return (
               <Wing
                 key={wings + index}
-                feed={wing}
+                wing={wing}
               />
             )
           }))
