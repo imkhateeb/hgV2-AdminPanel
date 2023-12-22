@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import {
+  isPendingOrRejectedAction,
+  handlePendingAndRejected,
+} from "../../utils/actionHandler";
 const storedToken = JSON.parse(localStorage.getItem("token"));
 
 const headers = {
-  authorization: `Bearer ${storedToken}`,
+  // authorization: `Bearer ${storedToken}`,
+  authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQ0MTc4M2FjMTdhYzM0NzIwZjI4NCIsImlhdCI6MTcwMzE2NjUyMCwiZXhwIjoxNzA1NzU4NTIwfQ.dkDckQKAgVB93AXmSJNgYtrpIPZ8j3Lis33APxsx39c`,
 };
-
-console.log(storedToken)
 
 // Async Thunks
 export const fetchAnnouncements = createAsyncThunk(
@@ -72,33 +74,10 @@ const announcementSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase(fetchAnnouncements.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    })
-      .addCase(
-        createAnnouncement.pending,
-        deleteAnnouncement.pending,
-        updateAnnouncement.pending,
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      )
       .addCase(fetchAnnouncements.fulfilled, (state, action) => {
         state.loading = false;
         state.announcementData = action.payload;
       })
-      .addCase(
-        createAnnouncement.rejected,
-        fetchAnnouncements.rejected,
-        deleteAnnouncement.rejected,
-        updateAnnouncement.rejected,
-        (state, action) => {
-          state.loading = false;
-          state.error = action.error.message;
-        }
-      )
       .addCase(createAnnouncement.fulfilled, (state, action) => {
         state.loading = false;
         state.announcementData?.push(action.payload);
@@ -112,13 +91,6 @@ const announcementSlice = createSlice({
             ? updateAnnouncement.updatedAnnouncement
             : e
         );
-        // const index = state.announcementData.findIndex(
-        //   (e) => e._id === updateAnnouncement.updatedAnnouncement._id
-        // );
-        // if (index !== -1) {
-        //   state.announcementData[index] =
-        //     updateAnnouncement.updatedAnnouncement;
-        // }
       })
       .addCase(deleteAnnouncement.fulfilled, (state, action) => {
         state.loading = false;
@@ -126,7 +98,8 @@ const announcementSlice = createSlice({
         state.announcementData = state.announcementData.filter(
           (e) => e._id !== id
         );
-      });
+      })
+      .addMatcher(isPendingOrRejectedAction, handlePendingAndRejected);
   },
 });
 

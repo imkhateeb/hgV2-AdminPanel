@@ -23,7 +23,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-3 w-full">
           <Navbar />
-          <ProtectedRoute>
+          {/* <ProtectedRoute> */}
             <Routes>
               <Route path="/announcements" element={<Announcements />} />
               <Route path="/feeds" element={<Feeds />} />
@@ -36,7 +36,7 @@ export default function Home() {
                 element={<AddNewAnnouncement />}
               />
             </Routes>
-          </ProtectedRoute>
+          {/* </ProtectedRoute> */}
         </div>
       </div>
     </>

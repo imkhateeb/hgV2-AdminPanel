@@ -1,12 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {
+  isPendingOrRejectedAction,
+  handlePendingAndRejected,
+} from "../../utils/actionHandler";
 const storedToken = JSON.parse(localStorage.getItem("token"));
 
 // console.log("feeds",storedToken);
 const headers = {
-  authorization: `Bearer ${storedToken}`,
+  // authorization: `Bearer ${storedToken}`,
+  authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQ0MTc4M2FjMTdhYzM0NzIwZjI4NCIsImlhdCI6MTcwMzE2NjUyMCwiZXhwIjoxNzA1NzU4NTIwfQ.dkDckQKAgVB93AXmSJNgYtrpIPZ8j3Lis33APxsx39c`,
 };
-
 
 const struct = (arr) => {
   const data = arr.map(
@@ -26,8 +30,6 @@ const struct = (arr) => {
 
   return data;
 };
-
-
 
 export const fetchFeeds = createAsyncThunk("about/fetchFeeds", async () => {
   const response = await axios.get(
@@ -76,61 +78,6 @@ const feedSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(
-        fetchFeeds.pending,
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      )
-      .addCase(
-        updateFeed.pending,
-        (state) => {
-          // state.loading = true;
-          state.error = null;
-        }
-      )
-      .addCase(
-        deleteFeed.pending,
-        (state) => {
-          // state.loading = true;
-          state.error = null;
-        }
-      )
-      .addCase(
-        createFeed.pending,
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      )
-      .addCase(
-        fetchFeeds.rejected,
-        (state, action) => {
-          state.loading = false;
-          state.error = action.error.message;
-        }
-      )
-      .addCase(
-        updateFeed.rejected,
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      ).addCase(
-        deleteFeed.rejected,
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      )
-      .addCase(
-        createFeed.rejected,
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      )
       .addCase(fetchFeeds.fulfilled, (state, action) => {
         state.loading = false;
         state.feedData = struct(action.payload.feeds);
@@ -153,7 +100,8 @@ const feedSlice = createSlice({
         if (index !== -1) {
           state.feedData[index] = updateFeed[0];
         }
-      });
+      })
+      .addMatcher(isPendingOrRejectedAction, handlePendingAndRejected);
   },
 });
 

@@ -37,7 +37,7 @@ const getWing=async(req,res)=>{
 }
 const getAll = async (req, res) => {
     try {
-        const wings = await Wing.find().populate('lead').populate('coordinators');
+        const wings = await Wing.find().populate('lead').populate('coordinators').populate('levels');
         res.status(200).json(wings);
     } catch (error) {
         console.log(error);

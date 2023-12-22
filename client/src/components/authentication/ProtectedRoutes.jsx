@@ -7,7 +7,6 @@ import axios from "axios";
 import { loginSuccess } from "../../redux/slices/authSlice";
 const url = import.meta.env.VITE_APP_BACKEND_URI;
 
-console.log(url);
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();

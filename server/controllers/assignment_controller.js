@@ -63,6 +63,35 @@ const verifyAssignment = async (req, res) => {
     }
 };
 
+
+const update = async (req, res) => { 
+    try {
+        const updatedWing = await Assignment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json(updatedWing);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Something went wrong, unable to update the assignment',
+            error: error
+        });
+    }
+}
+const destroy = async (req, res) => {
+    try {
+        const deletedAssignment = await Assignment.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            message: 'Wing deleted successfully',
+            deletedAssignment
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: 'Something went wrong, unable to delete the assignment',
+            error: error
+        });
+    }
+}
+
 //get assignment by level id 
 // const getAssignmentbyLevelId=asyncHandler(async(req,res)=>{
 //     const {levelId}=req.params;
@@ -75,5 +104,7 @@ const verifyAssignment = async (req, res) => {
 module.exports = {
     create,
     submitAssignment,
-    verifyAssignment
+    verifyAssignment,
+    update,
+    destroy
 };

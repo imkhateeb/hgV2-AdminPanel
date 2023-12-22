@@ -12,7 +12,7 @@ const Wings = () => {
   return (
     <section className="bg-bgSecondary rounded-3xl p-5 w-full">
       <div className="w-full flex items-center my-2">
-        <h1 className="text-white text-3xl font-bold">Feeds</h1>
+        <h1 className="text-white text-3xl font-bold">Wings</h1>
       </div>
       <div className="flex py-2 items-center justify-between">
         <div className="flex gap-1">
