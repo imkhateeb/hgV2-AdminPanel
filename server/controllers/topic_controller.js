@@ -36,7 +36,7 @@ const getTopicsByLevel = asyncHandler(async (req, res) => {
     if (!findLevel) {
         return res.status(404).json({ message: "Cannot get the level" });
     }
-    const findTopics = await Topic.find({ $in: { _id: findLevel.topics } }).populate("subtopics");
+    const findTopics = await Topic.find({ _id: { $in: findLevel.topics } }).populate("subtopics");
     if (!findTopics) {
         return res.status(501).json({ message: "INTERNAL SERVER ERROR" });
     }
@@ -44,5 +44,33 @@ const getTopicsByLevel = asyncHandler(async (req, res) => {
 })
 
 
+const update = async (req, res) => { 
+    try {
+        const updateTopic = await Topic.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json(updateTopic);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Something went wrong, unable to update the topic',
+            error: error
+        });
+    }
+  }
+  const destroy = async (req, res) => {
+    try {
+        const deletedTopic = await Topic.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            message: 'Topic deleted successfully',
+            deletedTopic
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: 'Something went wrong, unable to delete the topic',
+            error: error
+        });
+    }
+  }
 
-module.exports = { createTopic, getTopics, getTopicsByLevel }
+
+module.exports = { createTopic, getTopics, getTopicsByLevel,update,destroy }

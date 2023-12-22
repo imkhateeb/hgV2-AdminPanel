@@ -29,7 +29,7 @@ const getLevelsByWingId = asyncHandler(async (req, res) => {
   if (!findWing) {
     return res.status(404).json({ message: "Cannot find the wing" });
   }
-  const findLevels = await Level.find({ $in: { _id: findWing.levels } });
+  const findLevels = await Level.find({  _id: { $in : findWing.levels } });
   if (!findLevels) {
     return res.status(501).json({ message: "Internal server error" });
   }
@@ -47,4 +47,32 @@ const getParticularLevel=asyncHandler(async(req,res)=>{
   }
   return res.status(200).json(findLevel);
 })
-module.exports = { createLevel ,getLevelsByWingId,getParticularLevel}
+
+const update = async (req, res) => { 
+  try {
+      const updateLevel = await Level.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.status(200).json(updateLevel);
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({
+          message: 'Something went wrong, unable to update the level',
+          error: error
+      });
+  }
+}
+const destroy = async (req, res) => {
+  try {
+      const deletedLevel = await Level.findByIdAndDelete(req.params.id);
+      res.status(200).json({
+          message: 'Level deleted successfully',
+          deletedLevel
+      });
+  } catch (error) {
+      console.log(error);
+      res.status(400).json({
+          message: 'Something went wrong, unable to delete the level',
+          error: error
+      });
+  }
+}
+module.exports = { createLevel ,getLevelsByWingId,getParticularLevel,update,destroy}

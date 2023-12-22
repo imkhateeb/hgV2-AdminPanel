@@ -30,35 +30,36 @@ const struct = (arr) => {
   return data;
 };
 
-export const fetchWings = createAsyncThunk("about/fetchWings", async () => {
+export const fetchLevels = createAsyncThunk("about/fetchlevels", async ({id}) => {
   const response = await axios.get(
-    `${import.meta.env.VITE_APP_BACKEND_URI}/api/wings`
+    `${import.meta.env.VITE_APP_BACKEND_URI}/api/levels/getlevelbywingid/${id}`
   );
+  console.log(response.data);
   return response.data;
 });
 
-export const createWing = createAsyncThunk("about/createWing", async (data) => {
+export const createLevel = createAsyncThunk("about/createLevel", async (data) => {
   const response = await axios.post(
-    `${import.meta.env.VITE_APP_BACKEND_URI}/api/wings`,
+    `${import.meta.env.VITE_APP_BACKEND_URI}/api/levels`,
     data,
     { headers }
   );
   return response.data;
 });
 
-export const deleteWing = createAsyncThunk("about/deleteWing", async (id) => {
+export const deleteLevel = createAsyncThunk("about/deleteLevel", async (id) => {
   await axios.delete(
-    `${import.meta.env.VITE_APP_BACKEND_URI}/api/wings/${id}`,
+    `${import.meta.env.VITE_APP_BACKEND_URI}/api/levels/${id}`,
     { headers }
   );
   return id;
 });
 
-export const updateWing = createAsyncThunk(
-  "about/updateWing",
+export const updateLevel = createAsyncThunk(
+  "about/updateLevel",
   async ({ id, updatedData }) => {
     const response = await axios.patch(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/wings/${id}`,
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/levels/${id}`,
       updatedData,
       { headers }
     );
@@ -66,58 +67,49 @@ export const updateWing = createAsyncThunk(
   }
 );
 
-export const fetchWing = createAsyncThunk("about/getWing", async ({ id }) => {
+export const fetchLevel = createAsyncThunk("about/getLevel", async ({ id }) => {
   const response = await axios.get(
-    `${import.meta.env.VITE_APP_BACKEND_URI}/api/wings/${id}`
+    `${import.meta.env.VITE_APP_BACKEND_URI}/api/levels/getparticularlevel/${id}`
   );
   return response.data;
 });
 
-export const getWingLevels = createAsyncThunk(
-  "about/getWingLevels",
-  async ({ id }) => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/wings/levels/${id}`
-    );
-    return response.data;
-  }
-);
-// Slice for wings
-const wingslice = createSlice({
-  name: "wings",
+// Slice for levels
+const levelslice = createSlice({
+  name: "levels",
   initialState: {
-    WingData: [],
+    levelData: [],
     loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchWings.fulfilled, (state, action) => {
+      .addCase(fetchlevels.fulfilled, (state, action) => {
         state.loading = false;
-        state.WingData = struct(action.payload);
+        state.levelData = struct(action.payload);
       })
-      .addCase(createWing.fulfilled, (state, action) => {
+      .addCase(createLevel.fulfilled, (state, action) => {
         state.loading = false;
-        state.WingData?.concat(struct([action.payload]));
+        state.levelData?.concat(struct([action.payload]));
       })
-      .addCase(deleteWing.fulfilled, (state, action) => {
+      .addCase(deleteLevel.fulfilled, (state, action) => {
         state.loading = false;
         const id = action.payload;
-        state.WingData = state.WingData.filter((e) => e._id !== id);
+        state.levelData = state.levelData.filter((e) => e._id !== id);
       })
-      .addCase(updateWing.fulfilled, (state, action) => {
+      .addCase(updateLevel.fulfilled, (state, action) => {
         state.loading = false;
-        const updateWing = struct([action.payload]);
-        const index = state.WingData.findIndex(
-          (e) => e._id === updateWing[0]._id
+        const updateLevel = struct([action.payload]);
+        const index = state.levelData.findIndex(
+          (e) => e._id === updateLevel[0]._id
         );
         if (index !== -1) {
-          state.WingData[index] = updateWing[0];
+          state.levelData[index] = updateLevel[0];
         }
       })
       .addMatcher(isPendingOrRejectedAction, handlePendingAndRejected);
   },
 });
 
-export default wingslice.reducer;
+export default levelslice.reducer;
