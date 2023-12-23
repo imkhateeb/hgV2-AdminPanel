@@ -28,7 +28,6 @@ const Wings = () => {
         queries={queries}
       />
 
-      
     </section>
   );
 };

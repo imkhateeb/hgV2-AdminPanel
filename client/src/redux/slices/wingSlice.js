@@ -4,7 +4,7 @@ import {
   isPendingOrRejectedAction,
   handlePendingAndRejected,
 } from "../../utils/actionHandler";
-const storedToken = JSON.parse(localStorage.getItem("token"));
+// const storedToken = JSON.parse(localStorage.getItem("token"));
 
 const headers = {
   // authorization: `Bearer ${storedToken}`,
@@ -86,7 +86,7 @@ export const getWingLevels = createAsyncThunk(
 const wingslice = createSlice({
   name: "wings",
   initialState: {
-    WingData: [],
+    wingData: [],
     loading: false,
     error: null,
   },
@@ -95,25 +95,25 @@ const wingslice = createSlice({
     builder
       .addCase(fetchWings.fulfilled, (state, action) => {
         state.loading = false;
-        state.WingData = struct(action.payload);
+        state.wingData = struct(action.payload);
       })
       .addCase(createWing.fulfilled, (state, action) => {
         state.loading = false;
-        state.WingData?.concat(struct([action.payload]));
+        state.wingData?.concat(struct([action.payload]));
       })
       .addCase(deleteWing.fulfilled, (state, action) => {
         state.loading = false;
         const id = action.payload;
-        state.WingData = state.WingData.filter((e) => e._id !== id);
+        state.wingData = state.wingData.filter((e) => e._id !== id);
       })
       .addCase(updateWing.fulfilled, (state, action) => {
         state.loading = false;
         const updateWing = struct([action.payload]);
-        const index = state.WingData.findIndex(
+        const index = state.wingData.findIndex(
           (e) => e._id === updateWing[0]._id
         );
         if (index !== -1) {
-          state.WingData[index] = updateWing[0];
+          state.wingData[index] = updateWing[0];
         }
       })
       .addMatcher(isPendingOrRejectedAction, handlePendingAndRejected);

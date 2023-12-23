@@ -6,7 +6,6 @@ import SkeletonAnimation from "../utility/SkeletonAnimation";
 
 import Wing from "./Wing";
 import { filterWings } from "../../utils/filterWings";
-import Test from "./Test";
 
 export default function WingContent({ queries }) {
   const [wings, setWings] = useState([]);
@@ -15,7 +14,8 @@ export default function WingContent({ queries }) {
   const [sortByName, setSortByName] = useState(false);
   const [sortByDesc, setSortByDesc] = useState(false);
   const dispatch = useDispatch();
-  const { wingData, loading, error } = useSelector((state) => state.wings); 
+  const { wingData, loading, error } = useSelector((state) => state.wings);
+
   const fetchAllwings = () => {
     try {
       dispatch(fetchWings());
@@ -26,6 +26,7 @@ export default function WingContent({ queries }) {
   useEffect(() => {
     fetchAllwings();
   }, [dispatch]);
+
 
   useEffect(() => {
     if (wingData?.length) {
@@ -38,7 +39,6 @@ export default function WingContent({ queries }) {
     }
   }, [wingData, queries]);
 
-  // console.log(wings);
 
   const sortByTimeDate = () => {};
 
