@@ -104,7 +104,7 @@ export default function WingContent({ queries }) {
         </div>
       </div>
       <div>
-        {/* <Test/> */}
+        <Test/>
       </div>
       {loading && !wingData ? (
         <SkeletonAnimation />

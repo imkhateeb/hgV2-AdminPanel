@@ -13,6 +13,10 @@ import ProtectedRoute from "../components/authentication/ProtectedRoutes";
 import Wings from "./Wings";
 import Announcements from "./Announcements";
 import Feeds from "./Feeds";
+import Levels from "./Levels";
+import AddNewLevel from "../components/levels/AddNewLevel";
+import SubTopics from "./SubTopics";
+import AddNewSubTopic from "../components/subtopics/AddNewSubTopic";
 
 export default function Home() {
   return (
@@ -31,6 +35,10 @@ export default function Home() {
               <Route path="/assignments" element={<Assignments />} />
               <Route path="/add-feed" element={<AddNewFeed />} />
               <Route path="/add-wing" element={<AddNewWing />} />
+              <Route path="/add-level" element={<AddNewLevel />} />
+              <Route path="/add-subtopic" element={<AddNewSubTopic />} />
+              <Route path="/levels" element={<Levels />} />
+              <Route path="/subtopics" element={<SubTopics />} />
               <Route
                 path="/add-announcement"
                 element={<AddNewAnnouncement />}
