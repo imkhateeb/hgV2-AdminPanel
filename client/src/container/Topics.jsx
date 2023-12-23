@@ -1,35 +1,40 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
-import WingContent from "../components/wings/WingContent";
+import TopicContent from "../components/topics/TopicContent";
 import FilterDropdown from "../components/utility/Filter";
 
-const Wings = () => {
+const Topics = () => {
   const [queries, setQueries] = useState([]);
 
+  const { levelId } = useParams();
 
   return (
     <section className="bg-bgSecondary rounded-3xl p-5 w-full">
       <div className="w-full flex items-center my-2">
-        <h1 className="text-white text-3xl font-bold">Wings</h1>
+        <h1 className="text-white text-3xl font-bold">Topics</h1>
       </div>
       <div className="flex py-2 items-center justify-between">
         <div className="flex gap-1">
-          <FilterDropdown setQueries={setQueries} />
+          <FilterDropdown
+            setQueries={setQueries}
+          />
         </div>
-        <Link to="/add-wing" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+        <Link to={`/add-topic/${levelId}`} className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>
       </div>
 
-      <WingContent
+      <TopicContent
         queries={queries}
+        levelId={levelId}
       />
 
     </section>
   );
 };
 
-export default Wings;
+export default Topics;
