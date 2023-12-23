@@ -15,13 +15,13 @@ export default function EditLevel({ setEditLevel, level }) {
   }
 
   return (
-    <div className="w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/3 bg-bgSecondary rounded-3xl px-5 py-3 z-20">
+    <div className="w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/3 bg-bgSecondary rounded-md px-5 py-6 z-20">
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold">Update Level</h1>
         <div className="my-5 flex flex-col gap-2">
           <p>Title</p>
-          <textarea
-            rows={4}
+          <input
+            type="text"
             className="py-2 px-3 bg-transparent rounded-md border-[1px] border-gray-400 outline-none"
             value={newLevelTitle}
             placeholder="Input new title..."

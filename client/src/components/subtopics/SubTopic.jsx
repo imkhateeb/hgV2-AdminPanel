@@ -70,14 +70,14 @@ export default function SubTopic({ subtopic }) {
                />
             </div>
          )} */}
-      {/* {editLevel && (
+      {editSubTopic && (
             <div className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-10">
-               <EditLevel
-                  setEditLevel={setEditLevel}
-                  level={level && level}
+               <EditSubTopic
+                  setEditSubTopic={setEditSubTopic}
+                  subtopic={subtopic}
                />
             </div>
-         )} */}
+         )}
       {addResource && (
         <div className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-10">
           <AddResource setAddResource={setAddResource} subtopic={subtopic} />
