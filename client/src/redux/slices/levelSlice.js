@@ -13,15 +13,14 @@ const headers = {
 
 const struct = (arr) => {
   const data = arr.map(
-    ({ _id, name, description, lead, levels, coordinators, image }) => {
+    ({ _id, title, enrolled, topics, assignments, createdAt }) => {
       const obj = {
         _id,
-        name,
-        description,
-        lead,
-        levels,
-        coordinators,
-        image,
+        title,
+        enrolled,
+        topics,
+        assignments,
+        createdAt,
       };
       return obj;
     }
@@ -34,7 +33,6 @@ export const fetchLevels = createAsyncThunk("about/fetchlevels", async ({id}) =>
   const response = await axios.get(
     `${import.meta.env.VITE_APP_BACKEND_URI}/api/levels/getlevelbywingid/${id}`
   );
-  console.log(response.data);
   return response.data;
 });
 
@@ -85,13 +83,13 @@ const levelslice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchlevels.fulfilled, (state, action) => {
+      .addCase(fetchLevels.fulfilled, (state, action) => {
         state.loading = false;
-        state.levelData = struct(action.payload);
+        state.levelData = struct(action.payload.findLevels);
       })
       .addCase(createLevel.fulfilled, (state, action) => {
         state.loading = false;
-        state.levelData?.concat(struct([action.payload]));
+        state.levelData?.concat(struct([action.payload.newLevel]));
       })
       .addCase(deleteLevel.fulfilled, (state, action) => {
         state.loading = false;

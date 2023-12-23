@@ -22,11 +22,10 @@ const createSubtopic = asyncHandler(async (req, res) => {
   }
 });
 const addResource = asyncHandler(async (req, res) => {
-  const { url, type, title, subtopicId } = req.body;
+  const { url, type, subtopicId } = req.body;
   const subtopic = await Subtopic.findByIdAndUpdate(
     subtopicId,
     {
-      $set: { title },
       $push: {
         resources: { url, type },
       },
@@ -60,6 +59,19 @@ const getSubtopics = asyncHandler(async (req, res) => {
   return res.status(200).json(findSubtopics);
 });
 
+
+const update = async (req, res) => { 
+  try {
+      const updatedSubTopic = await Subtopic.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.status(200).json(updatedSubTopic);
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({
+          message: 'Something went wrong, unable to update the subtopic',
+          error: error
+      });
+  }
+}
 const destroy = async (req, res) => {
   try {
     const deletedSubTopic = await Subtopic.findByIdAndDelete(req.params.id);
@@ -76,4 +88,4 @@ const destroy = async (req, res) => {
   }
 };
 
-module.exports = { createSubtopic, addResource, getSubtopics,destroy };
+module.exports = { createSubtopic, addResource, getSubtopics,destroy ,update};
