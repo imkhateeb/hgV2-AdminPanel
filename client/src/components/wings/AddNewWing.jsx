@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createWing } from '../../redux/slices/wingSlice';
-import axios from 'axios';
+
 import fetchAllUsers from '../../utils/getAllUser';
 
 export default function AddNewWing() {

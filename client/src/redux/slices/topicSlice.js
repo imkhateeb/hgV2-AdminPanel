@@ -4,7 +4,7 @@ import {
   isPendingOrRejectedAction,
   handlePendingAndRejected,
 } from "../../utils/actionHandler";
-const storedToken = JSON.parse(localStorage.getItem("token"));
+// const storedToken = JSON.parse(localStorage.getItem("token"));
 
 const headers = {
   // authorization: `Bearer ${storedToken}`,
@@ -13,15 +13,10 @@ const headers = {
 
 const struct = (arr) => {
   const data = arr.map(
-    ({ _id, name, description, lead, topics, coordinators, image }) => {
+    ({ _id, title}) => {
       const obj = {
         _id,
-        name,
-        description,
-        lead,
-        topics,
-        coordinators,
-        image,
+        title,
       };
       return obj;
     }
@@ -78,7 +73,7 @@ const topicslice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchtopics.fulfilled, (state, action) => {
+      .addCase(fetchTopics.fulfilled, (state, action) => {
         state.loading = false;
         state.topicData = struct(action.payload);
       })

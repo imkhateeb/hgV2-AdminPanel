@@ -6,13 +6,15 @@ import {
   AddNewFeed,
   AddNewAnnouncement,
   AddNewWing,
+  AddNewTopic
 } from "../components";
 
-import ProtectedRoute from "../components/authentication/ProtectedRoutes";
+// import ProtectedRoute from "../components/authentication/ProtectedRoutes";
 
 import Wings from "./Wings";
 import Announcements from "./Announcements";
 import Feeds from "./Feeds";
+import Topics from "./Topics";
 
 export default function Home() {
   return (
@@ -35,6 +37,8 @@ export default function Home() {
                 path="/add-announcement"
                 element={<AddNewAnnouncement />}
               />
+              <Route path="/add-topic/:levelId" element={<AddNewTopic />} />
+              <Route path="/topics/:levelId" element={<Topics />} />
             </Routes>
           {/* </ProtectedRoute> */}
         </div>
