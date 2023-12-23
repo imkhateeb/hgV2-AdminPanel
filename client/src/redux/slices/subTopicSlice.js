@@ -68,7 +68,7 @@ export const updateSubTopic = createAsyncThunk(
   "about/updateSubTopic",
   async ({id,updatedData }) => {
     const response = await axios.patch(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/subtopics/:${id}`,
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/subtopics/${id}`,
       updatedData,
       { headers }
     );
@@ -100,6 +100,16 @@ const subtopicslice = createSlice({
         state.subTopicData = state.subTopicData.filter((e) => e._id !== id);
       })
       .addCase(updateSubTopic.fulfilled, (state, action) => {
+        state.loading = false;
+        const updateSubTopic = struct([action.payload]);
+        const index = state.subTopicData.findIndex(
+          (e) => e._id === updateSubTopic[0]._id
+        );
+        if (index !== -1) {
+          state.subTopicData[index] = updateSubTopic[0];
+        }
+      })
+      .addCase(addResource.fulfilled, (state, action) => {
         state.loading = false;
         const updateSubTopic = struct([action.payload.subtopic]);
         const index = state.subTopicData.findIndex(
