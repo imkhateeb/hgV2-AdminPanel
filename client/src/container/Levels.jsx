@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
 import { AiOutlinePlus } from "react-icons/ai";
 import { Input } from "antd";
 
-import { Link } from "react-router-dom";
 import FeedContent from "../components/feeds/FeedContent";
 import Pagination from "../components/utility/Pagination";
 
@@ -11,6 +12,7 @@ import LevelContent from "../components/levels/LevelContent";
 
 
 const Levels = () => {
+  const { wingId } = useParams();
   const [searchTerm, setSearchTerm] = useState(null);
   const [levelLimit, setLevelLimit] = useState(8);
   const [totalLevels, setTotalLevels] = useState(0);
@@ -36,7 +38,7 @@ const Levels = () => {
             <Input placeholder="Search here..." onChange={(e) => setSearchTerm(e.target.value)} bordered={false} />
           </div>
         </div>
-        <Link to="/add-level" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+        <Link to={`/add-level/${wingId}`} className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>

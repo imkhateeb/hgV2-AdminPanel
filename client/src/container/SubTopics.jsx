@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Input } from "antd";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Pagination from "../components/utility/Pagination";
 
 import searchLogo from '../assets/pngimages/search.png';
@@ -11,6 +11,7 @@ import SubTopicContent from "../components/subtopics/SubTopicContent";
 
 
 const SubTopics = () => {
+  const { topicId } = useParams();
   const [searchTerm, setSearchTerm] = useState(null);
   const [subTopicLimit, setSubTopicLimit] = useState(8);
   const [totalSubTopics, setTotalSubTopics] = useState(0);
@@ -36,7 +37,7 @@ const SubTopics = () => {
             <Input placeholder="Search here..." onChange={(e) => setSearchTerm(e.target.value)} bordered={false} />
           </div>
         </div>
-        <Link to="/add-subtopic" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+        <Link to={`/add-subtopic/${topicId}`} className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>

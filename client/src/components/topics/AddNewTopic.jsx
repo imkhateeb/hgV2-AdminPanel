@@ -27,7 +27,7 @@ export default function AddNewTopic() {
         levelId,
       })
     );
-    navigate("/topics");
+    navigate(`/topics/${levelId}`);
   }
 
 
@@ -50,7 +50,7 @@ export default function AddNewTopic() {
         <button
           type='button'
           className={feedsStyle.btn2}
-          onClick={() => navigate("/wings")}
+          onClick={() => navigate(`/topics/${levelId}`)}
         ><AiOutlineArrowLeft /> Go Back</button>
 
         <button

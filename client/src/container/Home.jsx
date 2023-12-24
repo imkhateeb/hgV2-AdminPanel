@@ -2,24 +2,25 @@ import { Route, Routes } from "react-router-dom";
 import {
   Sidebar,
   Navbar,
-  Assignments,
   AddNewFeed,
   AddNewAnnouncement,
   AddNewWing,
-  AddNewTopic
+  AddNewTopic,
+  AddNewAssignment,
+  AddNewLevel,
+  AddNewSubTopic
 } from "../components";
 
-// import ProtectedRoute from "../components/authentication/ProtectedRoutes";
-
-import Wings from "./Wings";
 import Announcements from "./Announcements";
 import Feeds from "./Feeds";
-import Levels from "./Levels";
-import AddNewLevel from "../components/levels/AddNewLevel";
-import SubTopics from "./SubTopics";
-import AddNewSubTopic from "../components/subtopics/AddNewSubTopic";
-import Topics from "./Topics";
 
+import Wings from "./Wings";
+import Levels from "./Levels";
+import Topics from "./Topics";
+import Assignments from './Assignments';
+import SubTopics from "./SubTopics";
+
+// import ProtectedRoute from "../components/authentication/ProtectedRoutes";
 export default function Home() {
   return (
     <>
@@ -32,21 +33,25 @@ export default function Home() {
           {/* <ProtectedRoute> */}
             <Routes>
               <Route path="/announcements" element={<Announcements />} />
+              <Route path="/add-announcement" element={<AddNewAnnouncement />} />
+
               <Route path="/feeds" element={<Feeds />} />
-              <Route path="/wings" element={<Wings />} />
-              <Route path="/assignments" element={<Assignments />} />
               <Route path="/add-feed" element={<AddNewFeed />} />
+
+              <Route path="/wings" element={<Wings />} />
               <Route path="/add-wing" element={<AddNewWing />} />
-              <Route path="/add-level" element={<AddNewLevel />} />
-              <Route path="/add-subtopic" element={<AddNewSubTopic />} />
-              <Route path="/levels" element={<Levels />} />
-              <Route path="/subtopics" element={<SubTopics />} />
-              <Route
-                path="/add-announcement"
-                element={<AddNewAnnouncement />}
-              />
-              <Route path="/add-topic/:levelId" element={<AddNewTopic />} />
+
+              <Route path="/levels/:wingId" element={<Levels />} />
+              <Route path="/add-level/:wingId" element={<AddNewLevel />} />
+
               <Route path="/topics/:levelId" element={<Topics />} />
+              <Route path="/add-topic/:levelId" element={<AddNewTopic />} />
+
+              <Route path="/assignments/:levelId" element={<Assignments />} />
+              <Route path="/add-assignment/:levelId" element={<AddNewAssignment />} />
+
+              <Route path="/subtopics/:topicId" element={<SubTopics />} />
+              <Route path="/add-subtopic/:topicId" element={<AddNewSubTopic />} />
             </Routes>
           {/* </ProtectedRoute> */}
         </div>

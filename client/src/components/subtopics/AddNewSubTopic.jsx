@@ -4,12 +4,14 @@ import { CgFeed } from "react-icons/cg";
 import feedsStyle from "../../constants/styles/feedsStyle";
 import { useRef } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createSubTopic } from "../../redux/slices/subTopicSlice";
 
 
 export default function AddNewSubTopic() {
+  const { topicId } = useParams();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +26,7 @@ export default function AddNewSubTopic() {
         // title: subTopicTitle.current.value,
       })
     );
-    navigate("/subtopics");
+    navigate(`/subtopics/${topicId}`);
   };
 
   return (
@@ -48,7 +50,7 @@ export default function AddNewSubTopic() {
         <button
           type="button"
           className={feedsStyle.btn2}
-          onClick={() => navigate("/subtopics")}
+          onClick={() => navigate(`/subtopics/${topicId}`)}
         >
           <AiOutlineArrowLeft /> Go Back
         </button>

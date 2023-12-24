@@ -3,13 +3,13 @@ import { CgFeed } from 'react-icons/cg';
 import feedsStyle from '../../constants/styles/feedsStyle';
 import { useRef } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createLevel } from '../../redux/slices/levelSlice';
 
 
 export default function AddNewLevel() {
-
+  const { wingId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,11 +18,11 @@ export default function AddNewLevel() {
   const handleClick = () => {
     dispatch(
       createLevel({
-        wingId : '6585cafdb35c9e93e4553462',
+        wingId,
         title: levelTitle.current.value,
       })
     );
-    navigate("/levels")
+    navigate(`/levels/${wingId}`)
   }
 
   return (
@@ -44,7 +44,7 @@ export default function AddNewLevel() {
         <button
           type='button'
           className={feedsStyle.btn2}
-          onClick={() => navigate("/levels")}
+          onClick={() => navigate(`/levels/${wingId}`)}
         ><AiOutlineArrowLeft /> Go Back</button>
 
         <button

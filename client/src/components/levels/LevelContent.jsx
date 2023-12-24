@@ -30,6 +30,7 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
     fetchAllLevels();
   }, [dispatch]);
 
+  console.log(levelData);
   useEffect(() => {
     // if (feedData?.length) {
     //   if (!searchTerm?.trim() && !queries?.length) {
