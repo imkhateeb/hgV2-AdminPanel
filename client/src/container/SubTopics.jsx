@@ -6,7 +6,6 @@ import { Link, useParams } from "react-router-dom";
 import Pagination from "../components/utility/Pagination";
 
 import searchLogo from '../assets/pngimages/search.png';
-import LevelContent from "../components/levels/LevelContent";
 import SubTopicContent from "../components/subtopics/SubTopicContent";
 
 
@@ -49,6 +48,7 @@ const SubTopics = () => {
         setTotalSubTopics={setTotalSubTopics}
         pageNumber={pageNumber}
         totalSubTopics={totalSubTopics}
+        topicId={topicId}
       />
 
       {totalSubTopics !== 0 && <div className="flex mt-4 justify-between items-center">

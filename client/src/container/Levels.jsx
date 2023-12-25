@@ -50,6 +50,7 @@ const Levels = () => {
         setTotalLevels={setTotalLevels}
         pageNumber={pageNumber}
         totalLevels={totalLevels}
+        wingId={wingId}
       />
 
       {totalLevels !== 0 && <div className="flex mt-4 justify-between items-center">

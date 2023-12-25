@@ -8,7 +8,7 @@ import Level from "./Level";
 // import { filterFeeds } from "../../utils/filterFeeds";
 
 
-export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, pageNumber, totalLevels }) {
+export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, pageNumber, totalLevels,wingId }) {
 
   const [levels, setLevels] = useState([]);
   // const [showOldest, setShowOldest] = useState(false);
@@ -21,7 +21,7 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
 
   const fetchAllLevels = () => {
     try {
-      dispatch(fetchLevels({id : '6585cafdb35c9e93e4553462'}));
+      dispatch(fetchLevels({id : wingId}));
     } catch (error) {
       console.log("Error while gettting all levels", error);
     }
@@ -30,7 +30,6 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
     fetchAllLevels();
   }, [dispatch]);
 
-  console.log(levelData);
   useEffect(() => {
     // if (feedData?.length) {
     //   if (!searchTerm?.trim() && !queries?.length) {
