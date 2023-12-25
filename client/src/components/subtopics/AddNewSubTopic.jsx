@@ -21,9 +21,8 @@ export default function AddNewSubTopic() {
   const handleClick = () => {
     dispatch(
       createSubTopic({
-        topicId: "6586ccfc3e4a957139a204c3",
+        topicId,
         title: subTopicTitle.current.value,
-        // title: subTopicTitle.current.value,
       })
     );
     navigate(`/subtopics/${topicId}`);

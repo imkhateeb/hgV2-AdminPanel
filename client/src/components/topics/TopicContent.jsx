@@ -17,7 +17,6 @@ export default function TopicContent({ queries, levelId }) {
   const dispatch = useDispatch();
   const { topicData, loading, error } = useSelector((state) => state.topics);
 
-  console.log(topicData);
   const fetchAllTopics = () => {
     try {
       dispatch(fetchTopics({id: levelId}));
@@ -101,7 +100,7 @@ export default function TopicContent({ queries, levelId }) {
       ) : (
         topics.length &&
         topics.map((topic, index) => {
-          return <Topic key={topic.id + index} topic={topic} />;
+          return <Topic key={topic._id + index} topic={topic} />;
         })
       )}
     </div>

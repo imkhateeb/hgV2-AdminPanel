@@ -6,6 +6,7 @@ import wingSlice from './slices/wingSlice';
 import levelSlice from './slices/levelSlice';
 import subTopicSlice from './slices/subTopicSlice';
 import topicSlice from './slices/topicSlice';
+import assignmentSlice from './slices/assignmentSlice';
 const store = configureStore({
   reducer: {
     announcements: announcementSlice,
@@ -15,6 +16,7 @@ const store = configureStore({
     levels : levelSlice,
     subtopics : subTopicSlice,
     topics: topicSlice,
+    assignments: assignmentSlice,
   },
 })
 

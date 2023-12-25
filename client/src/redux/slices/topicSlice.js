@@ -75,7 +75,7 @@ const topicslice = createSlice({
     builder
       .addCase(fetchTopics.fulfilled, (state, action) => {
         state.loading = false;
-        state.topicData = struct(action.payload.findTopics);
+        state.topicData = struct(action.payload.topics);
       })
       .addCase(createTopic.fulfilled, (state, action) => {
         state.loading = false;

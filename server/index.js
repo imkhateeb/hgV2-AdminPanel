@@ -12,6 +12,7 @@ const feedRoutes = require("./routes/feed_routes");
 const wingRoutes = require("./routes/wing_routes");
 const levelRoutes = require("./routes/level_routes");
 const topicRoutes=require("./routes/topic_routes");
+const assignmentRoutes = require("./routes/assignment_routes");
 const subtopicRoutes=require("./routes/subtopic_routes");
 const projectRoutes=require("./routes/project_routes");
 const { connectDB } = require("./database/database");
@@ -47,6 +48,7 @@ app.use("/api/announcements", announcementRoutes);
 app.use("/api/topics",topicRoutes);
 app.use('/api/subtopics',subtopicRoutes);
 app.use('/api/projects',projectRoutes);
+app.use('/api/assignments', assignmentRoutes);
 
 
 app.get("/",(req,res)=>{
