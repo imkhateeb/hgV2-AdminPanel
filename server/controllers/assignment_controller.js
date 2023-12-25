@@ -92,19 +92,36 @@ const destroy = async (req, res) => {
     }
 }
 
-//get assignment by level id 
-// const getAssignmentbyLevelId=asyncHandler(async(req,res)=>{
-//     const {levelId}=req.params;
-//     if(levelId==":levelId"){
-//         return res.status(401).json({message:"Cannot find the assignment without the level id"});
-//     }
-//     //doubt here
-// })
+// get assignment by level id 
+const getAssignmentbyLevelId = asyncHandler(async(req,res)=>{
+    const {id}=req.params;
+    if ( !id || id === undefined ){
+        return res.status(401).json({
+            success: false,
+            error: 'No level ID found'
+        })
+    }
+
+    try {
+        const assignments = await Level.findById(id).populate("assignments");
+        return res.status(200).json({
+            success: true,
+            assignments,
+        })
+    } catch (error) {
+        return res.status(404).json({
+            success: false,
+            error,
+        })
+    }
+
+})
 
 module.exports = {
     create,
     submitAssignment,
     verifyAssignment,
     update,
-    destroy
+    destroy,
+    getAssignmentbyLevelId,
 };

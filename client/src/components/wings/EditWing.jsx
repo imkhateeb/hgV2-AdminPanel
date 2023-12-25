@@ -18,7 +18,7 @@ export default function EditWing({ setEditWing, wing }) {
   const [coordinatorOptions, setCoordinatorOptions] = useState(null);
   const [addMoreCoordinators, setAddMoreCoordinators] = useState(false);
 
-  console.log(newCoordinators);
+
   const [fields, setFields] = useState(false);
 
   const handleSave = () => {

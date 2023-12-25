@@ -4,7 +4,7 @@ import {
   isPendingOrRejectedAction,
   handlePendingAndRejected,
 } from "../../utils/actionHandler";
-const storedToken = JSON.parse(localStorage.getItem("token"));
+// const storedToken = JSON.parse(localStorage.getItem("token"));
 
 const headers = {
   // authorization: `Bearer ${storedToken}`,
@@ -13,15 +13,11 @@ const headers = {
 
 const struct = (arr) => {
   const data = arr.map(
-    ({ _id, name, description, lead, assignments, coordinators, image }) => {
+    ({ _id, name, description }) => {
       const obj = {
         _id,
         name,
         description,
-        lead,
-        assignments,
-        coordinators,
-        image,
       };
       return obj;
     }
@@ -68,6 +64,17 @@ export const updateAssignment = createAsyncThunk(
   }
 );
 
+export const fetchAssignments = createAsyncThunk(
+  "about/fetchAssignment",
+  async({id}) => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/${id}`,
+      {headers}
+    );
+    return response.data;
+  }
+)
+
 // Slice for assignments
 const assignmentslice = createSlice({
   name: "assignments",
@@ -81,7 +88,7 @@ const assignmentslice = createSlice({
     builder
       .addCase(fetchAssignments.fulfilled, (state, action) => {
         state.loading = false;
-        state.assignmentData = struct(action.payload);
+        state.assignmentData = struct(action.payload.assignments);
       })
       .addCase(createAssignment.fulfilled, (state, action) => {
         state.loading = false;
