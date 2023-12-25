@@ -14,6 +14,7 @@ export default function SubTopicContent({
   setTotalSubTopics,
   pageNumber,
   totalSubTopics,
+  topicId
 }) {
   const [subtopics, setSubTopics] = useState([]);
   // const [showOldest, setShowOldest] = useState(false);
@@ -27,7 +28,7 @@ export default function SubTopicContent({
   );
   const fetchAllSubTopics = () => {
     try {
-      dispatch(fetchSubTopics({ id: "6586ccfc3e4a957139a204c3" }));
+      dispatch(fetchSubTopics({ id: topicId }));
     } catch (error) {
       console.log("Error while gettting all subtopics", error);
     }

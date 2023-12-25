@@ -93,6 +93,7 @@ const subtopicslice = createSlice({
       .addCase(createSubTopic.fulfilled, (state, action) => {
         state.loading = false;
         state.subTopicData?.concat(struct([action.payload.newSubtopic]));
+        console.log(struct([action.payload.newSubtopic]))
       })
       .addCase(deleteSubTopic.fulfilled, (state, action) => {
         state.loading = false;
