@@ -29,7 +29,8 @@ const assignmentSchema = new mongoose.Schema({
       }
     }
   ]
-});
+},
+{timestamps : true});
 
 const Assignment = mongoose.model("Assignment", assignmentSchema);
 
