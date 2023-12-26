@@ -19,6 +19,10 @@ const assignmentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
+      submittedAt: {
+        type: Date,
+        default: Date.now,
+      },
       projectURL: {
         type: String,
         required: true,

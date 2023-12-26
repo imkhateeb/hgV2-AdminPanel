@@ -4,11 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import SkeletonAnimation from "../utility/SkeletonAnimation";
 import { fetchLevels } from "../../redux/slices/levelSlice";
 import Level from "./Level";
+import { useParams } from "react-router-dom";
 
 // import { filterFeeds } from "../../utils/filterFeeds";
 
 
 export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, pageNumber, totalLevels }) {
+
+  const { wingId } = useParams();
 
   const [levels, setLevels] = useState([]);
   // const [showOldest, setShowOldest] = useState(false);
@@ -21,7 +24,7 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
 
   const fetchAllLevels = () => {
     try {
-      dispatch(fetchLevels({id : '6585cafdb35c9e93e4553462'}));
+      dispatch(fetchLevels({id : wingId}));
     } catch (error) {
       console.log("Error while gettting all levels", error);
     }
@@ -30,7 +33,6 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
     fetchAllLevels();
   }, [dispatch]);
 
-  console.log(levelData);
   useEffect(() => {
     // if (feedData?.length) {
     //   if (!searchTerm?.trim() && !queries?.length) {
@@ -201,7 +203,7 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
         <div className="w-[25%] text-center text-[16px] font-semibold">ACTION</div>
       </div>
       {
-        loading && !levelData  ? <SkeletonAnimation totalLevels={totalLevels} /> :
+        loading ? <SkeletonAnimation totalLevels={totalLevels} /> :
           (levels && levels.slice(levelLimit * (pageNumber - 1), levelLimit * pageNumber > levels.length ? levels.length : levelLimit * pageNumber).map((level, index) => {
             return (
               <Level

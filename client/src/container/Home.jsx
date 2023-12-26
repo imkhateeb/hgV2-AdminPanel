@@ -19,6 +19,7 @@ import Levels from "./Levels";
 import Topics from "./Topics";
 import Assignments from './Assignments';
 import SubTopics from "./SubTopics";
+import Submissions from "./Submissions";
 
 // import ProtectedRoute from "../components/authentication/ProtectedRoutes";
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
 
               <Route path="/assignments/:levelId" element={<Assignments />} />
               <Route path="/add-assignment/:levelId" element={<AddNewAssignment />} />
+              <Route path="/assignment/:assignmentId/submissions" element={<Submissions />} />
 
               <Route path="/subtopics/:topicId" element={<SubTopics />} />
               <Route path="/add-subtopic/:topicId" element={<AddNewSubTopic />} />

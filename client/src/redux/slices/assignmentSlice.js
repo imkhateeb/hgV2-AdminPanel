@@ -4,29 +4,34 @@ import {
   isPendingOrRejectedAction,
   handlePendingAndRejected,
 } from "../../utils/actionHandler";
-// const storedToken = JSON.parse(localStorage.getItem("token"));
 
 const headers = {
-  // authorization: `Bearer ${storedToken}`,
   authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQ0MTc4M2FjMTdhYzM0NzIwZjI4NCIsImlhdCI6MTcwMzE2NjUyMCwiZXhwIjoxNzA1NzU4NTIwfQ.dkDckQKAgVB93AXmSJNgYtrpIPZ8j3Lis33APxsx39c`,
 };
 
 const struct = (arr) => {
   const data = arr.map(
-    ({ _id, name, description }) => {
-      const obj = {
-        _id,
-        name,
-        description,
-      };
-      return obj;
-    }
+    ({ _id, name, description }) => ({
+      _id,
+      name,
+      description,
+    })
   );
 
   return data;
 };
 
-export const verifyAssignment = createAsyncThunk("about/fetchassignments", async ({id,data}) => {
+export const fetchSingleAssignment = createAsyncThunk("about/fetchSingleAssignment", async ({ id }) => {
+  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/submissions/${id}`, { headers });
+  return response.data.assignment;
+});
+
+export const fetchAllAssignments = createAsyncThunk("about/fetchAllAssignments", async ({ id }) => {
+  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/${id}`, { headers });
+  return response.data.assignments.assignments;
+});
+
+export const verifyAssignment = createAsyncThunk("about/fetchAllAssignments", async ({ id, data }) => {
   const response = await axios.post(
     `${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/verify/${id}`,
     data,
@@ -52,6 +57,7 @@ export const deleteAssignment = createAsyncThunk("about/deleteAssignment", async
   return id;
 });
 
+
 export const updateAssignment = createAsyncThunk(
   "about/updateAssignment",
   async ({ id, updatedData }) => {
@@ -64,19 +70,7 @@ export const updateAssignment = createAsyncThunk(
   }
 );
 
-export const fetchAssignments = createAsyncThunk(
-  "about/fetchAssignment",
-  async({id}) => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/${id}`,
-      {headers}
-    );
-    return response.data;
-  }
-)
-
-// Slice for assignments
-const assignmentslice = createSlice({
+const assignmentSlice = createSlice({
   name: "assignments",
   initialState: {
     assignmentData: [],
@@ -86,9 +80,13 @@ const assignmentslice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAssignments.fulfilled, (state, action) => {
+      .addCase(fetchAllAssignments.fulfilled, (state, action) => {
         state.loading = false;
-        state.assignmentData = struct(action.payload.assignments);
+        state.assignmentData = action.payload;
+      })
+      .addCase(fetchSingleAssignment.fulfilled, (state, action) => {
+        state.loading = false;
+        state.assignmentData = action.payload;
       })
       .addCase(createAssignment.fulfilled, (state, action) => {
         state.loading = false;
@@ -113,4 +111,4 @@ const assignmentslice = createSlice({
   },
 });
 
-export default assignmentslice.reducer;
+export default assignmentSlice.reducer;
