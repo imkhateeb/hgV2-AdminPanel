@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAssignments } from '../../redux/slices/assignmentSlice';
+import { fetchAllAssignments } from "../../redux/slices/assignmentSlice";
 import SkeletonAnimation from "../utility/SkeletonAnimation";
 
 import { filterAssignments } from "../../utils/filterAssignments";
@@ -20,7 +20,7 @@ export default function AssignmentContent({ queries, levelId }) {
 
   const fetchAssignmentByLevelId = () => {
     try {
-      dispatch(fetchAssignments({id: levelId}));
+      dispatch(fetchAllAssignments({id: levelId}));
     } catch (error) {
       console.log("Error while gettting all Assignments", error);
     }
@@ -29,7 +29,6 @@ export default function AssignmentContent({ queries, levelId }) {
   useEffect(() => {
     fetchAssignmentByLevelId();
   }, [dispatch]);
-
 
   useEffect(() => {
     if (assignmentData?.length) {
@@ -54,8 +53,8 @@ export default function AssignmentContent({ queries, levelId }) {
 
   return (
     <div className="flex flex-col w-full mt-4">
-      <div className="flex border-t-2 py-4 w-full">
-        <div className="w-[15%] text-[16px] font-semibold flex items-center gap-1">
+      <div className="flex border-t-[1px] py-5 w-full">
+        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           NAME
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -65,7 +64,7 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[40%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[50%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           DESCRIPTION
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -75,7 +74,7 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[15%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           CREATED BY
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -85,8 +84,8 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[10%] text-[16px] font-semibold flex items-center gap-1">
-          SUBMITTED BY
+        <div className="w-[10%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+          SUBMISSION
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
             onClick={() => {
@@ -95,7 +94,7 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[20%] flex relative gap-1 items-center text-[16px] font-semibold justify-center">
+        <div className="w-[10%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold justify-center">
           <h1>ACTIONS</h1>
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -106,7 +105,7 @@ export default function AssignmentContent({ queries, levelId }) {
           />
         </div>
       </div>
-      {loading ? (
+      {loading && !assignmentData ? (
         <SkeletonAnimation />
       ) : (
         assignments.length &&

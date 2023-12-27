@@ -9,14 +9,16 @@ import { AiFillEdit } from "react-icons/ai";
 import EditFeed from "./EditFeed";
 import FeedDetails from "./FeedDetails";
 import Actions from "../utility/Actions";
-
+import { useNotification } from "../utility/Notification";
 export default function Feed({ feed }) {
   const dispatch = useDispatch();
+  const { openNotification } = useNotification();
   const [feedDetailPopUp, setFeedDetailPopUp] = useState(false);
   const [editFeed, setEditFeed] = useState(false);
 
   const handleDeleteFeed = (id) => {
     dispatch(deleteFeed(id));
+    openNotification("success", "Feed", "Deleted");
   };
 
   return (

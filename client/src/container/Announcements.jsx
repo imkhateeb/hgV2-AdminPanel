@@ -54,11 +54,11 @@ const Announcements = () => {
 
       {totalAnnouncements !== 0 && <div className="flex mt-4 justify-between items-center">
         <div className="flex items-center gap-3 ">
-          <h1>Show result : </h1>
+          <h1 className="text-[13.5px]">Show result : </h1>
           <select
             onChange={(e) => setAnnouncementLimit(parseInt(e.target.value))}
             defaultValue={8}
-            className="cursor-pointer py-[2px] px-[5px] outline-none rounded-md bg-transparent border-[1px] border-gray-400"
+            className="cursor-pointer py-[5px] px-[8px] outline-none rounded-md bg-transparent border-[1px] border-gray-400 text-[14px]"
           >
             <option className="text-black">1</option>
             <option className="text-black">2</option>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { useNotification } from "../utility/Notification";
 import { updateWing } from "../../redux/slices/wingSlice";
 import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
 import feedsStyle from "../../constants/styles/feedsStyle";
@@ -8,6 +8,7 @@ import fetchAllUsers from "../../utils/getAllUser";
 
 export default function EditWing({ setEditWing, wing }) {
   const dispatch = useDispatch();
+  const { openNotification } = useNotification();
   const [leadOptions, setLeadOptions] = useState(null);
   const [users, setUsers] = useState(null);
 
@@ -32,6 +33,7 @@ export default function EditWing({ setEditWing, wing }) {
       }
       dispatch(updateWing({ id: wing?._id, updatedData: newwingObj }))
       setEditWing(false)
+      openNotification("success", "Wing", "Edited");
     } else {
       setFields(true);
       setTimeout(() => {

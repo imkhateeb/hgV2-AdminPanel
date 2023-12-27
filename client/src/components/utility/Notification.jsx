@@ -1,7 +1,6 @@
 import { notification } from "antd";
 import React, { createContext, useContext } from "react";
 const NotificationContext = createContext();
-
 export const NotificationProvider = ({ children }) => {
   const [api, contextHolder] = notification.useNotification();
 
@@ -9,7 +8,8 @@ export const NotificationProvider = ({ children }) => {
     api[type]({
       message: param,
       description: 
-        `${param} ${task} successfully`,
+        `${task} successfully`,
+        // icon : 
     });
   };
 

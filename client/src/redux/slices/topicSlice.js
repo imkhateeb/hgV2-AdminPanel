@@ -29,7 +29,6 @@ export const fetchTopics = createAsyncThunk("about/fetchtopics", async ({id}) =>
   const response = await axios.get(
     `${import.meta.env.VITE_APP_BACKEND_URI}/api/topics/gettopicsbylevel/${id}`
   );
-  console.log(response.data);
   return response.data;
 });
 

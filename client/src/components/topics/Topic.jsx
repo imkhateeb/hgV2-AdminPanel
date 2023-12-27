@@ -5,53 +5,62 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { deleteTopic } from "../../redux/slices/topicSlice";
 import { IoIosEye } from "react-icons/io";
-
-import TopicDetails from './TopicDetails';
-import EditTopic from './EditTopic';
+import { useNotification } from "../utility/Notification";
+import TopicDetails from "./TopicDetails";
+import EditTopic from "./EditTopic";
+import Actions from "../utility/Actions";
 
 export default function Topic({ topic }) {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const { openNotification } = useNotification();
+  const [editTopic, setEditTopic] = useState(false);
+  const [topicDetailPopUp, setTopicDetailPopUp] = useState(false);
 
-   const [editTopic, setEditTopic] = useState(false);
-   const [topicDetailPopUp, setTopicDetailPopUp] = useState(false);
+  const handleDeleteTopic = (id, event) => {
+       dispatch(deleteTopic(id));
+       openNotification("success", "Topic", "Deleted");
+  };
 
-   const handleDeleteTopic = (id, event) => {
-      event.stopPropagation();
-      event.preventDefault();
-      dispatch(deleteTopic(id));
-   };
-
-   return (
-      <>
-         <Link
-            to={`/subtopics/${topic?._id}`}
-            className="flex z-30 border-t-2 py-4 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in pl-2"
-         >
-            <div className="w-[30%] text-[16px] font-semibold flex items-center gap-1">
-               {topic?.title}
-            </div>
-            <div className="w-[30%] text-[16px] font-semibold flex items-center gap-1">
-               {`MD KHATEEBUR RAB`}
-            </div>
-            <div className="w-[20%] flex relative gap-1 items-center text-[16px] font-semibold">
-               {topic?.subtopics?.length || 0}
-            </div>
-            <div className="flex w-[20%] gap-2 flex justify-center">
-               <div onClick={(e) => e.stopPropagation()}>
-                  <button
-                     type="button"
-                     className="button z-20 hover:underline flex justify-center items-center text-yellow-300"
-                     onClick={(event) => {
-                        event.stopPropagation();
-                        event.preventDefault();
-                        setEditTopic(true);
-                     }}
-                  >
-                     <AiFillEdit fontSize={24} />
-                  </button>
-               </div>
-               <div onClick={(e) => e.stopPropagation()}>
-                  <button
+  return (
+    <>
+      <Link
+        to={`/subtopics/${topic?._id}`}
+        className="flex z-30 border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in pl-2"
+      >
+        <div
+          className="w-[30%] text-[15px]
+            pl-5 font-semibold flex items-center gap-1"
+        >
+          {topic?.title}
+        </div>
+        <div
+          className="w-[30%] text-[15px]
+            pl-5 font-semibold flex items-center gap-1"
+        >
+          {`MD KHATEEBUR RAB`}
+        </div>
+        <div
+          className="w-[20%] flex relative gap-1 items-center text-[15px]
+            pl-5 font-semibold"
+        >
+          {topic?.subtopics?.length || 0}
+        </div>
+        <div className="flex w-[20%] gap-2  justify-center">
+          {/* <div onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="button z-20 hover:underline flex justify-center items-center text-yellow-300"
+              onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                setEditTopic(true);
+              }}
+            >
+              <AiFillEdit fontSize={24} />
+            </button>
+          </div> */}
+          {/* <div onClick={(e) => e.stopPropagation()}>
+            <button
                      type="button"
                      className="button z-20 hover:underline flex justify-center items-center text-red-500"
                      onClick={(e) => {
@@ -60,9 +69,9 @@ export default function Topic({ topic }) {
                   >
                      <MdDelete fontSize={24} />
                   </button>
-               </div>
+               </div> */}
                <div onClick={(e) => e.stopPropagation()}>
-                  <button
+                  {/* <button
                      type="button"
                      className="button z-20 hover:underline flex justify-center items-center text-pink-500"
                      onClick={(e) => {
@@ -72,41 +81,46 @@ export default function Topic({ topic }) {
                      }}
                   >
                      <IoIosEye fontSize={24} />
-                  </button>
-               </div>
-            </div>
-         </Link>
-         {topicDetailPopUp && (
-            <div
-               className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-50"
-               onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-               }}
-            >
-               <TopicDetails
-                  data={topic}
-                  setTopicDetailPopUp={setTopicDetailPopUp}
-                  setEditTopic={setEditTopic}
-                  handleDeleteTopic={handleDeleteTopic}
-               />
-            </div>
-         )}
-         {editTopic && (
-            <div
-               className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-50"
-               onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-               }}
-            >
-               <EditTopic
-                  setEditTopic={setEditTopic}
-                  topic={topic}
-               />
-            </div>
-         )}
-      </>
-   );
-}
+                  </button> */}
 
+                  <Actions
+              handleDelete={handleDeleteTopic}
+              setEdit={setEditTopic}
+              param={topic}
+              setDetailPopUp={setTopicDetailPopUp}
+            />
+        </div>
+
+          </div>
+          
+      </Link>
+      {topicDetailPopUp && (
+        <div
+          className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-50"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
+          <TopicDetails
+            data={topic}
+            setTopicDetailPopUp={setTopicDetailPopUp}
+            setEditTopic={setEditTopic}
+            handleDeleteTopic={handleDeleteTopic}
+          />
+        </div>
+      )}
+      {editTopic && (
+        <div
+          className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-50"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
+          <EditTopic setEditTopic={setEditTopic} topic={topic} />
+        </div>
+      )}
+    </>
+  );
+}

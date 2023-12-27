@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { useNotification } from "../utility/Notification";
 import { updateFeed } from "../../redux/slices/feedSlice";
 
 export default function EditFeed({ setEditFeed, feed }) {
   const dispatch = useDispatch();
-
+  const { openNotification } = useNotification();
   const [newFeedDetail, setNewFeedDetail] = useState(feed?.feedDetails);
 
   const handleClick = () => {
     const newFeedObj = {feedDetails: newFeedDetail}
     dispatch(updateFeed({id: feed?._id, updatedData: newFeedObj}))
     setEditFeed(false)
+    openNotification("success", "Feed", "Edited");
   }
 
   return (

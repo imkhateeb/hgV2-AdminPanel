@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateLevel } from "../../redux/slices/levelSlice";
-
+import { useNotification } from "../utility/Notification";
 
 export default function EditLevel({ setEditLevel, level }) {
   const dispatch = useDispatch();
-
+  const { openNotification } = useNotification();
   const [newLevelTitle, setNewLevelTitle] = useState(level?.title);
 
   const handleClick = () => {
     const newLevelObj = {title: newLevelTitle}
     dispatch(updateLevel({id: level?._id, updatedData: newLevelObj}))
     setEditLevel(false)
+    openNotification("success", "Level", "Edited");
   }
 
   return (

@@ -99,7 +99,7 @@ const getAssignmentbyLevelId = asyncHandler(async(req,res)=>{
     if ( !id || id === undefined ){
         return res.status(401).json({
             success: false,
-            error: 'No level ID found'
+            error: 'No level found'
         })
     }
 
@@ -116,7 +116,38 @@ const getAssignmentbyLevelId = asyncHandler(async(req,res)=>{
         })
     }
 
-})
+});
+
+const getAssignmentByAssignmentId = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+    if (!id || id === undefined) {
+        return res.status(401).json({
+            success: false,
+            error: 'No assignment found'
+        });
+    }
+    try {
+        const assignment = await Assignment.findById(id).populate('submitted.user');
+        
+        if (!assignment) {
+            return res.status(404).json({
+                success: false,
+                error: 'Assignment not found'
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            assignment,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: 'Server error',
+        });
+    }
+});
+
 
 module.exports = {
     create,
@@ -125,4 +156,5 @@ module.exports = {
     update,
     destroy,
     getAssignmentbyLevelId,
+    getAssignmentByAssignmentId
 };
