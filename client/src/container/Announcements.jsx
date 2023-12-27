@@ -18,7 +18,7 @@ const Announcements = () => {
 
 
   return (
-    <section className="bg-bgSecondary rounded-3xl p-5 w-full">
+    <section className="bg-bgSecondary rounded-xl p-5 w-full">
 
       <div className="w-full flex items-center my-2">
         <h1 className="text-white text-3xl font-bold">Announcements</h1>

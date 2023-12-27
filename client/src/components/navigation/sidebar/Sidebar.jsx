@@ -20,8 +20,8 @@ const isNotActiveStyle = 'pr-8 py-2 text-base text-slate-400 font-semibold hover
 
 export default function Sidebar() {
   return (
-    <div className="py-5 px-4 bg-bgSecondary rounded-lg h-full">
-      <div className="flex justify-center mt-5 mb-10">
+    <div className="py-5 px-4 bg-bgSecondary rounded-lg min-h-screen">
+      <div className="flex justify-center mt-2 mb-4">
         <img
           src={hglogo}
           alt="hglogo"
