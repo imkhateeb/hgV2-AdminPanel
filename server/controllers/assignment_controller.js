@@ -10,7 +10,7 @@ const create = async (req, res) => {
         const assignment = await Level.findByIdAndUpdate(req.body.levelId, { $push: { assignments: newAssignment._id } }, { new: true });
         res.status(201).json({
             message: "Assignment added successfully",
-            assignment
+            newAssignment
         });
     } catch (error) {
         console.log(error);
@@ -30,6 +30,7 @@ const submitAssignment = async (req, res) => {
             projectURL: req.body.projectURL,
         });
         await assignment.save();
+
         res.status(200).json(assignment);
     } catch (error) {
         console.log(error);
@@ -80,7 +81,7 @@ const destroy = async (req, res) => {
     try {
         const deletedAssignment = await Assignment.findByIdAndDelete(req.params.id);
         res.status(200).json({
-            message: 'Wing deleted successfully',
+            message: 'Assignment deleted successfully',
             deletedAssignment
         });
     } catch (error) {
@@ -106,7 +107,7 @@ const getAssignmentbyLevelId = asyncHandler(async(req,res)=>{
         const assignments = await Level.findById(id).populate("assignments");
         return res.status(200).json({
             success: true,
-            assignments,
+            assignments : assignments.assignments
         })
     } catch (error) {
         return res.status(404).json({

@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 // import { filterFeeds } from "../../utils/filterFeeds";
 
 
-export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, pageNumber, totalLevels }) {
+export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, pageNumber, totalLevels,wingId }) {
 
   const { wingId } = useParams();
 

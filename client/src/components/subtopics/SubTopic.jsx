@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Switch } from "antd";
-
+import {IoIosEye} from 'react-icons/io'
 import { useDispatch } from "react-redux";
 
 import { MdDelete } from "react-icons/md";
@@ -10,10 +10,11 @@ import { AiFillEdit } from "react-icons/ai";
 import { deleteSubTopic } from "../../redux/slices/subTopicSlice";
 import EditSubTopic from "./EditSubTopic";
 import AddResource from "./AddResource";
+import SubTopicDetails from "./SubTopicDetails";
 
 export default function SubTopic({ subtopic }) {
   const dispatch = useDispatch();
-  //    const [feedDetailPopUp, setFeedDetailPopUp] = useState(false);
+  const [subTopicDetailPopUp, setSubTopicDetailPopUp] = useState(false);
   const [editSubTopic, setEditSubTopic] = useState(false);
   const [addResource, setAddResource] = useState(false);
 
@@ -59,17 +60,24 @@ export default function SubTopic({ subtopic }) {
         >
           <MdDelete fontSize={24} />
         </button>
+        <button
+          type="button"
+          className="button hover:underline flex justify-center items-center text-red-500"
+          onClick={() => setSubTopicDetailPopUp(!subTopicDetailPopUp)}
+        >
+         <IoIosEye fontSize={24} />
+        </button>     
       </div>
-      {/* {feedDetailPopUp && (
+      {subTopicDetailPopUp && (
             <div className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-10">
-               <FeedDetails
-                  data={feed}
-                  setFeedDetailPopUp={setFeedDetailPopUp}
-                  setEditFeed={setEditFeed}
-                  handleDeleteFeed={handleDeleteFeed}
+               <SubTopicDetails
+                  data={subtopic}
+                  setSubTopicDetailPopUp={setSubTopicDetailPopUp}
+                  setEditSubTopic={setEditSubTopic}
+                  handleDeleteSubTopic={handleDeleteSubTopic}
                />
             </div>
-         )} */}
+         )}
       {editSubTopic && (
             <div className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-10">
                <EditSubTopic

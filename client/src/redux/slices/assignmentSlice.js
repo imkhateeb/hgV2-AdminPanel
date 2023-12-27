@@ -11,15 +11,21 @@ const headers = {
 
 const struct = (arr) => {
   const data = arr.map(
-    ({ _id, name, description }) => ({
-      _id,
-      name,
-      description,
-    })
+    ({ _id, name, description,submitted,createdAt }) => {
+      const obj = {
+        _id,
+        name,
+        description,
+        submitted,
+        createdAt 
+      };
+      return obj;
+    }
   );
 
   return data;
 };
+
 
 export const fetchSingleAssignment = createAsyncThunk("about/fetchSingleAssignment", async ({ id }) => {
   const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/submissions/${id}`, { headers });
@@ -31,10 +37,11 @@ export const fetchAllAssignments = createAsyncThunk("about/fetchAllAssignments",
   return response.data.assignments.assignments;
 });
 
-export const verifyAssignment = createAsyncThunk("about/fetchAllAssignments", async ({ id, data }) => {
+
+export const verifyAssignment = createAsyncThunk("about/verifyAssignment", async ({id,projectURL}) => {
   const response = await axios.post(
     `${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/verify/${id}`,
-    data,
+    projectURL,
     { headers }
   );
   return response.data;
@@ -90,7 +97,7 @@ const assignmentSlice = createSlice({
       })
       .addCase(createAssignment.fulfilled, (state, action) => {
         state.loading = false;
-        state.assignmentData?.concat(struct([action.payload]));
+        state.assignmentData?.concat(struct([action.payload.newAssignment]));
       })
       .addCase(deleteAssignment.fulfilled, (state, action) => {
         state.loading = false;
@@ -100,6 +107,16 @@ const assignmentSlice = createSlice({
       .addCase(updateAssignment.fulfilled, (state, action) => {
         state.loading = false;
         const updateAssignment = struct([action.payload]);
+        const index = state.assignmentData.findIndex(
+          (e) => e._id === updateAssignment[0]._id
+        );
+        if (index !== -1) {
+          state.assignmentData[index] = updateAssignment[0];
+        }
+      })
+      .addCase(verifyAssignment.fulfilled, (state, action) => {
+        state.loading = false;
+        const updateAssignment = struct([action.payload.assignment]);
         const index = state.assignmentData.findIndex(
           (e) => e._id === updateAssignment[0]._id
         );
