@@ -27,10 +27,10 @@ export default function Home() {
   return (
     <>
       <div className="flex gap-3 w-full min-h-screen  bg-bgTertiary text-white p-3 max-md:p-2 font-poppins">
-        <div className="max-md:hidden">
+        <div className="max-md:hidden w-[115px]">
           <Sidebar />
         </div>
-        <div className="flex flex-col gap-3 w-full">
+        <div className="flex flex-col gap-3 w-full md:pl-[172px]">
           <Navbar />
           {/* <ProtectedRoute> */}
             <Routes>

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { CgFeed } from 'react-icons/cg';
-import feedsStyle from '../../constants/styles/feedsStyle';
+import feedsStyle from '../../constants/styles/styles';
 
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';

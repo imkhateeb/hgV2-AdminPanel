@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNotification } from "../utility/Notification";
 import { updateWing } from "../../redux/slices/wingSlice";
 import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
-import feedsStyle from "../../constants/styles/feedsStyle";
+import feedsStyle from "../../constants/styles/styles";
 import fetchAllUsers from "../../utils/getAllUser";
 
 export default function EditWing({ setEditWing, wing }) {

@@ -88,9 +88,9 @@ export default {
         xs: "480px",
         ss: "700px",
         sm: "780px",
-        md: "1024px",
-        lg: "1186px",
-        xl: "1260px",
+        md: "900px",
+        lg: "1024px",
+        xl: "1330px",
         "2xl": "1536px",
       },
       boxShadow: {

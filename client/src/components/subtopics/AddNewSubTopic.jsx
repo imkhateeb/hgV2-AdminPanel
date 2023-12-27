@@ -1,7 +1,7 @@
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa6";
 import { CgFeed } from "react-icons/cg";
-import feedsStyle from "../../constants/styles/feedsStyle";
+import feedsStyle from "../../constants/styles/styles";
 import { useRef } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
