@@ -1,5 +1,6 @@
 const feedsStyle = {
-  sectionStyle: 'bg-bgSecondary rounded-3xl px-32 max-md:px-16 max-sm:px-5 w-full py-10 px-32 flex flex-col',
+  // sectionStyle: 'bg-bgSecondary rounded-3xl px-32 max-md:px-16 max-sm:px-5 w-full py-10 px-32 flex flex-col',
+  sectionStyle: 'bg-bgSecondary rounded-3xl px-32 max-md:px-16 max-sm:px-5 w-full py-10 min-h-[90%] px-32 flex flex-col',
 
   eventTypeInputStyle: 'py-2 px-3 bg-transparent border-[1px] border-slate-400 rounded-md w-[75%] max-sm:w-[65%] max-md:w-[70%] outline-none',
 

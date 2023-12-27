@@ -39,6 +39,7 @@ export default function TopicContent({ queries, levelId }) {
         setTopics(filteredtopics);
       }
     }
+
   }, [topicData, queries]);
 
 
@@ -53,8 +54,8 @@ export default function TopicContent({ queries, levelId }) {
 
   return (
     <div className="flex flex-col w-full mt-4">
-      <div className="flex border-t-2 py-4 w-full">
-        <div className="w-[30%] text-[16px] font-semibold flex items-center gap-1">
+      <div className="flex border-t-[1px] py-5 w-full">
+        <div className="w-[30%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           TITLE
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -64,7 +65,7 @@ export default function TopicContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[30%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[30%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           CREATED BY
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -74,7 +75,7 @@ export default function TopicContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[20%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           SUB-TOPICS
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -84,7 +85,7 @@ export default function TopicContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[20%] flex relative gap-1 items-center text-[16px] font-semibold justify-center">
+        <div className="w-[20%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold justify-center">
           <h1>ACTIONS</h1>
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -95,7 +96,7 @@ export default function TopicContent({ queries, levelId }) {
           />
         </div>
       </div>
-      {loading ? (
+      {loading && !topicData ? (
         <SkeletonAnimation />
       ) : (
         topics.length &&

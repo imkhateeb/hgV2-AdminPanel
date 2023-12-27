@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-function LevelDetails() {
-  return (
-    <div>LevelDetails</div>
-  )
-}
-
-export default LevelDetails
-=======
 export default function LevelDetails({
     data,
     setLevelDetailPopUp,
@@ -67,4 +56,3 @@ export default function LevelDetails({
     );
   }
   
->>>>>>> a7cd7c3784c2309042af861e772054192d47b651

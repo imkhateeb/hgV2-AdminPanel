@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { useNotification } from "../utility/Notification";
 import { updateTopic } from "../../redux/slices/topicSlice";
 
 export default function EditTopic({ setEditTopic, topic }) {
   const dispatch = useDispatch();
-
+  const { openNotification } = useNotification();
   const [newtopicTitle, setNewtopicTitle] = useState(topic?.title);
 
   const [fields, setFields] = useState(false);
@@ -18,6 +18,7 @@ export default function EditTopic({ setEditTopic, topic }) {
       }
       dispatch(updateTopic({ id: topic?._id, updatedData: newTopicObj }))
       setEditTopic(false)
+      openNotification("success", "Topic", "Edited");
 
     } else {
       setFields(true);

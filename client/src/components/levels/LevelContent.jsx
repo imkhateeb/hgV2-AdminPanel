@@ -8,10 +8,15 @@ import { useParams } from "react-router-dom";
 
 // import { filterFeeds } from "../../utils/filterFeeds";
 
-
-export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, pageNumber, totalLevels,wingId }) {
-
-  const { wingId } = useParams();
+export default function LevelContent({
+  searchTerm,
+  levelLimit,
+  setTotalLevels,
+  pageNumber,
+  totalLevels,
+  wingId,
+}) {
+  // const { wingId } = useParams();
 
   const [levels, setLevels] = useState([]);
   // const [showOldest, setShowOldest] = useState(false);
@@ -24,11 +29,11 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
 
   const fetchAllLevels = () => {
     try {
-      dispatch(fetchLevels({id : wingId}));
+      dispatch(fetchLevels({ id: wingId }));
     } catch (error) {
       console.log("Error while gettting all levels", error);
     }
-  }
+  };
   useEffect(() => {
     fetchAllLevels();
   }, [dispatch]);
@@ -45,10 +50,9 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
     //   }
     // }
 
-    setTotalLevels(levelData?.length)
-    setLevels(levelData)
+    setTotalLevels(levelData?.length);
+    setLevels(levelData);
   }, [levelData, searchTerm]);
-
 
   // const sortByTimeDate = () => {
   //   if (showOldest) {
@@ -164,56 +168,73 @@ export default function LevelContent({ searchTerm, levelLimit, setTotalLevels, p
   //   }
   // }
 
-  if (error) return <p>Error loading levels: {error.message || 'Unknown error'}</p>;
-
+  if (error)
+    return <p>Error loading levels: {error.message || "Unknown error"}</p>;
 
   return (
     <div className="flex flex-col w-full mt-4">
-      <div className="flex border-t-2 py-4 w-full">
-        <div className="w-[25%] text-[16px] font-semibold flex items-center gap-1">USER
-          <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
-            // setSortByName(!sortByName);
-            // sortByLexicalUser();
-          }} />
+      <div className="flex border-t-[1px] py-5 w-full">
+        <div className="w-[30%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+          USER
+          <BiSort
+            className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
+            onClick={() => {
+              // setSortByName(!sortByName);
+              // sortByLexicalUser();
+            }}
+          />
         </div>
-        {/* <div className="w-[45%] text-[16px] font-semibold flex items-center gap-1">DESCRIPTION
+        {/* <div className="w-[45%] text-[14px] pl-5 font-semibold flex items-center gap-1">DESCRIPTION
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             // setSortByDesc(!sortByDesc)
             // sortByLexicalDesc()
           }} />
         </div> */}
-        <div className="w-[25%] flex relative gap-1 items-center text-[16px] font-semibold">
+        <div className="w-[30%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
           <h1>CREATED ON</h1>
-          <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
-            // setShowOldest(!showOldest)
-            // sortByTimeDate()
-          }} />
+          <BiSort
+            className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
+            onClick={() => {
+              // setShowOldest(!showOldest)
+              // sortByTimeDate()
+            }}
+          />
         </div>
-        {/* <div className="w-[8%] text-center text-[16px] font-semibold flex items-center gap-1">STATUS
+        {/* <div className="w-[8%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">STATUS
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             // setSortByStatus(!sortByStatus)
             // handleSortByStatus()
           }} />
         </div> */}
-        <div className="w-[25%] text-center text-[16px] font-semibold flex items-center gap-1">ENROLLED
-          <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
-            // setSortByUpvotes(!sortByUpvotes);
-            // handleSortByUpvotes();
-          }} /></div>
-        <div className="w-[25%] text-center text-[16px] font-semibold">ACTION</div>
+        <div className="w-[25%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">
+          ENROLLED
+          <BiSort
+            className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
+            onClick={() => {
+              // setSortByUpvotes(!sortByUpvotes);
+              // handleSortByUpvotes();
+            }}
+          />
+        </div>
+        <div className="w-[15%] text-center text-[14px] pl-5 font-semibold">
+          ACTION
+        </div>
       </div>
-      {
-        loading ? <SkeletonAnimation totalLevels={totalLevels} /> :
-          (levels && levels.slice(levelLimit * (pageNumber - 1), levelLimit * pageNumber > levels.length ? levels.length : levelLimit * pageNumber).map((level, index) => {
-            return (
-              <Level
-                key={index}
-                level={level}
-              />
-            )
-          }))
-      }
+      {loading && !levelData ? (
+        <SkeletonAnimation totalLevels={totalLevels} />
+      ) : (
+        levels &&
+        levels
+          .slice(
+            levelLimit * (pageNumber - 1),
+            levelLimit * pageNumber > levels.length
+              ? levels.length
+              : levelLimit * pageNumber
+          )
+          .map((level, index) => {
+            return <Level key={index} level={level} />;
+          })
+      )}
     </div>
   );
 }
-

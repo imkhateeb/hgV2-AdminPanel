@@ -44,8 +44,8 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
 
   return (
     <div className="flex flex-col w-full mt-4">
-      <div className="flex border-t-2 py-4 w-full">
-        <div className="w-[20%] text-[16px] font-semibold flex items-center gap-1">
+      <div className="flex border-t-[1px] py-5 w-full">
+        <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           NAME
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -55,7 +55,7 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
             }}
           />
         </div>
-        <div className="w-[30%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[30%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           PROJECT URL
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -65,7 +65,7 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
             }}
           />
         </div>
-        <div className="w-[20%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           SUBMITTED AT
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -75,7 +75,7 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
             }}
           />
         </div>
-        <div className="w-[15%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           VERIFIED
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -85,7 +85,7 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
             }}
           />
         </div>
-        <div className="w-[15%] text-[16px] font-semibold flex items-center gap-1">
+        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           ACTIONS
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"

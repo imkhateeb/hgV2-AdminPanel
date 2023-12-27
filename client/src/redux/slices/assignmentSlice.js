@@ -34,7 +34,7 @@ export const fetchSingleAssignment = createAsyncThunk("about/fetchSingleAssignme
 
 export const fetchAllAssignments = createAsyncThunk("about/fetchAllAssignments", async ({ id }) => {
   const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/${id}`, { headers });
-  return response.data.assignments.assignments;
+  return response.data.assignments;
 });
 
 

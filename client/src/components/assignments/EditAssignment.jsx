@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { useNotification } from "../utility/Notification";
 import { updateAssignment } from '../../redux/slices/assignmentSlice';
 
 export default function EditAssignment({ setEditAssignment, assignment }) {
   const dispatch = useDispatch();
-
+  const { openNotification } = useNotification();
   const [name, setName] = useState(assignment.name);
   const [description, setDescription] = useState(assignment.description)
 
@@ -20,6 +20,7 @@ export default function EditAssignment({ setEditAssignment, assignment }) {
       }
       dispatch(updateAssignment({ id: assignment?._id, updatedData: newassignmentObj }))
       setEditAssignment(false)
+      openNotification("success", "Assignment", "Edited");
 
     } else {
       setFields(true);

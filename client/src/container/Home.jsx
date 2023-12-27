@@ -20,12 +20,13 @@ import Topics from "./Topics";
 import Assignments from './Assignments';
 import SubTopics from "./SubTopics";
 import Submissions from "./Submissions";
+import ResultFB from "../components/utility/Result";
 
 // import ProtectedRoute from "../components/authentication/ProtectedRoutes";
 export default function Home() {
   return (
     <>
-      <div className="flex gap-3 w-full min-h-screen bg-bgTertiary text-white p-3 max-md:p-2">
+      <div className="flex gap-3 w-full min-h-screen  bg-bgTertiary text-white p-3 max-md:p-2 font-poppins">
         <div className="max-md:hidden">
           <Sidebar />
         </div>
@@ -54,6 +55,8 @@ export default function Home() {
 
               <Route path="/subtopics/:topicId" element={<SubTopics />} />
               <Route path="/add-subtopic/:topicId" element={<AddNewSubTopic />} />
+
+              <Route path="/result" element={<ResultFB/>} />
             </Routes>
           {/* </ProtectedRoute> */}
         </div>

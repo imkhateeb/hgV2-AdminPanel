@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
+import { useNotification } from "../utility/Notification";
 import { updateAnnouncement } from '../../redux/slices/announcementSlice';
 
 export default function EditAnnouncement({ setEditAnnouncement, announcement }) {
 
   const dispatch = useDispatch();
+  const { openNotification } = useNotification();
 
   const [newAnnouncementDetail, setNewAnnouncementDetail] = useState(announcement?.announcementDetails);
 
@@ -13,10 +14,11 @@ export default function EditAnnouncement({ setEditAnnouncement, announcement }) 
     const newFeedObj = { announcementDetails: newAnnouncementDetail }
     dispatch(updateAnnouncement({ id: announcement?._id, updatedData: newFeedObj }))
     setEditAnnouncement(false)
+    openNotification("success", "Announcement", "Edited");
   }
 
   return (
-    <div className="w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/3 bg-bgSecondary rounded-3xl px-5 py-3 z-20">
+    <div className="w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/3 bg-bgSecondary rounded-lg px-5 py-3 z-20">
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold">Update Announcement</h1>
         <div className="my-5 flex flex-col gap-2">

@@ -55,7 +55,7 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
         <button
           key={index}
           onClick={() => page !== '...' && goToPage(page)}
-          className={currentPage === page ? 'bg-pink-600 text-lg py-[2px] px-[8px] rounded-md bg-opacity-10 text-pink-600' : 'text-gray-200 hover:bg-pink-600 px-3 text-lg py-1 rounded-md hover:bg-opacity-10 hover:text-pink-600 py-[2px] px-[8px]'}
+          className={currentPage === page ? 'bg-pink-600 text-lg py-[2px] px-[8px] rounded-md bg-opacity-10 text-pink-600' : 'text-gray-200 hover:bg-pink-600 px-3 text-lg py-1 rounded-md hover:bg-opacity-10 hover:text-pink-600'}
           disabled={page === '...'}
         >
           {page}

@@ -6,7 +6,7 @@ export default function AnnouncementDetails({
 
 }) {
    return (
-      <div className="w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/3 bg-bgSecondary rounded-3xl p-5 z-20">
+      <div className="w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/3 bg-bgSecondary rounded-lg p-5 z-20">
          <div className="flex flex-col">
             <h1 className="text-3xl font-bold">{data?.user.name}</h1>
             <p className='text-gray-400 mt-1'>{data.createdAt.split("T")[0]} {" "} {data.createdAt.split("T")[1].split(".")[0]}</p>

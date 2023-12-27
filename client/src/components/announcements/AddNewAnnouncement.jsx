@@ -3,6 +3,7 @@ import { GrAnnounce } from "react-icons/gr";
 import feedsStyle from "../../constants/styles/feedsStyle";
 import { useNavigate } from "react-router-dom";
 import { createAnnouncement } from "../../redux/slices/announcementSlice";
+
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 export default function AddNewAnnouncement() {
@@ -14,14 +15,14 @@ export default function AddNewAnnouncement() {
     dispatch(
       createAnnouncement({
         announcementDetails: descRef.current.value,
-        tags: tagRef.current.value.split(','),
+        tags: tagRef.current.value.split(","),
       })
     );
     navigate("/announcements");
   };
   return (
     <section className={feedsStyle.sectionStyle}>
-      <div className="py-10 px-16 bg-pink-600 rounded-3xl">
+      <div className="py-2  text-pink-600 rounded-3xl">
         <h1 className="text-5xl font-bold">Announcement</h1>
       </div>
       <p className="my-5">DETAILS</p>

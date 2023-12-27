@@ -2,25 +2,33 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateSubTopic } from "../../redux/slices/subTopicSlice";
 import { MdDelete } from "react-icons/md";
-
+import { useNotification } from "../utility/Notification";
 export default function EditSubTopic({ setEditSubTopic, subtopic }) {
   const dispatch = useDispatch();
-
+  const { openNotification } = useNotification();
   const [newSubTopicTitle, setNewSubTopicTitle] = useState(subtopic?.title);
   const [newSubTopicResources, setNewSubTopicResources] = useState(
     subtopic?.resources
   );
   const handleDelete = (e) => {
     setNewSubTopicResources((prev) => {
-      return prev.filter((item)=>{
-        return e.url !== item.url
-      })
-  })
+      return prev.filter((item) => {
+        return e.url !== item.url;
+      });
+    });
+
+    openNotification("success", "Subtopic", "Resource deleted");
   };
   const handleClick = () => {
-    const newSubTopicObj = {title: newSubTopicTitle,resources : newSubTopicResources}
-    dispatch(updateSubTopic({id: subtopic?._id, updatedData: newSubTopicObj}))
+    const newSubTopicObj = {
+      title: newSubTopicTitle,
+      resources: newSubTopicResources,
+    };
+    dispatch(
+      updateSubTopic({ id: subtopic?._id, updatedData: newSubTopicObj })
+    );
     setEditSubTopic(false);
+    openNotification("success", "Subtopic", "Edited");
   };
 
   return (
