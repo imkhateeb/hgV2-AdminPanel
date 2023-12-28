@@ -220,7 +220,7 @@ export default function LevelContent({
           ACTION
         </div>
       </div>
-      {loading && !levelData ? (
+      {loading ? (
         <SkeletonAnimation totalLevels={totalLevels} />
       ) : (
         levels &&

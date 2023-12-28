@@ -44,19 +44,19 @@ export default function Submission({ submission, assignmentId }) {
         </div>
         <div className="w-[20%] flex relative gap-1 items-center text-[15px] pl-5 ">
           {submission?.submittedAt.split("T")[0] +
-            " : " +
+            " | " +
             submission?.submittedAt.split("T")[1].split(".")[0]}
         </div>
         <div className="w-[15%] flex relative gap-1 items-center text-[15px] pl-10 ">
           {submission?.submitted?.verified ? (
             <RiVerifiedBadgeFill
               fontSize={24}
-              className="text-green-500 text-xl font-bold"
+              className="text-green-500 text-3xl font-bold"
             />
           ) : (
             <BsPatchQuestionFill
               fontSize={24}
-              className="text-red-500 text-xl font-bold"
+              className="text-red-500 text-2xl font-bold"
             />
           )}
         </div>

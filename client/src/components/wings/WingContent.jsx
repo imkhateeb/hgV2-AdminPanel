@@ -103,7 +103,7 @@ export default function WingContent({ queries }) {
           />
         </div>
       </div>
-      {loading && !wingData ? (
+      {loading ? (
         <SkeletonAnimation />
       ) : (
         wings &&

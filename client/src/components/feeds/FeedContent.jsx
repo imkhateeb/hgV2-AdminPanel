@@ -197,7 +197,7 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
         <div className="w-[9%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
       </div>
       {
-        loading && !feedData  ? <SkeletonAnimation totalFeeds={totalFeeds} /> :
+        loading ? <SkeletonAnimation totalFeeds={totalFeeds} /> :
           (feeds && feeds.slice(feedLimit * (pageNumber - 1), feedLimit * pageNumber > feeds.length ? feeds.length : feedLimit * pageNumber).map((feed, index) => {
             return (
               <Feed
