@@ -1,8 +1,7 @@
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { CgFeed } from 'react-icons/cg';
 import { FaMinusCircle } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
-
+import { GiFluffyWing } from "react-icons/gi";
 
 import { useEffect, useRef, useState } from 'react';
 import formStyles from '../../constants/styles/styles';
@@ -73,11 +72,11 @@ export default function AddNewWing() {
 
 
   return (
-    <section className={`${formStyles.sectionStyle} py-12`}>
+    <section className={`${formStyles.sectionStyle}`}>
       <div className='py-2 text-pink-600'>
         <h1 className='text-5xl font-bold  max-xl:text-4xl max-xs:text-3xl'>New Wing</h1>
       </div>
-      {fields && <p className="text-center text-lg text-red-500 font-semibold mt-4">Fill all the fields</p>}
+      {fields && <p className="text-center text-lg text-red-500 font-semibold mt-4">Fill all the fields!</p>}
       <div className='flex flex-col w-full my-5'>
         <p className='mb-2'>NAME</p>
         <div className='flex w-full justify-between'>
@@ -88,7 +87,7 @@ export default function AddNewWing() {
           />
         </div>
       </div>
-      <div className='flex flex-col w-full my-5'>
+      <div className='flex flex-col w-full'>
         <p className='mb-2'>DESCRIPTION</p>
         <div>
           <textarea
@@ -100,8 +99,8 @@ export default function AddNewWing() {
         </div>
       </div>
 
-      <div className='flex gap-5 w-full my-5'>
-        <div className='relative w-1/2'>
+      <div className='flex max-xs:flex-col xs:gap-5 w-full my-5'>
+        <div className='relative w-1/2 max-xs:w-full max-xs:mb-5'>
           <p className='mb-2'>LEAD</p>
           {!selectedLead && <div>
             <input
@@ -113,7 +112,7 @@ export default function AddNewWing() {
           </div>}
 
           {selectedLead && (
-            <div className='relative w-1/2 flex gap-2'>
+            <div className='relative w-full flex gap-2'>
               <p>{selectedLead.name}</p>
               <FaMinusCircle
                 className='text-2xl font-bold text-red-500 hover:text-red-600 transition-all duration-200 ease-linear cursor-pointer'
@@ -146,7 +145,7 @@ export default function AddNewWing() {
         </div>
 
         {/* Coordinators */}
-        <div className='relative w-1/2'>
+        <div className='relative w-1/2 max-xs:w-full'>
           <p className='mb-2'>COORDINATORS</p>
           {(selectedCoordinators.length === 0 || addMoreCoordinators) &&
             <div>
@@ -227,7 +226,7 @@ export default function AddNewWing() {
           type='button'
           className={formStyles.btn3}
           onClick={handleClick}
-        >Create Wing <CgFeed /></button>
+        >Create Wing <GiFluffyWing /></button>
       </div>
     </section>
   );

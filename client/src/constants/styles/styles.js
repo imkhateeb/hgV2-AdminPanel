@@ -1,5 +1,5 @@
 const formStyles = {
-  sectionStyle: 'bg-bgSecondary rounded-3xl px-80 max-xl:px-40 max-lg:px-12 max-md:px-16 max-sm:px-5 py-36 w-full my-auto min-h-[92%] px-32 flex flex-col',
+  sectionStyle: 'bg-bgSecondary rounded-3xl px-80 max-xl:px-40 max-lg:px-12 max-md:px-16 max-sm:px-5 py-12 w-full my-auto min-h-[92%] px-32 flex flex-col',
 
   eventTypeInputStyle: 'py-2 px-3 bg-transparent border-[1px] border-slate-400 rounded-md w-full outline-none',
 
