@@ -369,7 +369,7 @@ const AnnouncementContent = ({
         <div className="w-[10%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
       </div>
       {
-        loading && !announcementData ? <SkeletonAnimation totalAnnouncements={totalAnnouncements} /> :
+        loading ? <SkeletonAnimation totalAnnouncements={totalAnnouncements} /> :
           (announcements && announcements.slice(announcementLimit * (pageNumber - 1), announcementLimit * pageNumber > announcements?.length ? announcements?.length : announcementLimit * pageNumber).map((announcement, index) => {
             return (
               <Announcement

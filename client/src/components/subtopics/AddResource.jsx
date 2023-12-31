@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addResource } from "../../redux/slices/subTopicSlice";
-import feedsStyle from "../../constants/styles/feedsStyle";
+import feedsStyle from "../../constants/styles/styles";
 
 export default function AddResource({ setAddResource, subtopic }) {
   const dispatch = useDispatch();

@@ -14,13 +14,21 @@ import announcementsw from '../../../assets/sidebar/announcementw.png';
 import feedsw from '../../../assets/sidebar/feedsw.png';
 import wingsw from '../../../assets/sidebar/wingsw.png';
 import assignmentw from '../../../assets/sidebar/assignmentw.png';
+import { useState } from "react";
 
 const isActiveStyle = 'pr-8 py-2 text-base font-semibold bg-pink-600 rounded-lg text-white';
 const isNotActiveStyle = 'pr-8 py-2 text-base text-slate-400 font-semibold hover:bg-pink-600 hover:text-white rounded-lg animate-fade-in transition-all duration-100 ease-linear';
 
 export default function Sidebar() {
+
+  const [hovered, setHovered] = useState("");
+
+  const isHovered = (title) => {
+    return hovered === title
+  }
+
   return (
-    <div className="py-5 px-4 bg-bgSecondary rounded-lg h-full">
+    <div className="py-5 px-4 bg-bgSecondary rounded-lg h-[97%] fixed">
       <div className="flex justify-center mt-2 mb-4">
         <img
           src={hglogo}
@@ -64,11 +72,13 @@ export default function Sidebar() {
               key={title}
               to={url}
               className={({ isActive }) => isActive ? isActiveStyle : isNotActiveStyle}
+              onMouseEnter={()=>setHovered(title)}
+              onMouseLeave={()=>setHovered("")}
             >
               {({ isActive }) => (
                 <div className="flex gap-3 items-center px-4">
                   <img
-                    src={isActive ? whiteIconSrc : iconSrc}
+                    src={(isActive || isHovered(title)) ? whiteIconSrc : iconSrc}
                     alt={`icon-${title}`}
                     className="w-6 h-6"
                   />

@@ -105,7 +105,7 @@ export default function AssignmentContent({ queries, levelId }) {
           />
         </div>
       </div>
-      {loading && !assignmentData ? (
+      {loading ? (
         <SkeletonAnimation />
       ) : (
         assignments.length &&

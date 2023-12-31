@@ -1,10 +1,10 @@
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { CgFeed } from 'react-icons/cg';
 import { FaMinusCircle } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
+import { GiFluffyWing } from "react-icons/gi";
 
-import feedsStyle from '../../constants/styles/feedsStyle';
 import { useEffect, useRef, useState } from 'react';
+import formStyles from '../../constants/styles/styles';
 
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -14,13 +14,15 @@ import fetchAllUsers from '../../utils/getAllUser';
 
 export default function AddNewWing() {
   const [users, setUsers] = useState(null);
+  const [fields, setFields] = useState(false);
 
-  const [leadOptions, setleadOptions] = useState(null);
+  const [leadOptions, setleadOptions] = useState([]);
   const [selectedLead, setSelectedLead] = useState(null);
 
   const [selectedCoordinators, setSelectedCoordinators] = useState([]);
-  const [coordinatorOptions, setCoordinatorOptions] = useState(null);
+  const [coordinatorOptions, setCoordinatorOptions] = useState([]);
   const [addMoreCoordinators, setAddMoreCoordinators] = useState(false);
+
   const wingName = useRef(null);
   const wingDesc = useRef(null);
 
@@ -40,15 +42,22 @@ export default function AddNewWing() {
 
 
   const handleClick = () => {
-    dispatch(
-      createWing({
-        name: wingName.current.value,
-        description: wingDesc.current.value,
-        lead: selectedLead._id,
-        coordinators: selectedCoordinators.map((item)=>item._id),
-      })
-    );
-    navigate("/wings");
+    if (!wingName.current.value || !wingDesc.current.value || !selectedLead._id || !selectedCoordinators.length) {
+      setFields(true)
+      setTimeout(() => {
+        setFields(false)
+      }, 3000);
+    } else {
+      dispatch(
+        createWing({
+          name: wingName.current.value,
+          description: wingDesc.current.value,
+          lead: selectedLead._id,
+          coordinators: selectedCoordinators.map((item) => item._id),
+        })
+      );
+      navigate("/wings");
+    }
   }
 
   const findLead = (e) => {
@@ -63,47 +72,47 @@ export default function AddNewWing() {
 
 
   return (
-    <section className={feedsStyle.sectionStyle}>
-      <div className='py-10 px-16 bg-pink-600 rounded-3xl'>
-        <h1 className='text-5xl font-bold'>Add New Wing</h1>
+    <section className={`${formStyles.sectionStyle}`}>
+      <div className='py-2 text-pink-600'>
+        <h1 className='text-5xl font-bold  max-xl:text-4xl max-xs:text-3xl'>New Wing</h1>
       </div>
-      <div className='my-4'>
-        <p className='my-2'>NAME</p>
+      {fields && <p className="text-center text-lg text-red-500 font-semibold mt-4">Fill all the fields!</p>}
+      <div className='flex flex-col w-full my-5'>
+        <p className='mb-2'>NAME</p>
         <div className='flex w-full justify-between'>
           <input
-            placeholder='Event type...'
-            className={feedsStyle.eventTypeInputStyle}
+            placeholder='Wing name...'
+            className={formStyles.eventTypeInputStyle}
             ref={wingName}
           />
         </div>
       </div>
-      <div className='my-4'>
-        <p className='my-2'>DESCRIPTION</p>
+      <div className='flex flex-col w-full'>
+        <p className='mb-2'>DESCRIPTION</p>
         <div>
           <textarea
             rows={4}
-            className={feedsStyle.textareaStyle}
-            placeholder='Enter details'
+            className={formStyles.textareaStyle}
+            placeholder='Enter details...'
             ref={wingDesc}
           />
         </div>
       </div>
 
-      <div className='flex gap-2'>
-
-        <div className='my-4 relative w-1/2'>
-          <p className='my-2'>LEAD</p>
+      <div className='flex max-xs:flex-col xs:gap-5 w-full my-5'>
+        <div className='relative w-1/2 max-xs:w-full max-xs:mb-5'>
+          <p className='mb-2'>LEAD</p>
           {!selectedLead && <div>
             <input
               type='text'
-              className={feedsStyle.textareaStyle}
+              className={formStyles.eventTypeInputStyle}
               placeholder='Enter lead name...'
               onChange={(e) => findLead(e.target.value)}
             />
           </div>}
 
           {selectedLead && (
-            <div className='my-4 relative w-1/2 flex gap-2'>
+            <div className='relative w-full flex gap-2'>
               <p>{selectedLead.name}</p>
               <FaMinusCircle
                 className='text-2xl font-bold text-red-500 hover:text-red-600 transition-all duration-200 ease-linear cursor-pointer'
@@ -112,21 +121,47 @@ export default function AddNewWing() {
             </div>
           )}
 
-          {!selectedLead && <div className='absolute bg-black'>
-            {leadOptions?.map((item) => (
-              <div key={item._id} className='cursor-pointer px-2 py-1 hover:bg-gray-900' onClick={() => setSelectedLead(item)}>
-                {item?.name}
-              </div>
-            ))}
-          </div>}
+          {!!leadOptions.length &&
+            <div className='absolute top-20 w-full h-40 overflow-hidden bg-black rounded-md overflow-y-auto'>
+
+              <button
+                onClick={() => setleadOptions([])}
+                type='button'
+                className='py-1 px-2 absolute right-0 bg-red-600 rounded-md text-white cursor-pointer hover:bg-red-500'>
+                Cancel
+              </button>
+
+              {leadOptions?.map((item) => (
+                <div key={item._id} className='cursor-pointer px-2 py-1 hover:bg-gray-900' onClick={() => {
+                  setSelectedLead(item)
+                  setleadOptions([])
+                }}>
+                  {item?.name}
+                </div>
+              ))}
+            </div>
+          }
+
         </div>
 
         {/* Coordinators */}
-        <div className='my-4 relative w-1/2'>
-          <p className='my-2'>COORDINATORS</p>
-
+        <div className='relative w-1/2 max-xs:w-full'>
+          <p className='mb-2'>COORDINATORS</p>
+          {(selectedCoordinators.length === 0 || addMoreCoordinators) &&
+            <div>
+              <input
+                type='text'
+                className={formStyles.textareaStyle}
+                placeholder='Enter coordinator name...'
+                onChange={(e) => {
+                  findCoordinator(e.target.value)
+                  setAddMoreCoordinators(true)
+                }}
+              />
+            </div>
+          }
           {selectedCoordinators.length !== 0 && (
-            <div className='my-4 relative flex gap-2 w-1/2 items-center'>
+            <div className='relative flex gap-2 w-full items-center'>
               <div className='flex gap-2 w-full flex-wrap'>
                 {selectedCoordinators?.map((item) => {
                   return (
@@ -145,29 +180,23 @@ export default function AddNewWing() {
                 })}
               </div>
               <FaPlusCircle
-                className='text-2xl font-bold text-blue-500 hover:text-blue-600 transition-all duration-200 ease-linear cursor-pointer'
+                className='text-3xl text-blue-500 hover:text-blue-600 transition-all duration-200 ease-linear cursor-pointer'
                 onClick={() => setAddMoreCoordinators(!addMoreCoordinators)}
               />
 
             </div>
           )}
 
-          {(selectedCoordinators.length === 0 || addMoreCoordinators) &&
-            <div>
-              <input
-                type='text'
-                className={feedsStyle.textareaStyle}
-                placeholder='Enter coordinator name...'
-                onChange={(e) => {
-                  findCoordinator(e.target.value)
-                  setAddMoreCoordinators(true)
-                }}
-              />
-            </div>
-          }
+          {addMoreCoordinators && !!coordinatorOptions.length &&
+            <div className='absolute top-20 w-full h-40 overflow-hidden bg-black rounded-md overflow-y-auto'>
 
-          {addMoreCoordinators &&
-            <div className='absolute bg-black'>
+              <button
+                onClick={() => setAddMoreCoordinators(false)}
+                type='button'
+                className='py-1 px-2 absolute right-0 bg-red-600 rounded-md text-white cursor-pointer hover:bg-red-500'>
+                Cancel
+              </button>
+
               {coordinatorOptions?.map((item) => (
                 <div
                   key={item._id}
@@ -185,20 +214,19 @@ export default function AddNewWing() {
             </div>
           }
         </div>
-
       </div>
       <div className='flex gap-3 justify-center mt-5'>
         <button
           type='button'
-          className={feedsStyle.btn2}
+          className={formStyles.btn2}
           onClick={() => navigate("/wings")}
         ><AiOutlineArrowLeft /> Go Back</button>
 
         <button
           type='button'
-          className={feedsStyle.btn3}
+          className={formStyles.btn3}
           onClick={handleClick}
-        >Create Wing <CgFeed /></button>
+        >Create Wing <GiFluffyWing /></button>
       </div>
     </section>
   );
