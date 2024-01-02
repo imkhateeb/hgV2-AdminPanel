@@ -96,7 +96,7 @@ export default function TopicContent({ queries, levelId }) {
           />
         </div>
       </div>
-      {loading ? (
+      {loading && !topicData ? (
         <SkeletonAnimation />
       ) : (
         topics.length &&

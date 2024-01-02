@@ -79,3 +79,11 @@ color: white;
 :where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-prev button, :where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-next button{
   color: white;
 }
+.custom-checkbox::before {
+  color: #ee2b7a /* Default color of the checkmark */
+}
+
+/* Change the color of the tick mark when the checkbox is checked */
+input[type="checkbox"]:checked + .custom-checkbox::before {
+  color: #ee2b7a; /* Change this to your desired checked color (pink in this case) */
+}

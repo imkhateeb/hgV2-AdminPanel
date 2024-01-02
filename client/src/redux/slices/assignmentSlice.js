@@ -41,11 +41,13 @@ export const fetchAllAssignments = createAsyncThunk("about/fetchAllAssignments",
 export const verifyAssignment = createAsyncThunk("about/verifyAssignment", async ({id,projectURL}) => {
   const response = await axios.post(
     `${import.meta.env.VITE_APP_BACKEND_URI}/api/assignments/verify/${id}`,
-    projectURL,
+    {projectURL : projectURL},
     { headers }
   );
+
   return response.data;
 });
+
 
 export const createAssignment = createAsyncThunk("about/createAssignment", async (data) => {
   const response = await axios.post(
@@ -89,11 +91,11 @@ const assignmentSlice = createSlice({
     builder
       .addCase(fetchAllAssignments.fulfilled, (state, action) => {
         state.loading = false;
-        state.assignmentData = action.payload;
+        state.assignmentData = struct(action.payload);
       })
       .addCase(fetchSingleAssignment.fulfilled, (state, action) => {
         state.loading = false;
-        state.assignmentData = action.payload;
+        state.assignmentData = struct([action.payload]);
       })
       .addCase(createAssignment.fulfilled, (state, action) => {
         state.loading = false;

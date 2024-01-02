@@ -43,7 +43,8 @@ const submitAssignment = async (req, res) => {
 };
 const verifyAssignment = async (req, res) => {
     try {
-        const assignment = await Assignment.findById(req.params.id);
+        const assignment = await Assignment.findById(req.params.id).populate('submitted.user');
+
         assignment.submitted.forEach((submission) => {
             if (submission.projectURL == req.body.projectURL) {
                 submission.verified = true;

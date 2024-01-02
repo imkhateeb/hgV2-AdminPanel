@@ -8,7 +8,6 @@ import FilterDropdown from "../components/utility/Filter";
 const Wings = () => {
   const [queries, setQueries] = useState([]);
 
-
   return (
     <section className="bg-bgSecondary rounded-3xl p-5 w-full">
       <div className="w-full flex items-center my-2">
@@ -18,16 +17,18 @@ const Wings = () => {
         <div className="flex gap-1">
           <FilterDropdown setQueries={setQueries} />
         </div>
-        <Link to="/add-wing" className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+        <Link
+          to="/add-wing"
+          className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer"
+        >
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>
       </div>
 
-      <WingContent
-        queries={queries}
-      />
-
+      <div className="overflow-auto w-full">
+        <WingContent queries={queries} />
+      </div>
     </section>
   );
 };

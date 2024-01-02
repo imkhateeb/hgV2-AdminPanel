@@ -13,7 +13,9 @@ const Actions = ({
   setEdit,
   param,
   setDetailPopUp,
+  handleVerifyAssignment,
   show = false,
+  submission = false
 }) => {
   return (
     <DropdownMenu className="">
@@ -35,18 +37,24 @@ const Actions = ({
         >
           View
         </DropdownMenuItem>
-        <DropdownMenuItem
+       { !submission && <DropdownMenuItem
           onClick={() => setEdit(true)}
           className="cursor-pointer"
         >
           Edit
-        </DropdownMenuItem>
-        <DropdownMenuItem
+        </DropdownMenuItem>}
+       { !submission && <DropdownMenuItem
           onClick={() => handleDelete(param?._id)}
           className="cursor-pointer "
         >
           Delete
-        </DropdownMenuItem>
+        </DropdownMenuItem>}
+        { submission && <DropdownMenuItem
+          onClick={() => handleVerifyAssignment(true)}
+          className="cursor-pointer "
+        >
+          Verify
+        </DropdownMenuItem>}
         {show && (
           <>
             {" "}

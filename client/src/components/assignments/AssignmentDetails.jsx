@@ -11,13 +11,13 @@ export default function AssignmentDetails({ data, setAssignmentDetailPopUp, setE
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold">{data?.name}</h1>
         <p className="text-gray-400 mt-2">
-          {data.createdAt.split("T")[0]}{" "}
-          {data.createdAt.split("T")[1].split(".")[0]}
+          {data?.createdAt?.split("T")[0]}{" "}
+          {data?.createdAt?.split("T")[1].split(".")[0]}
         </p>
         <p className='text-gray-400 mb-2'>{'Md Khateebur Rab'}</p>
       </div>
       <div className="mb-5">
-        <p>{data.description}</p>
+        <p>{data?.description}</p>
       </div>
       <div className="z-20 opacity-100 flex gap-3">
         <button

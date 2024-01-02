@@ -44,6 +44,7 @@ const Levels = () => {
         </Link>
       </div>
 
+      <div className="w-full overflow-auto">
       <LevelContent
         searchTerm={searchTerm}
         levelLimit={levelLimit}
@@ -52,6 +53,7 @@ const Levels = () => {
         totalLevels={totalLevels}
         wingId={wingId}
       />
+      </div>
 
       {totalLevels !== 0 && <div className="flex mt-4 justify-between items-center">
         <div className="flex items-center gap-3 ">

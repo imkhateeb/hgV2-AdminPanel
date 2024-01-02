@@ -50,7 +50,7 @@ export default function WingContent({ queries }) {
     return <p>Error loading wings: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4">
+    <div className="flex flex-col w-full mt-4 min-w-[682px]">
       <div className="flex border-t-[1px] py-5  w-full">
         <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           WING
@@ -103,7 +103,7 @@ export default function WingContent({ queries }) {
           />
         </div>
       </div>
-      {loading ? (
+      {loading && !wingData ? (
         <SkeletonAnimation />
       ) : (
         wings &&
