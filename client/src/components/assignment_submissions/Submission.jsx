@@ -20,20 +20,20 @@ export default function Submission({ submission, assignmentId }) {
   const handleVerifyAssignment = () => {
     setVerifying(true);
 
-    if (!submission?.submitted?.verified) {
+    if (!submission?.verified) {
       const newAssignmentObj = {
         id: assignmentId,
-        data: {
-          projectURL: submission?.projectURL,
-        },
+        projectURL: submission?.projectURL,
       };
+
 
       dispatch(verifyAssignment(newAssignmentObj));
     }
   };
+
   return (
     <>
-      <div className="flex z-30 border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in">
+      <div className="flex border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in">
         <div className="w-[20%] text-[15px] pl-5  flex items-center gap-1">
           {submission?.user?.name}
         </div>
@@ -48,10 +48,10 @@ export default function Submission({ submission, assignmentId }) {
             submission?.submittedAt.split("T")[1].split(".")[0]}
         </div>
         <div className="w-[15%] flex relative gap-1 items-center text-[15px] pl-10 ">
-          {submission?.submitted?.verified ? (
+          {submission?.verified ? (
             <RiVerifiedBadgeFill
               fontSize={24}
-              className="text-green-500 text-3xl font-bold"
+              className="text-green-500 text-2xl font-bold"
             />
           ) : (
             <BsPatchQuestionFill
@@ -92,6 +92,7 @@ export default function Submission({ submission, assignmentId }) {
             <Actions
               handleVerifyAssignment={handleVerifyAssignment}
               setDetailPopUp={setSubmissionDetailPopUp}
+              submission={true}
             />
           </div>
         </div>

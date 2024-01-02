@@ -339,37 +339,37 @@ const AnnouncementContent = ({
   if (error) return <p>Error loading feeds: {error.message || 'Unknown error'}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4">
+    <div className="flex flex-col  mt-4">
       <div className="flex border-t-[1px] py-5 w-full">
-        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">USER
+        <div className="max-lg:w-[25%] w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">USER
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setSortByName(!sortByName);
             handleSortByLexicalUser();
           }} />
         </div>
-        <div className="w-[50%] text-[14px] pl-5 font-semibold flex items-center gap-1">DESCRIPTION
+        <div className="w-[50%] max-lg:hidden text-[14px] pl-5 font-semibold flex items-center gap-1">DESCRIPTION
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setSortByDesc(!sortByDesc)
             handleSortByLexicalDesc()
           }} />
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
+        <div className="max-lg:w-[25%] w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
           <h1>CREATED ON</h1>
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setShowOldest(!showOldest)
             handleSortByTimeDate()
           }} />
         </div>
-        <div className="w-[10%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">STATUS
+        <div className="max-lg:w-[25%] w-[10%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">STATUS
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setSortByStatus(!sortByStatus)
             handleSortByStatus()
           }} />
         </div>
-        <div className="w-[10%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
+        <div className="max-lg:w-[25%] w-[10%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
       </div>
       {
-        loading ? <SkeletonAnimation totalAnnouncements={totalAnnouncements} /> :
+        loading && !announcementData ? <SkeletonAnimation totalAnnouncements={totalAnnouncements} /> :
           (announcements && announcements.slice(announcementLimit * (pageNumber - 1), announcementLimit * pageNumber > announcements?.length ? announcements?.length : announcementLimit * pageNumber).map((announcement, index) => {
             return (
               <Announcement
@@ -384,3 +384,5 @@ const AnnouncementContent = ({
 };
 
 export default AnnouncementContent;
+
+

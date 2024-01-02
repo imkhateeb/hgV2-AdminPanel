@@ -14,7 +14,7 @@ export default function WingDetails({ data, setwingDetailPopUp, setEditWing, han
         <div className="flex gap-2">
 
           {data?.coordinators.length === 0 ? <p className="text-gray-400 text-sm p-[4px] rounded-md bg-slate-800">No Co-ordinators</p> : data?.coordinators?.map((coordinator, index) => (
-            <p key={coordinator.id} className={index === 0 && 'text-red-400' || index % 2 === 0 && 'text-green-500' || (index % 3 === 0 ? 'text-pink-500' : 'text-blue-400')}>{coordinator.name}</p>
+            <p key={coordinator._id} className={index === 0 && 'text-red-400' || index % 2 === 0 && 'text-green-500' || (index % 3 === 0 ? 'text-pink-500' : 'text-blue-400')}>{coordinator.name}</p>
           ))}
         </div>
         <p className='my-4'>{data?.description}</p>

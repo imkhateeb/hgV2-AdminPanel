@@ -21,7 +21,7 @@ export default function AddNewSubTopic() {
   const resourceURL = useRef(null);
 
   const handleClick = () => {
-    if (!topicId || !subTopicTitle.current.value || subTopicDesc.current.value || resourceURL.current.value) {
+    if (!topicId || !subTopicTitle.current.value || !subTopicDesc.current.value || !resourceURL.current.value) {
       setFields(true)
       setTimeout(() => {
         setFields(false)

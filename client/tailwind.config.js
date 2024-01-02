@@ -92,6 +92,7 @@ export default {
         lg: "1024px",
         xl: "1330px",
         "2xl": "1536px",
+        res : "1245px"
       },
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",

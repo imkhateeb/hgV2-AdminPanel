@@ -26,7 +26,7 @@ export default function Wing({ wing }) {
     <>
       <Link
         to={`/levels/${wing?._id}`}
-        className="flex z-30 border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in pl-2"
+        className="flex border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in"
       >
         <div className="w-[20%] text-[14px] pl-5  flex items-center gap-1">
           {wing?.name}

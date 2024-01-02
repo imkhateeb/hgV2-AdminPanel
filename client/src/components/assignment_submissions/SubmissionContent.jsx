@@ -28,10 +28,9 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
   }, []);
 
   useEffect(() => {
-    setAssignmentData(assignmentData && assignmentData)
+    setAssignmentData(assignmentData[0])
   }, [assignmentData])
 
-  console.log(assignmentData?.submitted);
 
   const sortByTimeDate = () => { };
 
@@ -96,11 +95,11 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
           />
         </div>
       </div>
-      {loading ? (
+      {loading && !assignmentData ? (
         <SkeletonAnimation />
       ) : (
-        assignmentData?.submitted?.length &&
-        assignmentData?.submitted?.map((submission, index) => {
+        assignmentData[0]?.submitted?.length &&
+        assignmentData[0]?.submitted?.map((submission, index) => {
           return <Submission 
           key={submission.user + index} 
           submission={submission} 

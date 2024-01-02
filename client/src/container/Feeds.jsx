@@ -44,6 +44,7 @@ const Feeds = () => {
         </Link>
       </div>
 
+      <div className="w-full overflow-auto">
       <FeedContent
         searchTerm={searchTerm}
         queries={queries}
@@ -52,6 +53,7 @@ const Feeds = () => {
         pageNumber={pageNumber}
         totalFeeds={totalFeeds}
       />
+      </div>
 
       {totalFeeds !== 0 && <div className="flex mt-4 justify-between items-center">
         <div className="flex items-center gap-3 ">

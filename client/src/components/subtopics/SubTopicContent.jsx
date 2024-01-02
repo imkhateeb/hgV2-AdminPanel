@@ -223,7 +223,7 @@ export default function SubTopicContent({
           ACTION
         </div>
       </div>
-      {loading ? (
+      {loading && !subTopicData ? (
         <SkeletonAnimation totalSubTopics={totalSubTopics} />
       ) : (
         subtopics &&
