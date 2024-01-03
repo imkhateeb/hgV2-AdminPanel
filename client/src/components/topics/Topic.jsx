@@ -41,7 +41,7 @@ export default function Topic({ topic }) {
         </div>
         <div
           className="w-[20%] flex relative gap-1 items-center text-[15px]
-            pl-5 font-semibold"
+            pl-10 font-semibold"
         >
           {topic?.subtopics?.length || 0}
         </div>

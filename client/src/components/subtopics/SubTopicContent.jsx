@@ -171,7 +171,7 @@ export default function SubTopicContent({
     return <p>Error loading subtopics: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4">
+    <div className="flex flex-col w-full mt-4 min-w-[680px]">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           USER
@@ -199,7 +199,7 @@ export default function SubTopicContent({
             // handleSortByStatus()
           }} />
         </div> */}
-        <div className="w-[20%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="w-[25%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">
           NAME
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -209,7 +209,7 @@ export default function SubTopicContent({
             }}
           />
         </div>
-        <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           RESOURCE
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"

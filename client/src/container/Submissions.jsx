@@ -27,12 +27,14 @@ const Submissions = () => {
             </div>
          </div>
 
+         <div className="overflow-auto w-full">
          <SubmissionContent
             queries={queries}
             assignmentId={assignmentId}
             setAssignmentData={setAssignmentData}
          />
 
+         </div>
       </section>
    );
 };

@@ -29,10 +29,12 @@ const Assignments = () => {
         </Link>
       </div>
 
-      <AssignmentContent
+     <div className="overflow-auto w-full">
+     <AssignmentContent
         queries={queries}
         levelId={levelId}
       />
+     </div>
 
     </section>
   );

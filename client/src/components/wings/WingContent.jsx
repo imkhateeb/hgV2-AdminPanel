@@ -50,9 +50,9 @@ export default function WingContent({ queries }) {
     return <p>Error loading wings: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4 min-w-[682px]">
+    <div className="flex flex-col w-full mt-4 min-w-[680px]">
       <div className="flex border-t-[1px] py-5  w-full">
-        <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="max-res:w-[25%] w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           WING
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -62,7 +62,7 @@ export default function WingContent({ queries }) {
             }}
           />
         </div>
-        <div className="w-[40%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="w-[40%] max-res:hidden text-[14px] pl-5 font-semibold flex items-center gap-1">
           DESCRIPTION
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -72,7 +72,7 @@ export default function WingContent({ queries }) {
             }}
           />
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
+        <div className="max-res:w-[25%] w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
           <h1>LEVELS</h1>
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -82,7 +82,7 @@ export default function WingContent({ queries }) {
             }}
           />
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
+        <div className="max-res:w-[30%] w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
           <h1>LEAD</h1>
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -92,15 +92,8 @@ export default function WingContent({ queries }) {
             }}
           />
         </div>
-        <div className="w-[10%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
+        <div className="max-res:w-[20%] w-[10%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
           <h1>ACTIONS</h1>
-          <BiSort
-            className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
-            onClick={() => {
-              setShowOldest(!showOldest);
-              sortByTimeDate();
-            }}
-          />
         </div>
       </div>
       {loading && !wingData ? (

@@ -28,19 +28,19 @@ export default function Wing({ wing }) {
         to={`/levels/${wing?._id}`}
         className="flex border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in"
       >
-        <div className="w-[20%] text-[14px] pl-5  flex items-center gap-1">
+        <div className="max-res:w-[25%] w-[20%] text-[14px] pl-5  flex items-center gap-1">
           {wing?.name}
         </div>
-        <div className="w-[40%] text-[14px] pl-5  flex items-center gap-1">
+        <div className="w-[40%] max-res:hidden text-[14px] pl-5  flex items-center gap-1">
           {wing?.description}
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[14px] pl-10 ">
+        <div className="max-res:w-[25%] w-[15%] flex relative gap-1 items-center text-[14px] pl-10 ">
           {wing?.levels?.length}
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[14px] pl-5 ">
+        <div className="max-res:w-[30%] w-[15%] flex relative gap-1 items-center text-[14px] pl-5 ">
           {wing?.lead?.name}
         </div>
-        <div className="flex w-[9%] gap-2  justify-center">
+        <div className="flex max-res:w-[20%] w-[10%] gap-2  pl-8">
           <div onClick={(e) => e.stopPropagation()}>
             {/* <button
                      type="button"

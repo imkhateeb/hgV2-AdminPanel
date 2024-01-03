@@ -22,8 +22,8 @@ export default function SubTopic({ subtopic }) {
     <div className="flex border-t-[1px] py-5 text-[15px] w-full">
       <div className="w-[20%] pl-5">{subtopic.title}</div>
       <div className="w-[20%] pl-5">{subtopic.createdAt.split("T")[0]}</div>
-      <div className="w-[20%] pl-5">Siva</div>
-      <div className="w-[20%] pl-10">
+      <div className="w-[25%] pl-5">Siva</div>
+      <div className="w-[15%] pl-10">
         <button
           className="bg-blue-500 p-2 rounded-full"
           onClick={() => setAddResource(!addResource)}
