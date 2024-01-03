@@ -52,7 +52,7 @@ export default function AssignmentContent({ queries, levelId }) {
     return <p>Error loading Assignments: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4 min-w-[680px]">
+    <div className="flex flex-col w-full mt-4 min-w-[500px]">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="max-res:w-[25%] w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           NAME
@@ -98,7 +98,7 @@ export default function AssignmentContent({ queries, levelId }) {
           <h1>ACTIONS</h1>
         </div>
       </div>
-      {loading && !assignmentData ? (
+      {loading && !assignmentData?.length ? (
         <SkeletonAnimation />
       ) : (
         assignments.length &&

@@ -11,79 +11,119 @@
 :where(.css-dev-only-do-not-override-1adbn6x).ant-modal .ant-modal-header {
   background-color: #212130;
 }
+
 :where(.css-dev-only-do-not-override-1adbn6x).ant-modal .ant-modal-title {
   color: white;
   display: none;
 }
+
 button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-default {
   background-color: white;
   color: black;
   background-image: none;
   border: none;
 }
+
 button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-default:hover {
-    background-color: white;
-    color: black;
-    background-image: none;
-    border: none;
-  }
+  background-color: white;
+  color: black;
+  background-image: none;
+  border: none;
+}
+
 button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary {
   background-color: rgb(219 39 119);
   background-image: none;
   border: none;
 }
-button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary:hover{
-    background-color: rgb(219 39 119);
-    background-image: none;
-    border: none;
+
+button.ant-btn.css-dev-only-do-not-override-1adbn6x.ant-btn-primary:hover {
+  background-color: rgb(219 39 119);
+  background-image: none;
+  border: none;
 }
 
-/* Customizing the scrollbar for WebKit browsers */
+/* Customizing the vertical scrollbar */
 ::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 10px;
+  /* Width of the vertical scrollbar */
+  height: 10px;
+  /* Height of the horizontal scrollbar */
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the track */
-}
-
+/* Styling the vertical thumb */
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar thumb */
-  border-radius: 5px; /* Roundness of the thumb */
+  background-color: #888;
 }
 
+/* Hover effect on the vertical thumb */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color of the thumb on hover */
+  background-color: #555;
+}
+
+/* Styling the track (background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Customizing the horizontal scrollbar */
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+  /* Height of the horizontal scrollbar */
+  width: 10px;
+  /* Width of the vertical scrollbar */
+}
+
+/* Styling the horizontal thumb */
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #888;
+}
+
+/* Hover effect on the horizontal thumb */
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background-color: #555;
+}
+
+/* Styling the horizontal track (background of the scrollbar) */
+::-webkit-scrollbar-track:horizontal {
+  background-color: #f1f1f1;
 }
 
 .ant-switch {
   background-color: red !important;
   min-width: 40px;
-  border-radius: 20px; 
+  border-radius: 20px;
 }
 
 .ant-switch-checked {
   background-color: rgb(53, 53, 240) !important;
 }
 
-:where(.css-dev-only-do-not-override-1adbn6x).ant-select:not(.ant-select-customize-input) .ant-select-selector{
+:where(.css-dev-only-do-not-override-1adbn6x).ant-select:not(.ant-select-customize-input) .ant-select-selector {
   border: none;
 }
-:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-item a{
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-item a {
   color: white;
 }
 
-:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-disabled .ant-pagination-item-link, :where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-disabled:hover .ant-pagination-item-link{
-color: white;  
-}
-:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-prev button, :where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-next button{
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-disabled .ant-pagination-item-link,
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-disabled:hover .ant-pagination-item-link {
   color: white;
 }
+
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-prev button,
+:where(.css-dev-only-do-not-override-1adbn6x).ant-pagination .ant-pagination-next button {
+  color: white;
+}
+
 .custom-checkbox::before {
-  color: #ee2b7a /* Default color of the checkmark */
+  color: #ee2b7a
+    /* Default color of the checkmark */
 }
 
 /* Change the color of the tick mark when the checkbox is checked */
-input[type="checkbox"]:checked + .custom-checkbox::before {
-  color: #ee2b7a; /* Change this to your desired checked color (pink in this case) */
+input[type="checkbox"]:checked+.custom-checkbox::before {
+  color: #ee2b7a;
+  /* Change this to your desired checked color (pink in this case) */
 }

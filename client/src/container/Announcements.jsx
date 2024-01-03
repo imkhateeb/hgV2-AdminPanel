@@ -100,7 +100,6 @@ import FilterDropdown from "../components/utility/Filter";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import Pagination from "../components/utility/Pagination";
-import { TestTable } from "../components/announcements/TestTable";
 
 const Announcements = () => {
   const [queries, setQueries] = useState([]);
@@ -109,18 +108,24 @@ const Announcements = () => {
   const [totalAnnouncements, setTotalAnnouncements] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
   return (
     <section className="bg-bgSecondary rounded-xl p-5 w-full">
       <div className="w-full flex items-center my-2">
         <h1 className="text-white text-3xl font-bold">Announcements</h1>
       </div>
       <div className="flex py-2 items-center justify-between">
-        <div className="flex gap-1">
-          <div className="flex bg-white rounded-md px-2">
+        <div className="flex gap-2">
+          <FilterDropdown setQueries={setQueries} />
+        </div>
+        <Link
+          to="/add-announcement"
+          className="bg-pink-600 flex py-[4px] px-2 items-center justify-center h-8 w-[200px] xs:w-[160px] gap-3 rounded-lg cursor-pointer"
+        >
+          <AiOutlinePlus />
+          <h1>Add New</h1>
+        </Link>
+      </div>
+      <div className="flex bg-white rounded-md px-2 w-60">
             <button>
               <img
                 src={searchLogo}
@@ -134,17 +139,6 @@ const Announcements = () => {
               bordered={false}
             />
           </div>
-
-          <FilterDropdown setQueries={setQueries} />
-        </div>
-        <Link
-          to="/add-announcement"
-          className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer"
-        >
-          <AiOutlinePlus />
-          <h1>Add New</h1>
-        </Link>
-      </div>
 
       {/* <TestTable/> */}
 

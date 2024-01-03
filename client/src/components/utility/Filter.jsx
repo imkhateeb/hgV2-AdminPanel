@@ -40,11 +40,11 @@ const FilterDropdown = ({ setQueries }) => {
   };
 
   return (
-    <div className="flex gap-1 z-100 ">
-      <div className="relative bg-white rounded-md ">
+    <div className="flex gap-1 z-100 flex-col">
+      <div className="relative bg-white w-[110px] rounded-md ">
         <button
           onClick={toggleDropdown}
-          className={`py-[4px] pl-3 cursor-pointer w-28  flex gap-2 items-center transition-all text-[14px] duration-200 ease-linear text-slate-500 font-semibold `}
+          className={`py-[4px] pl-3 cursor-pointer flex gap-2 items-center transition-all text-[14px] duration-200 ease-linear text-slate-500 font-semibold `}
         >
           <img
             src={filterLogo}
@@ -59,7 +59,7 @@ const FilterDropdown = ({ setQueries }) => {
           )}
         </button>
         {showDropdown && (
-          <div className=" absolute  rounded-md my-[2px]  bg-white shadow w-28 text-[14px] text-black">
+          <div className=" absolute rounded-md my-[2px]  bg-white shadow w-28 text-[14px] text-black">
             {options.map((option) => (
               <div
                 key={option}

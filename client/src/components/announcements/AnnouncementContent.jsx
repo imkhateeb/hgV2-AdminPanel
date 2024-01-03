@@ -339,7 +339,7 @@ const AnnouncementContent = ({
   if (error) return <p>Error loading feeds: {error.message || 'Unknown error'}</p>;
 
   return (
-    <div className="flex flex-col min-w-[680px]  mt-4">
+    <div className="flex flex-col min-w-[500px] mt-4">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="max-res:w-[30%] w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">USER
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
@@ -365,7 +365,7 @@ const AnnouncementContent = ({
         <div className="max-res:w-[20%] w-[10%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">ACTION</div>
       </div>
       {
-        loading && !announcementData ? <SkeletonAnimation totalAnnouncements={totalAnnouncements} /> :
+        loading ? <SkeletonAnimation totalAnnouncements={totalAnnouncements} /> :
           (announcements && announcements.slice(announcementLimit * (pageNumber - 1), announcementLimit * pageNumber > announcements?.length ? announcements?.length : announcementLimit * pageNumber).map((announcement, index) => {
             return (
               <Announcement

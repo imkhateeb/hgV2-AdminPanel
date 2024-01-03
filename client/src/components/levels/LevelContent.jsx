@@ -172,7 +172,7 @@ export default function LevelContent({
     return <p>Error loading levels: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4 min-w-[680px]">
+    <div className="flex flex-col w-full min-w-[500px] mt-4">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="w-[30%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           USER
@@ -220,7 +220,7 @@ export default function LevelContent({
           ACTION
         </div>
       </div>
-      {loading && !levelData ? (
+      {loading && !levelData?.length ? (
         <SkeletonAnimation totalLevels={totalLevels} />
       ) : (
         levels &&

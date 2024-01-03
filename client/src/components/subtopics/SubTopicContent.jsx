@@ -171,7 +171,7 @@ export default function SubTopicContent({
     return <p>Error loading subtopics: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4 min-w-[680px]">
+    <div className="flex flex-col w-full mt-4 min-w-[500px]">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           USER
@@ -223,7 +223,7 @@ export default function SubTopicContent({
           ACTION
         </div>
       </div>
-      {loading && !subTopicData ? (
+      {loading && !subTopicData?.length ? (
         <SkeletonAnimation totalSubTopics={totalSubTopics} />
       ) : (
         subtopics &&

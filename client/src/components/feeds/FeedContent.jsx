@@ -162,7 +162,7 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
 
 
   return (
-    <div className="flex flex-col min-w-[680px] w-full mt-4">
+    <div className="flex flex-col min-w-[500px] w-full mt-4">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="max-res:w-[27%] w-[15%] text-[14px] pl-5  font-semibold flex items-center gap-1">USER
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
@@ -194,7 +194,7 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
         <div className="max-res:w-[15%] w-[9%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
       </div>
       {
-        loading && !feedData ? <SkeletonAnimation totalFeeds={totalFeeds} /> :
+        loading && !feedData.length ? <SkeletonAnimation totalFeeds={totalFeeds} /> :
           (feeds && feeds.slice(feedLimit * (pageNumber - 1), feedLimit * pageNumber > feeds.length ? feeds.length : feedLimit * pageNumber).map((feed, index) => {
             return (
               <Feed

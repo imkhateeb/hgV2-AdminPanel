@@ -53,7 +53,7 @@ export default function TopicContent({ queries, levelId }) {
     return <p>Error loading topics: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4 min-w-[680px]">
+    <div className="flex flex-col w-full mt-4 min-w-[500px]">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="w-[30%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           TITLE
@@ -89,7 +89,7 @@ export default function TopicContent({ queries, levelId }) {
           <h1>ACTIONS</h1>
         </div>
       </div>
-      {loading && !topicData ? (
+      {loading && !topicData?.length ? (
         <SkeletonAnimation />
       ) : (
         topics.length &&

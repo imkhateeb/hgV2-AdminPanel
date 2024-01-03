@@ -42,7 +42,7 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
     return <p>Error loading Assignments: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4 min-w-[680px]">
+    <div className="flex flex-col w-full mt-4 min-w-[500px]">
       <div className="flex border-t-[1px] py-5 w-full">
         <div className="w-[20%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           NAME
@@ -88,7 +88,7 @@ export default function SubmissionContent({ queries, assignmentId, setAssignment
           ACTIONS
         </div>
       </div>
-      {loading && !assignmentData ? (
+      {loading && !assignmentData?.length ? (
         <SkeletonAnimation />
       ) : (
         assignmentData[0]?.submitted?.length &&
