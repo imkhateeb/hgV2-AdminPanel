@@ -23,10 +23,12 @@ export default function Feed({ feed }) {
 
   return (
     <div className="flex border-t-[1px] py-5 text-[15px] w-full">
-      <div className="pl-5 w-[15%]">{feed.name}</div>
-      <div className="pl-5 w-[45%]">{feed.feedDetails.slice(0, 50)}... </div>
-      <div className="pl-5 w-[15%]">{feed.createdAt.split("T")[0]}</div>
-      <div className="pl-5 w-[8%]">
+      <div className="pl-5 max-res:w-[27%] w-[15%]">{feed.name}</div>
+      <div className="pl-5 w-[40%] max-res:hidden">{feed.feedDetails.slice(0, 50)}... </div>
+      <div className="pl-5 max-res:w-[27%] w-[15%]">{feed.createdAt.split("T")[0]}</div>
+      
+      <div className="pl-11 max-res:w-[16%] w-[13%] ">{feed.upVotes.length}</div>
+      <div className="pl-5 max-res:w-[15%] w-[8%]">
         <Switch
           checked={feed.staus}
           onClick={() => {
@@ -36,8 +38,7 @@ export default function Feed({ feed }) {
           }}
         />
       </div>
-      <div className="pl-11 w-[8%] ">{feed.upVotes.length}</div>
-      <div className="flex pl-5 w-[9%] gap-2  justify-center">
+      <div className="flex pl-5 max-res:w-[15%] w-[9%] gap-2  justify-center">
         {/* <button
                type="button"
                className="button hover:underline flex justify-center items-center text-yellow-300"

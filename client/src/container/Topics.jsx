@@ -18,21 +18,20 @@ const Topics = () => {
       </div>
       <div className="flex py-2 items-center justify-between">
         <div className="flex gap-1">
-          <FilterDropdown
-            setQueries={setQueries}
-          />
+          <FilterDropdown setQueries={setQueries} />
         </div>
-        <Link to={`/add-topic/${levelId}`} className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer">
+        <Link
+          to={`/add-topic/${levelId}`}
+          className="bg-pink-600 flex py-[4px] px-4 items-center gap-3 rounded-lg cursor-pointer"
+        >
           <AiOutlinePlus />
           <h1>Add New</h1>
         </Link>
       </div>
 
-      <TopicContent
-        queries={queries}
-        levelId={levelId}
-      />
-
+      <div className="w-full overflow-auto">
+        <TopicContent queries={queries} levelId={levelId} />
+      </div>
     </section>
   );
 };

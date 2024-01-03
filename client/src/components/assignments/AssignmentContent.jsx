@@ -52,9 +52,9 @@ export default function AssignmentContent({ queries, levelId }) {
     return <p>Error loading Assignments: {error.message || "Unknown error"}</p>;
 
   return (
-    <div className="flex flex-col w-full mt-4">
+    <div className="flex flex-col w-full mt-4 min-w-[680px]">
       <div className="flex border-t-[1px] py-5 w-full">
-        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="max-res:w-[25%] w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           NAME
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -64,7 +64,7 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[50%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="w-[40%] max-res:hidden text-[14px] pl-5 font-semibold flex items-center gap-1">
           DESCRIPTION
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -74,7 +74,7 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="max-res:w-[25%] w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           CREATED BY
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -84,7 +84,7 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[10%] text-[14px] pl-5 font-semibold flex items-center gap-1">
+        <div className="max-res:w-[25%] w-[15%] text-[14px] pl-5 font-semibold flex items-center gap-1">
           SUBMISSION
           <BiSort
             className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
@@ -94,15 +94,8 @@ export default function AssignmentContent({ queries, levelId }) {
             }}
           />
         </div>
-        <div className="w-[10%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold justify-center">
+        <div className="max-res:w-[25%] w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold justify-center">
           <h1>ACTIONS</h1>
-          <BiSort
-            className="cursor-pointer hover:shadow-inner hover:shadow-pink-600"
-            onClick={() => {
-              setShowOldest(!showOldest);
-              sortByTimeDate();
-            }}
-          />
         </div>
       </div>
       {loading && !assignmentData ? (

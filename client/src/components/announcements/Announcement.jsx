@@ -108,14 +108,14 @@ export default function Announcement({ announcement }) {
 
   return (
     <div className="flex  border-t-[1px]  py-5 w-full text-[15px]">
-      <div className="max-lg:w-[25%] w-[15%] pl-5">{announcement?.user?.name}</div>
-        <div className="w-[50%] max-lg:hidden pl-5">
+      <div className="max-res:w-[30%] w-[15%] pl-5">{announcement?.user?.name}</div>
+        <div className="w-[50%] max-res:hidden pl-5">
           {announcement?.announcementDetails.slice(0, 50)}...{" "}
       
         </div>
-      <div className="max-lg:w-[25%] w-[15%] pl-5">{announcement.createdAt.split("T")[0]}</div>
+      <div className="max-res:w-[30%] w-[15%] pl-5">{announcement.createdAt.split("T")[0]}</div>
 
-      <div className="max-lg:w-[25%] w-[10%] pl-5 ">
+      <div className="max-res:w-[20%] w-[10%] pl-5 ">
         <Switch
           checked={announcement.status}
           onClick={() => {
@@ -129,7 +129,7 @@ export default function Announcement({ announcement }) {
         />
       </div>
 
-      <div className="max-lg:w-[25%]  w-[10%] pl-5 gap-2 flex justify-center">
+      <div className="max-res:w-[20%]  w-[10%] pl-8 gap-2 flex ">
         <Actions
           handleDelete={handleDeleteAnnouncement}
           setEdit={setEditAnnouncement}

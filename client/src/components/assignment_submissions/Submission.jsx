@@ -33,7 +33,7 @@ export default function Submission({ submission, assignmentId }) {
 
   return (
     <>
-      <div className="flex border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in">
+      <div className="flex border-t-[1px] py-5 w-full transition-all duration-200 ease-in">
         <div className="w-[20%] text-[15px] pl-5  flex items-center gap-1">
           {submission?.user?.name}
         </div>

@@ -162,39 +162,36 @@ export default function FeedContent({ searchTerm, queries, feedLimit, setTotalFe
 
 
   return (
-    <div className="flex flex-col min-w-[900px] w-full mt-4">
+    <div className="flex flex-col min-w-[680px] w-full mt-4">
       <div className="flex border-t-[1px] py-5 w-full">
-        <div className="w-[15%] text-[14px] pl-5  font-semibold flex items-center gap-1">USER
+        <div className="max-res:w-[27%] w-[15%] text-[14px] pl-5  font-semibold flex items-center gap-1">USER
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setSortByName(!sortByName);
             sortByLexicalUser();
           }} />
         </div>
-        <div className="w-[45%] text-[14px] pl-5 font-semibold flex items-center gap-1">DESCRIPTION
+        <div className="w-[40%] max-res:hidden text-[14px] pl-5 font-semibold flex items-center gap-1">DESCRIPTION
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setSortByDesc(!sortByDesc)
             sortByLexicalDesc()
           }} />
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
+        <div className="max-res:w-[27%] w-[15%] flex relative gap-1 items-center text-[14px] pl-5 font-semibold">
           <h1>CREATED ON</h1>
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setShowOldest(!showOldest)
             sortByTimeDate()
           }} />
         </div>
-        <div className="w-[8%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">STATUS
-          <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
-            setSortByStatus(!sortByStatus)
-            handleSortByStatus()
-          }} />
-        </div>
-        <div className="w-[8%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">UPVOTES
+        <div className="max-res:w-[16%] w-[13%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">UPVOTES
           <BiSort className="cursor-pointer hover:shadow-inner hover:shadow-pink-600" onClick={() => {
             setSortByUpvotes(!sortByUpvotes);
             handleSortByUpvotes();
           }} /></div>
-        <div className="w-[9%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
+        <div className="max-res:w-[15%] w-[8%] text-center text-[14px] pl-5 font-semibold flex items-center gap-1">STATUS
+        </div>
+       
+        <div className="max-res:w-[15%] w-[9%] text-center text-[14px] pl-5 font-semibold">ACTION</div>
       </div>
       {
         loading && !feedData ? <SkeletonAnimation totalFeeds={totalFeeds} /> :

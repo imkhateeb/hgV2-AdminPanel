@@ -28,23 +28,23 @@ export default function Assignment({ assignment }) {
         to={`/assignment/${assignment?._id}/submissions`}
         className="flex border-t-[1px] py-5 w-full hover:bg-slate-800 hover:bg-opacity-50 transition-all duration-200 ease-in"
       >
-        <div className="w-[15%] text-[15px] pl-5  flex items-center gap-1">
+        <div className="max-res:w-[25%] w-[15%] text-[15px] pl-5  flex items-center gap-1">
           {assignment?.name}
         </div>
-        <div className="w-[50%] text-[15px] pl-5  flex items-center gap-1">
+        <div className="w-[40%] max-res:hidden text-[15px] pl-5  flex items-center gap-1">
           {`${
             assignment.description.length > 50
               ? assignment?.description.slice(0, 50) + "..."
               : assignment.description
           }`}
         </div>
-        <div className="w-[15%] flex relative gap-1 items-center text-[15px] pl-5 ">
+        <div className="max-res:w-[25%] w-[15%] flex relative gap-1 items-center text-[15px] pl-5 ">
           {"Md Khateebur Rab"}
         </div>
-        <div className="w-[10%] flex relative gap-1 items-center text-[15px] pl-14 ">
+        <div className="max-res:w-[25%] w-[15%] flex relative gap-1 items-center text-[15px] pl-14 ">
           {assignment?.submitted?.length}
         </div>
-        <div className="flex w-[10%] gap-2 justify-center">
+        <div className="flex max-res:w-[25%] w-[15%] gap-2 justify-center">
           <div onClick={(e) => e.stopPropagation()}>
             {/* <button
                      type="button"
